@@ -6,7 +6,7 @@ const UserModel = require('./models/user.model');
 const CommnetModel = require('./models/comment.model');
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/curriculum`, {
-    logging: false, 
+    logging: false,
     native: false, 
 });
 
@@ -26,5 +26,5 @@ const { Cv, User, Comment } = sequelize.models;
 
 module.exports = {
     conn: sequelize,   // para importar la conexión { conn } = require('./db.js')
-    // ...sequelize.models // para cuando alla modelos
+    ...sequelize.models // para cuando alla modelos
 }
