@@ -10,22 +10,23 @@ const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}
     native: false, 
 });
 
-
 CvModel(sequelize);
 UserModel(sequelize);
 CommnetModel(sequelize);
 
-// DESESCTRUCTURACION DE MODELOS
 const { Cv, User, Comment } = sequelize.models;
 
-//Defino la relación N:1 entre Cv y User
+// Defino la relación N:1 entre User y Cv
+User.hasMany(Cv); // Un usuario puede tener muchos CV
+Cv.belongsTo(User); // Un CV pertenece a un usuario
 
-//Defino la relación : entre User y Comment
-
-
-// RELACIONES DE MODELOS
+// Defino la relación N:1 entre Comment y Cv
+Cv.hasMany(Comment); // Un Cv puede tener muchos comentarios
+Comment.belongsTo(Cv); // Un comentario pertenece a un solo Cv
 
 module.exports = {
-    conn: sequelize,   // para importar la conexión { conn } = require('./db.js')
-    // ...sequelize.models // para cuando alla modelos
+    conn: sequelize,
+    Cv,
+    User,
+    Comment
 }
