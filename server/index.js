@@ -4,8 +4,7 @@ require("dotenv").config();
 // const PORT = 3001;
 const PORT = process.env.PORT;
 
-conn
-  .sync({ force: true })
+conn.sync({ force: true })
   .then(() => {
     server.listen(PORT, () => {
       console.log(`Server listening on port ${PORT}`);
