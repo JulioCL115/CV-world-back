@@ -10,6 +10,7 @@ const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}
     native: false, 
 });
 
+
 CvModel(sequelize);
 UserModel(sequelize);
 CommnetModel(sequelize);

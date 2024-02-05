@@ -1,10 +1,10 @@
 const { Router } = require("express");
-
-const { loginRouter, registerRouter } = require("./auth.router");
-
 const router = Router();
+const cvRouter = require('./cvRouter');
+const userRouter = require("./userRouter");
 
-router.use("/register", registerRouter);
-router.use("/login", loginRouter);
+router.use('/cv', cvRouter);
+
+router.use('/user', userRouter);
 
 module.exports = router;
