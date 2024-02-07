@@ -7,5 +7,23 @@
     "contact": "123456789",
     "study": ["Ingeniería en Informática", "Curso de Desarrollo Web Avanzado"],
     "applying": "Ingeniero"
+  },
+  {
+    "name": "Jane Smith CV",
+    "image": [{"first":"jane_smith_cv.jpg"}, { "second": "jane_smith_cv2.jpg" }],
+    "description": "Dynamic marketing professional with a track record of successful campaigns.",
+    "experience": [{ "company": "Marketing Co.", "role": "Marketing Manager", "years": 8 }, { "company": "Marketing Sucks", "role": "Junior Marketer", "years": 3 }],
+    "contact": "987654321",
+    "study": ["Marketing School", "Advanced Marketing Business School"],
+    "applying": "Marketer"
+  },
+  {
+    "name": "Alice Johnson CV",
+    "image": [{"first":"alice_johnson_cv.jpg"}, { "second": "alice_johnson_cv2.jpg" }],
+    "description": "Dedicated nurse with experience in critical care and patient advocacy.",
+    "experience": [{ "company": "Hospital XYZ", "role": "Registered Nurse", "years": 10 },{ "company": "Memorial Hospital", "role": "Assistant Nurse", "years": 3 }],
+    "contact": "999888777",
+    "study": ["Nursing College", "Nursing Massachusetts"],
+    "applying": "Nurse"
   }
 ]
