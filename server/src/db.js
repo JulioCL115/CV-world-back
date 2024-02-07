@@ -19,7 +19,8 @@ CommnetModel(sequelize);
 const { Cv, User, Comment } = sequelize.models;
 
 //Defino la relación N:1 entre Cv y User
-
+User.hasMany(Cv);
+Cv.belongsTo(User);
 //Defino la relación : entre User y Comment
 
 
@@ -27,5 +28,5 @@ const { Cv, User, Comment } = sequelize.models;
 
 module.exports = {
     conn: sequelize,   // para importar la conexión { conn } = require('./db.js')
-    // ...sequelize.models // para cuando alla modelos
+    ...sequelize.models // para cuando alla 
 }
