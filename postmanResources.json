@@ -1,10 +1,10 @@
 [
   {
-    "name": "adasdasd",
-    "image": [{}, {}],
-    "description": "adadadasdasddasd",
-    "experience": [{}, {}],
-    "contact": "tel 333 adasdasd",
+    "name": "John Doe CV",
+    "image": [{"first":"john_doe_cv.jpg"}, { "second": "john_doe_cv2.jpg" }],
+    "description": "Experienced software engineer with expertise in web development.",
+    "experience": [{ "company": "ABC Inc.", "role": "Senior Developer", "years": 5 }, { "company": "ZKH Inc.", "role": "Junior Developer", "years": 2 }],
+    "contact": "123456789",
     "study": ["Ingeniería en Informática", "Curso de Desarrollo Web Avanzado"],
     "applying": "Ingeniero"
   }
