@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         experience: {
-            type: DataTypes.JSON,
+            type: DataTypes.JSONB,
             allowNull: false
         },
         contact: {
@@ -30,7 +30,11 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         study: {
-            type: DataTypes.TEXT,
+            type: DataTypes.JSONB,
+            allowNull: false
+        }, 
+        applying: {
+            type: DataTypes.STRING,
             allowNull: false
         }
     },
