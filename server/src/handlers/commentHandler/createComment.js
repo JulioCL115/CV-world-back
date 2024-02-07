@@ -1,12 +1,26 @@
 const createCommentController = require("../../controllers/commentController/createCommentController");
+const { commentSchema, ZodError } = require('../../schemas/commentSchema');
 
 const createComment = async (req, res) => {
-  const { comment } = req.body;
-  const { id } = req.params;
   try {
-    const commentCreated = await createCommentController(comment, id);
+    const { comment } = req.body;
+
+    const { cvId, userId } = req.params;
+
+    if (!cvId || !userId) {
+      return res.status(400).json({ error: "cvId and userId are required in the parameters" });
+    }
+
+    commentSchema.parse(comment);
+
+    const commentCreated = await createCommentController(comment, cvId, userId);
+
     res.status(201).json(commentCreated);
+
   } catch (error) {
+    if (error instanceof ZodError) {
+      return res.status(400).json(error.issues.map(issue => ({ error: issue.message })));
+    }
     res.status(500).json({ error: error.message });
   }
 };
