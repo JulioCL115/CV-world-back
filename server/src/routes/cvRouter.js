@@ -6,8 +6,8 @@ const createCv = require('../handlers/cvHandler/createCv');
 
 cvRouter.get('/', getAllCvs);
 
-cvRouter.get('/:id', getCvById);
+cvRouter.get('/:cvId', getCvById);
 
-cvRouter.post('/:id', createCv);
+cvRouter.post('/:userId', createCv);
 
 module.exports = cvRouter;
