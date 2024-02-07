@@ -24,6 +24,10 @@ Cv.belongsTo(User); // Un CV pertenece a un usuario
 Cv.hasMany(Comment); // Un Cv puede tener muchos comentarios
 Comment.belongsTo(Cv); // Un comentario pertenece a un solo Cv
 
+// Defino la relación N:1 entre User y Comment
+User.hasMany(Comment); // Un User puede tener muchos comentarios
+Comment.belongsTo(User); // Un comentarios pertenece a un solo User
+
 module.exports = {
     conn: sequelize,
     Cv,
