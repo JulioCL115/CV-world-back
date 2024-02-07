@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         image: {
-            type: DataTypes.STRING,
+            type: DataTypes.JSONB,
             allowNull: false
         },
         description: {
@@ -31,6 +31,10 @@ module.exports = (sequelize) => {
         },
         study: {
             type: DataTypes.JSONB,
+            allowNull: false
+        }, 
+        applying: {
+            type: DataTypes.STRING,
             allowNull: false
         }
     },
