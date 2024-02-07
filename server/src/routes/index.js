@@ -8,6 +8,6 @@ router.use('/cv', cvRouter);
 router.use('/', userRouter);
 router.use('/user', userRouter);
 
-router.use('/cv/user', commentRouter)
+router.use('/comment', commentRouter)
 
 module.exports = router;
