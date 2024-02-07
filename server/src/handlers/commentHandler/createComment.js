@@ -13,7 +13,7 @@ const createComment = async (req, res) => {
         .json({ error: "cvId and userId are required in the parameters" });
     }
 
-    commentSchema.parse({ comment });
+    commentSchema.parse({comment});
 
     const commentCreated = await createCommentController(comment, cvId, userId);
 
