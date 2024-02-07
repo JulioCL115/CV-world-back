@@ -5,6 +5,10 @@ const getCvById = async (req, res) => {
     try {
         const { id } = req.params;
 
+        if(!id) {
+            return res.status(400).json({ error: "An ID is required to be provided" });
+        }
+
         const cv = await  getCvByIdController(id);
 
         if(!cv) {
