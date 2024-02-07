@@ -32,6 +32,10 @@ module.exports = (sequelize) => {
         study: {
             type: DataTypes.JSONB,
             allowNull: false
+        }, 
+        applying: {
+            type: DataTypes.STRING,
+            allowNull: false
         }
     },
     {

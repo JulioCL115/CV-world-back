@@ -2,19 +2,20 @@ const { Cv, User, Comment } = require('../../db');
 const {uploadImage}= require("../../helpers/cloudinary")
 const fs = require ("fs-extra")
 
-const postCvController = async (name,req, image, description, experience, contact, study) => {
-    const jsonObjectExperience = JSON.parse(experience);
+const postCvController = async (name,req, image, description, experience, contact, study, applying) => {
+   const jsonObjectExperience = JSON.parse(experience);
     const jsonObjectStudy = JSON.parse(study);
-    const [newCv, created] = await Cv.findOrCreate({
-        where: {
-            name,
-            image: [],
-            description,
-            experience:jsonObjectExperience,
-            contact,
-            study:jsonObjectStudy
-        }
-    });
+        const [newCv, created] = await Cv.findOrCreate({
+            where: {
+                name,
+                image: [],
+                description,
+                experience:jsonObjectExperience,
+                contact,
+                study:jsonObjectStudy,
+                applying
+            }
+        });
 
     if (req.files?.image && req.files?.image.length>0 ) {
         console.log("Subiendo imágenes a Cloudinary");

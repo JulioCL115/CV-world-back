@@ -26,6 +26,16 @@ const getCvByIdController = async (idKey) => {
          }
          return null
 
+    try {
+        const cvFound = await Cv.findOne({
+            where: { id }
+        });
+    
+        return cvFound;
+    } catch (error) {
+        console.error('Error searching for CV:', error);
+        throw error; 
+    }
 }
 
 module.exports = getCvByIdController;
