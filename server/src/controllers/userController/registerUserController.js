@@ -4,7 +4,7 @@ const {User} = require('../../db')
 const bcrypt = require('bcrypt')
 
 const createUserController = async (req,res) => {
-    const {username,email, password} = req.body
+    const {username,email, password, phoneNumber} = req.body
 
     try {
         const userFind = await User.findOne({where: {email: email}})
@@ -15,7 +15,8 @@ const createUserController = async (req,res) => {
         const userCreated = await User.create({
             username,
             email,
-            password: passwordHashed
+            password: passwordHashed,
+            phoneNumber
         })
         const token = await createAccesToken({id: userCreated.id})
         res.cookie('token', token)
