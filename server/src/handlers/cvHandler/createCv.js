@@ -4,10 +4,10 @@ const { createCvSchema, ZodError } = require('../../schemas/cvSchema');
 const createCv = async (req, res) => {
     try {
         const { name, image, description, experience, contact, study, applying } = req.body;
-
+        const userId = req.params.id;
         createCvSchema.parse({ name, image, description, experience, contact, study, applying });
 
-        const cvCreated =  await postCvController(name, image, description, experience, contact, study, applying);
+        const cvCreated =  await postCvController(name, image, description, experience, contact, study, applying,userId);
 
         res.status(201).json(cvCreated);
 

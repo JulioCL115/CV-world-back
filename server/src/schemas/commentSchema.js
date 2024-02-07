@@ -1,7 +1,7 @@
 const { z, ZodError } = require("zod");
 
 const createCommentSchema = z.object({
-  name: z
+  comment: z
     .string()
     .nonempty("Comment is required")
     .min(5, "Comment is too short")

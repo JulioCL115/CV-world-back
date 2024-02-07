@@ -1,11 +1,11 @@
 const { Comment } = require("../../db");
 
-const createCommentController = async (comment, cvId) => {
+const createCommentController = async (comment, cvId, userId) => {
   try {
-    
     const newComment = await Comment.create({
       comment: comment,
       CvId: cvId,
+      UserId: userId,
     });
 
     return newComment;

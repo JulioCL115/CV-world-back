@@ -1,3 +1,11 @@
 [
-  
+  {
+    "name": "adasdasd",
+    "image": [{}, {}],
+    "description": "adadadasdasddasd",
+    "experience": [{}, {}],
+    "contact": "tel 333 adasdasd",
+    "study": ["Ingeniería en Informática", "Curso de Desarrollo Web Avanzado"],
+    "applying": "Ingeniero"
+  }
 ]

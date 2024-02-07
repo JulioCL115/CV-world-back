@@ -1,4 +1,4 @@
-INSERT INTO "Users" (id, name, email, password, phonenumber, role) VALUES
+INSERT INTO "Users" (id, name, email, password, "phoneNumber", role) VALUES
 ('aeb1c7d9-9c4f-4dc6-b0e6-6fa19d7845a8', 'John Doe', 'john@example.com', 'password123', '1234567890', 'user'),
 ('6c84fb90-12c4-11e1-840d-7b25c5ee775a', 'Jane Smith', 'jane@example.com', 'pass123', '9876543210', 'admin'),
 ('2edfedd9-9b9f-4a7d-8108-64928a410a1a', 'Alice Johnson', 'alice@example.com', 'securepass', '5555555555', 'user');
