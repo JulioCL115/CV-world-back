@@ -1,20 +1,23 @@
 const { Cv } = require("../../db");
 
-const postCvController = async (name, image = '', header, description, experience, education, contact, skils, speakingLanguages, otherInterests, creationDate = '2024-02-10', views = 0, userId, categoryId, lenguajeId) => {
+const postCvController = async (name, image = '', header, description, experience, education, contact, skils, speakingLanguages, otherInterests,  views = 0, userId, categoryId, lenguajeId) => {
     try {
+        const currentDate = new Date();
+        const formattedDate = currentDate.toISOString().slice(0, 10);
+
         const [newCv, created] = await Cv.findOrCreate({
             where: {
                 name, 
                 image, 
                 header, 
                 description, 
-                experience,
-                education, 
-                contact, 
+                experience, 
+                education,   
+                contact,           
                 skils, 
                 speakingLanguages, 
                 otherInterests, 
-                creationDate, 
+                creationDate: formattedDate, 
                 views,
                 UserId: userId,
                 CategoryId: categoryId,
