@@ -1,9 +1,9 @@
 const validateCv = (req, res, next) => {
-    const { name, image, description, experience, contact, study, applying } = req.body;
+    const { name, header, description, experience, education, contact, skils, speakingLanguages, otherInterests } = req.body;
 
-    const { userId } = req.params; 
+    const { userId, categoryId, lenguajeId } = req.params; 
 
-    if(!userId) {
+    if (!userId || !categoryId || !lenguajeId) {
         return res.status(400).json({ error: 'Please provide a valid ID in the request parameters' })
     }
 
@@ -11,28 +11,36 @@ const validateCv = (req, res, next) => {
         return res.status(400).json({ error: 'Please enter a name' });
     }  
 
-    if (!image) {
-        return res.status(400).json({ error: 'Please enter a image' });
+    if (!header) {
+        return res.status(400).json({ error: 'Please enter a header' });
     } 
 
     if (!description) {
-        return res.status(400).json({ error: 'Please enter description' });
+        return res.status(400).json({ error: 'Please enter a description' });
     }  
 
     if (!experience) {
         return res.status(400).json({ error: 'Please enter a experience' });
     } 
 
-    if (!contact) {
-        return res.status(400).json({ error: 'Please enter a contact' });
+    if (!education) {
+        return res.status(400).json({ error: 'Please enter a education' });
     } 
     
-    if (!study) {
-        return res.status(400).json({ error: 'Please enter a study' });
+    if (!contact) {
+        return res.status(400).json({ error: 'Please enter a contact' });
     }  
     
-    if (!applying) {
-        return res.status(400).json({ error: 'Please enter a applying' });
+    if (!skils) {
+        return res.status(400).json({ error: 'Please enter a skils' });
+    } 
+
+    if (!speakingLanguages) {
+        return res.status(400).json({ error: 'Please enter a speaking languages' });
+    } 
+
+    if (!otherInterests) {
+        return res.status(400).json({ error: 'Please enter a other Interests' });
     } 
 
     next();

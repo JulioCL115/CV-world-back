@@ -9,6 +9,6 @@ cvRouter.get('/', getAllCvs);
 
 cvRouter.get('/:cvId', getCvById);
 
-cvRouter.post('/:userId/:categoryId/:lenguajeId', createCv);
+cvRouter.post('/:userId/:categoryId/:lenguajeId', validateCv, createCv);
 
 module.exports = cvRouter;
