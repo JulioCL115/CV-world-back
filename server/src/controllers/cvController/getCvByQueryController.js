@@ -32,6 +32,11 @@ const getCvByQueryController = (data, filters) => {
           filters.experienceStudy === '>5' ? a.years - b.years : b.years - a.years
         );
       }
+
+      if (filters.apply) {
+        response = response.filter(cv => cv.applying.trim().toLowerCase() === filters.apply.trim().toLowerCase());
+      }
+      
   
     return response;
   };

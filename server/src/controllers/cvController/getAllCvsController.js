@@ -8,7 +8,8 @@ const getAllCvsController = async () => {
     description: cv.description,
     experience:cv.experience,
     study:cv.study,
-    contact: cv.contact
+    contact: cv.contact,
+    applying :cv.applying
   }));
   console.log("se ingresaron correctamente");
   return  mappedCv;
