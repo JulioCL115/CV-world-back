@@ -23,8 +23,7 @@ CategoryModel(sequelize);
 LenguajeModel(sequelize);
 SubscriptionModel(sequelize);
 
-const { Cv, User, Comment, Category, Lenguaje, Subscription } =
-  sequelize.models;
+const { Cv, User, Comment, Category, Lenguaje, Subscription } = sequelize.models;
 
 // Defino la relación N:1 entre User y Cv
 User.hasMany(Cv); // Un usuario puede tener muchos CV
