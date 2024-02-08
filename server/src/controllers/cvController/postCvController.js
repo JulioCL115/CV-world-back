@@ -2,7 +2,7 @@ const { Cv, User, Comment } = require('../../db');
 const {uploadImage}= require("../../helpers/cloudinary")
 const fs = require ("fs-extra")
 
-const postCvController = async (name,req, image, description, experience, contact, study, applying) => {
+const postCvController = async (name,req, image, description, experience, contact, study, applying, userId) => {
    const jsonObjectExperience = JSON.parse(experience);
     const jsonObjectStudy = JSON.parse(study);
         const [newCv, created] = await Cv.findOrCreate({
@@ -13,8 +13,9 @@ const postCvController = async (name,req, image, description, experience, contac
                 experience:jsonObjectExperience,
                 contact,
                 study:jsonObjectStudy,
-                applying
-            }
+                applying,
+                UserId: userId,
+            },
         });
 
     if (req.files?.image && req.files?.image.length>0 ) {
