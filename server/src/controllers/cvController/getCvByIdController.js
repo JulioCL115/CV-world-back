@@ -27,6 +27,7 @@ const getCvByIdController = async (cvId) => {
         throw error;
     }
 }
+module.exports = getCvByIdController;
 
 // const { Cv, Comment } = require("../../db");
 // const getCvByIdController = async (idKey) => {
@@ -57,4 +58,3 @@ const getCvByIdController = async (cvId) => {
 //   return null;
 // };
 
-module.exports = getCvByIdController;
