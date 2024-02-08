@@ -25,15 +25,15 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         experience: {
-            type: DataTypes.JSON,
+            type: DataTypes.JSONB,
             allowNull: false
         },
         education: {
-            type: DataTypes.JSON,
+            type: DataTypes.JSONB,
             allowNull: false
         },
         contact: {
-            type: DataTypes.JSON,
+            type: DataTypes.JSONB,
             allowNull: false
         },
         skils: {
@@ -49,7 +49,7 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         creationDate: {
-            type: DataTypes.DATEONLY
+            type: DataTypes.STRING
         },
         views: {
             type: DataTypes.INTEGER,
