@@ -1,5 +1,5 @@
 const { User } = require('../../db');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 
 
 const loginUserController = async (email, password) => {

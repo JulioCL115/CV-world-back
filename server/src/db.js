@@ -1,17 +1,20 @@
-require ('dotenv').config()
-const { Sequelize } = require('sequelize');
-const{ DB_USER, DB_PASSWORD, DB_HOST } = process.env;
-const CvModel = require('./models/cv');
-const UserModel = require('./models/user');
-const CommnetModel = require('./models/comment');
-const CategoryModel = require('./models/category');
-const LenguajeModel = require('./models/lenguaje');
-const SubscriptionModel = require('./models/subscription');
+require("dotenv").config();
+const { Sequelize } = require("sequelize");
+const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
+const CvModel = require("./models/cv");
+const UserModel = require("./models/user");
+const CommnetModel = require("./models/comment");
+const CategoryModel = require("./models/category");
+const LenguajeModel = require("./models/lenguaje");
+const SubscriptionModel = require("./models/subscription");
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/curriculum`, {
-    logging: false, 
-    native: false, 
-});
+const sequelize = new Sequelize(
+  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/curriculum`,
+  {
+    logging: false,
+    native: false,
+  }
+);
 
 CvModel(sequelize);
 UserModel(sequelize);
@@ -20,7 +23,8 @@ CategoryModel(sequelize);
 LenguajeModel(sequelize);
 SubscriptionModel(sequelize);
 
-const { Cv, User, Comment, Category, Lenguaje, Subscription } = sequelize.models;
+const { Cv, User, Comment, Category, Lenguaje, Subscription } =
+  sequelize.models;
 
 // Defino la relación N:1 entre User y Cv
 User.hasMany(Cv); // Un usuario puede tener muchos CV
@@ -46,13 +50,12 @@ Comment.belongsTo(User); // Un comentarios pertenece a un solo User
 Subscription.hasMany(User); // Una suscripción puede tener muchos usuarios
 User.belongsTo(Subscription); // Un usuario pertenece a una suscripción
 
-
 module.exports = {
-    conn: sequelize,
-    Cv,
-    User,
-    Comment,
-    Category,
-    Lenguaje,
-    Subscription
-}
+  conn: sequelize,
+  Cv,
+  User,
+  Comment,
+  Category,
+  Lenguaje,
+  Subscription,
+};
