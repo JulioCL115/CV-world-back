@@ -1,6 +1,6 @@
 const { Cv } = require('../../db');
 
-const getAllCvsController = async (page = 1, pageSize = 6) => {
+const getAllCvsController = async (page, pageSize) => {
     try {
         const offset = (page - 1) * pageSize;
 

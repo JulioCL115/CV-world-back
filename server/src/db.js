@@ -1,14 +1,17 @@
-require ('dotenv').config()
-const { Sequelize } = require('sequelize');
-const{ DB_USER, DB_PASSWORD, DB_HOST } = process.env;
-const CvModel = require('./models/cv.model');
-const UserModel = require('./models/user.model');
-const CommnetModel = require('./models/comment.model');
+require("dotenv").config();
+const { Sequelize } = require("sequelize");
+const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
+const CvModel = require("./models/cv.model");
+const UserModel = require("./models/user.model");
+const CommnetModel = require("./models/comment.model");
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/curriculum`, {
-    logging: false, 
-    native: false, 
-});
+const sequelize = new Sequelize(
+  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/curriculum`,
+  {
+    logging: false,
+    native: false,
+  }
+);
 
 CvModel(sequelize);
 UserModel(sequelize);
@@ -29,8 +32,8 @@ User.hasMany(Comment); // Un User puede tener muchos comentarios
 Comment.belongsTo(User); // Un comentarios pertenece a un solo User
 
 module.exports = {
-    conn: sequelize,
-    Cv,
-    User,
-    Comment
-}
+  conn: sequelize,
+  Cv,
+  User,
+  Comment,
+};
