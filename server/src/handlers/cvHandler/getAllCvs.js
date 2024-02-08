@@ -4,7 +4,10 @@ const getCvByQueryController = require('../../controllers/cvController/getCvByQu
 const getAllCvs = async (req, res) => {
     try {
 
-        const allCvs = await getAllCvsController();
+        const page = parseInt(req.query.page) || 1; // Página actual (por defecto es 1)
+        const pageSize = parseInt(req.query.pageSize) || 6; // Tamaño de página (por defecto es 6)
+
+        const allCvs = await getAllCvsController(page, pageSize);
 
         if (!allCvs || allCvs.length === 0) {
             return res.status(404).json({ error: "No CVs found." });
