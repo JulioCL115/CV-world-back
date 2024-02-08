@@ -1,5 +1,5 @@
 const validateRegister = (req, res, next) => {
-    const { name, email, password, phoneNumber } = req.body;
+    const { name, email, password } = req.body;
 
     if(!name) {
         return res.status(400).json({ error: 'Please enter a name' });
@@ -11,10 +11,6 @@ const validateRegister = (req, res, next) => {
 
     if(!password) {
         return res.status(400).json({ error: 'Please enter a password' });
-    }  
-
-    if(!phoneNumber) {
-        return res.status(400).json({ error: 'Please enter a phoneNumber' });
     }  
 
     next();

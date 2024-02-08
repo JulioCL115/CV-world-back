@@ -1,13 +1,12 @@
 const { User } = require("../../db");
 
-const createUserController = async (name, email, password, phoneNumber, role) => {
+const createUserController = async (name, email, password, role) => {
     try {
         const newUser = await User.create({
             name,
             email,
             password,
-            phoneNumber,
-            role,
+            role
         });
 
         return newUser;
