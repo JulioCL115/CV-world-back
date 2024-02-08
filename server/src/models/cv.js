@@ -14,7 +14,10 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         image: {
-            type: DataTypes.JSONB,
+            type: DataTypes.STRING
+        },
+        header: {
+            type: DataTypes.STRING,
             allowNull: false
         },
         description: {
@@ -22,20 +25,35 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         experience: {
-            type: DataTypes.JSONB,
+            type: DataTypes.JSON,
+            allowNull: false
+        },
+        education: {
+            type: DataTypes.JSON,
             allowNull: false
         },
         contact: {
-            type: DataTypes.TEXT,
+            type: DataTypes.JSON,
             allowNull: false
         },
-        study: {
-            type: DataTypes.JSONB,
+        skils: {
+            type: DataTypes.ARRAY(DataTypes.STRING),
             allowNull: false
-        }, 
-        applying: {
-            type: DataTypes.STRING,
+        },
+        speakingLanguages: {
+            type: DataTypes.ARRAY(DataTypes.STRING),
+            allowNull: false        
+        },
+        otherInterests: {
+            type: DataTypes.ARRAY(DataTypes.STRING),
             allowNull: false
+        },
+        creationDate: {
+            type: DataTypes.DATEONLY
+        },
+        views: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0
         }
     },
     {
