@@ -3,7 +3,7 @@ const getCvByIdController = async (idKey) => {
     const response = await Cv.findByPk(idKey, {
         include: [{ model: Comment }],
       });
-      if (response && response.review !== null) {
+      if (response) {
         const comments = response[Comment] || [];
         
         const result = {
@@ -15,11 +15,7 @@ const getCvByIdController = async (idKey) => {
             study:response.study,
             contact: response.contact,
             applying :response.applying,
-          Comments: comments.map(com => ({
-            id: com.id,
-            content: com.content,
-            rating: com.rating,
-          })) ,
+            Comments: response.Comments.map( (comment) => comment.comment),
         };
           console.log("op")
           return result;
