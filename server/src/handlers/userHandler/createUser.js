@@ -3,15 +3,14 @@ const { registerUserSchema, ZodError } = require('../../schemas/userSchema');
 
 const createUser = async (req, res) => {
     try {
-        const { name, email, password, phoneNumber, role } = req.body;
+        const { name, email, password, role } = req.body;
 
-        registerUserSchema.parse({ name, email, password, phoneNumber });
+        registerUserSchema.parse({ name, email, password });
 
         const newUser = await createUserController(
             name,
             email,
             password,
-            phoneNumber,
             role
         );
 
