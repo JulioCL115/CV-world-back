@@ -9,9 +9,7 @@ const loginUser = async (req, res) => {
 
         const loginCreated = await loginUserController(email, password);
 
-        res.cookie('jwt', loginCreated.token, loginCreated.cookieOption);
-        
-        res.status(201).json({ message: 'Usuario loggeado', userId: loginCreated.userId });
+        res.status(201).json(loginCreated);
 
     } catch (error) {
         if (error instanceof ZodError) {
