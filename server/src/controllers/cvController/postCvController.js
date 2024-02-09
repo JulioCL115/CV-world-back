@@ -1,6 +1,6 @@
 const { Cv } = require("../../db");
 
-const postCvController = async (name, image = '', header, description, experience, education, contact, skils, speakingLanguages, otherInterests,  views = 0, userId, categoryId, lenguajeId) => {
+const postCvController = async (name, image = '', header, description, experience, education, contact, skills, speakingLanguages, otherInterests,  views = 0, userId, categoryId, lenguajeId) => {
     try {
         const currentDate = new Date();
         const formattedDate = currentDate.toISOString().slice(0, 10);
@@ -14,7 +14,7 @@ const postCvController = async (name, image = '', header, description, experienc
                 experience, 
                 education,   
                 contact,           
-                skils, 
+                skills, 
                 speakingLanguages, 
                 otherInterests, 
                 creationDate: formattedDate, 
