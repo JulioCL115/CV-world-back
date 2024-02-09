@@ -14,7 +14,7 @@ async function populateSubscription() {
       },
       {
         name: "Plan Premium",
-        price: 30,
+        price: 2000,
         included: ["Poder ver y comentar cientos de currículums",
           "Ser visto por las mejores empresas",
           "Posibilidad de cargar múltiples currículums",
