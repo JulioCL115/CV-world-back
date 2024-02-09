@@ -2,17 +2,18 @@ const { Cv } = require('../../db');
 const {uploadImage}= require("../../helpers/cloudinary")
 const fs = require ("fs-extra")
 
-const postCvController = async (name,req, image, header, description, experience, education, contact, skils, speakingLanguages, otherInterests,  views = 0, userId, categoryId, lenguajeId) => {
-   const jsonObjectExperience = JSON.parse(experience);
-    const jsonObjectEducation = JSON.parse(education);
-    const jsonObjectContact = JSON.parse(contact);
+const postCvController = async (name,req, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests,  views = 0, userId, categoryId, lenguajeId) => {
+  
         const currentDate = new Date();
         const formattedDate = currentDate.toISOString().slice(0, 10);
+        const jsonObjectExperience = JSON.parse(experience);
+        const jsonObjectEducation = JSON.parse(education);
+        const jsonObjectContact = JSON.parse(contact);
 
-        const [newCv, created] = await Cv.findOrCreate({
-            where: {
+        const [newCv,create] = await Cv.findOrCreate({
+            where:{
                 name, 
-                image: [], 
+                image:[], 
                 header, 
                 description, 
                 experience:jsonObjectExperience, 
@@ -26,10 +27,10 @@ const postCvController = async (name,req, image, header, description, experience
                 UserId: userId,
                 CategoryId: categoryId,
                 LenguajeId: lenguajeId
-            },
-        });
+            },}
+        );
 
-    if (req.files?.image && req.files?.image.length>0 ) {
+    if (req.files?.image && req.files && req.files?.image.length>0 ) {
         console.log("Subiendo imágenes a Cloudinary");
     
         const uploadPromises = req.files.image.map(async (file) => {
@@ -55,7 +56,7 @@ const postCvController = async (name,req, image, header, description, experience
           }));
           console.log("Guardando producto en la base de datos");
           await newCv.save();
-      } else {
+      } else if (req.files?.image && req.files){
         const result = await uploadImage(req.files.image.tempFilePath)
         newCv.image = [
           {
