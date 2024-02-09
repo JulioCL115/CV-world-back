@@ -1,20 +1,31 @@
-const { Cv, User, Comment } = require('../../db');
+const { Cv } = require('../../db');
 const {uploadImage}= require("../../helpers/cloudinary")
 const fs = require ("fs-extra")
 
-const postCvController = async (name,req, image, description, experience, contact, study, applying, userId) => {
+const postCvController = async (name,req, image, header, description, experience, education, contact, skils, speakingLanguages, otherInterests,  views = 0, userId, categoryId, lenguajeId) => {
    const jsonObjectExperience = JSON.parse(experience);
-    const jsonObjectStudy = JSON.parse(study);
+    const jsonObjectEducation = JSON.parse(education);
+    const jsonObjectContact = JSON.parse(contact);
+        const currentDate = new Date();
+        const formattedDate = currentDate.toISOString().slice(0, 10);
+
         const [newCv, created] = await Cv.findOrCreate({
             where: {
-                name,
-                image: [],
-                description,
-                experience:jsonObjectExperience,
-                contact,
-                study:jsonObjectStudy,
-                applying,
+                name, 
+                image: [], 
+                header, 
+                description, 
+                experience:jsonObjectExperience, 
+                education:jsonObjectEducation,   
+                contact:jsonObjectContact,           
+                skils, 
+                speakingLanguages, 
+                otherInterests, 
+                creationDate: formattedDate, 
+                views,
                 UserId: userId,
+                CategoryId: categoryId,
+                LenguajeId: lenguajeId
             },
         });
 

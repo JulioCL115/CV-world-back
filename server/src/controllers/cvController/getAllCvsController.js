@@ -1,18 +1,20 @@
-const {Cv} = require("../../db")
-const getAllCvsController = async () => {
-    const response = await Cv.findAll();
-  const mappedCv = response.map((cv) => ({
-    id: cv.id,
-    name:cv.name,
-    image: cv.image,
-    description: cv.description,
-    experience:cv.experience,
-    study:cv.study,
-    contact: cv.contact,
-    applying :cv.applying
-  }));
-  console.log("se ingresaron correctamente");
-  return  mappedCv;
+const { Cv } = require('../../db');
+
+const getAllCvsController = async (page, pageSize) => {
+    try {
+        const offset = (page - 1) * pageSize;
+
+        // Realiza la consulta a la base de datos para obtener los CVs paginados
+        const allCvsFound = await Cv.findAndCountAll({
+            limit: pageSize,
+            offset: offset,
+        });
+
+        return allCvsFound.rows;
+        
+    } catch (error) {
+        throw new Error(`Error al obtener todos los CVs: ${error.message}`);
+    }
 
 }
 

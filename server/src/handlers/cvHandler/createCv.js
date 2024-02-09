@@ -1,21 +1,22 @@
 const postCvController = require('../../controllers/cvController/postCvController');
-const { createCvSchema, ZodError } = require('../../schemas/cvSchema');
+// const { createCvSchema, ZodError } = require('../../schemas/cvSchema');
 
 const createCv = async (req, res) => {
     try {
-        const { name, image, description, experience, contact, study, applying } = req.body;
-        const { userId } = req.params; 
+        const { name, image, header, description, experience, education, contact, skils, speakingLanguages, otherInterests, creationDate, views } = req.body;
 
-        createCvSchema.parse({ name, image, description, experience, contact, study, applying });
+        const { userId, categoryId, lenguajeId } = req.params; 
 
-        const cvCreated =  await postCvController(name, req, image, description, experience, contact, study, applying, userId);
+        // createCvSchema.parse({ name, image, header, description, experience, education, contact, skils, speakingLanguages, otherInterests, creationDate, views });
+
+        const cvCreated = await postCvController(name,req, image, header, description, experience, education, contact, skils, speakingLanguages, otherInterests, views, userId, categoryId, lenguajeId);
 
         res.status(201).json(cvCreated);
 
     } catch (error) {
-        if(error instanceof ZodError) {
-            return res.status(400).json(error.issues.map( (issue) => ({ error: issue.message }) ))
-        }
+        // if(error instanceof ZodError) {
+        //     return res.status(400).json(error.issues.map( (issue) => ({ error: issue.message }) ))
+        // }
 
         return res.status(500).json({ error: error.message });
     }

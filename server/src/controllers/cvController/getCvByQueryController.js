@@ -1,46 +1,39 @@
-const getCvByQueryController = (data, filters) => {
-    let response = [...data];
-  
-    if (filters.experienceTitle) {
-      response = response.filter((cv) =>
-        cv.experience.some(
-          (exp) =>
-            exp.title &&
-            exp.title.toLowerCase().includes(filters.experienceTitle.toLowerCase())
-        )
-      );
+const { Cv, sequelize  } = require('../../db');
+const { Op } = require('sequelize');
+
+const getCvByQueryController = async (queryParam, page, pageSize) => {
+    try {
+        const offset = (page - 1) * pageSize;
+
+        const cvsByQueryFound = await Cv.findAndCountAll({
+            where: {
+                [Op.or]: [
+                    {
+                        header: {
+                            [Op.iLike]: `%${queryParam}%`
+                        }
+                    },
+                    {
+                        description: {
+                            [Op.iLike]: `%${queryParam}%`
+                        }
+                    },
+                    sequelize.literal(`"Cv"."experience"->>'jobPosition' ILIKE '%${queryParam}%'`),
+                    sequelize.literal(`"Cv"."experience"->>'description' ILIKE '%${queryParam}%'`),
+                    sequelize.literal(`"Cv"."education"->>'institution: ' ILIKE '%${queryParam}%'`),
+                    sequelize.literal(`"Cv"."education"->>'title' ILIKE '%${queryParam}%'`),
+                    sequelize.literal(`"Cv"."education"->>'description' ILIKE '%${queryParam}%'`),
+                ]
+            },
+            limit: pageSize,
+            offset: offset,
+        });
+
+        return cvsByQueryFound.rows;
+        
+    } catch (error) {
+        throw new Error(`Error al obtener todos los CVs: ${error.message}`);
     }
-  
-    if (filters.experienceYears) {
-      response.sort((a, b) =>
-        filters.experienceYears === '>5' ? a.years - b.years : b.years - a.years
-      );
-    }
+}
 
-    if (filters.studyName) {
-        response = response.filter((cv) =>
-          cv.study.some(
-            (exp) =>
-              exp.name &&
-              exp.name.trim().toLowerCase().includes(filters.studyName.trim().toLowerCase())
-          )
-        );
-      }
-
-      if (filters.experienceStudy) {
-        response.sort((a, b) =>
-          filters.experienceStudy === '>5' ? a.years - b.years : b.years - a.years
-        );
-      }
-
-      if (filters.apply) {
-        response = response.filter(cv => cv.applying.trim().toLowerCase() === filters.apply.trim().toLowerCase());
-      }
-      
-  
-    return response;
-  };
-
- 
-  
-  module.exports = getCvByQueryController;
+module.exports = getCvByQueryController;

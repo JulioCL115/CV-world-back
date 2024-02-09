@@ -1,11 +1,11 @@
 const loginUserController = require('../../controllers/userController/loginUserController');
-const { createUserSchema, ZodError } =  require('../../schemas/userSchema');
+const { loginUserSchema, ZodError } =  require('../../schemas/userSchema');
 
 const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        createUserSchema.parse({ email, password });
+        loginUserSchema.parse({ email, password });
 
         const loginCreated = await loginUserController(email, password);
 

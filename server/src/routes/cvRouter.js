@@ -7,8 +7,8 @@ const validateCv = require('../middlewares/validateCv');
 
 cvRouter.get('/', getAllCvs);
 
-cvRouter.get('/:idKey', getCvById);
+cvRouter.get('/:cvId', getCvById);
 
-cvRouter.post('/:userId', validateCv, createCv);
+cvRouter.post('/:userId/:categoryId/:lenguajeId', validateCv, createCv);
 
 module.exports = cvRouter;
