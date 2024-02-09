@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         image: {
-            type: DataTypes.STRING
+            type: DataTypes.JSONB
         },
         header: {
             type: DataTypes.STRING,
@@ -36,7 +36,7 @@ module.exports = (sequelize) => {
             type: DataTypes.JSONB,
             allowNull: false
         },
-        skils: {
+        skills: {
             type: DataTypes.ARRAY(DataTypes.STRING),
             allowNull: false
         },

@@ -1,23 +1,23 @@
 const { User } = require('../../db');
-// const bcrypt = require('bcrypt');
-
+const bcrypt = require('bcrypt');
 
 const loginUserController = async (email, password) => {
     try {
         
         const userFound = await User.findOne({
-            where: { email, password }
+            where: { email }
         });
 
         if (!userFound) {
-            throw new Error('Usuario no encontrado');
+            throw new Error('User not found');
         }
 
-        // const isPasswordValid = await bcrypt.compare(password, userFound.password);
+        // Comparar la contraseña proporcionada con la contraseña almacenada en la base de datos
+        const passwordMatch = await bcrypt.compare(password, userFound.password);
 
-        // if (!isPasswordValid) {
-        //     throw new Error('Contraseña incorrecta');
-        // }
+        if (!passwordMatch) {
+            throw new Error('Incorrect password');
+        }
 
         return userFound;
         
