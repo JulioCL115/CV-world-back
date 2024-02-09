@@ -8,7 +8,7 @@ const populateSubscription = require("./src/seeder/populateSubscription.js")
 
 
 conn
-  .sync({ force: true })
+  .sync({ force: false })
   .then(() => {
     server.listen(PORT, () => {
       console.log(`Server listening on port ${PORT}`);
