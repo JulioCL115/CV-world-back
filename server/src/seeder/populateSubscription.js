@@ -4,7 +4,7 @@ async function populateSubscription() {
   try {
     const subscriptions = await Subscription.bulkCreate([
       {
-        name: "Basic",
+        name: "Plan Básico",
         price: 0,
         included: ["Poder ver y comentar cientos de currículums",
           "Ser visto por las mejores empresas"],
@@ -13,7 +13,7 @@ async function populateSubscription() {
           "Convertirte en usuario verificado"],
       },
       {
-        name: "Premium",
+        name: "Plan Premium",
         price: 30,
         included: ["Poder ver y comentar cientos de currículums",
           "Ser visto por las mejores empresas",
@@ -23,7 +23,7 @@ async function populateSubscription() {
         notIncluded: null,
       },
     ]);
-    
+
     console.log("subscription table populated successfully");
   } catch (error) {
     console.error("Error populating subscription database:", error);
