@@ -9,5 +9,4 @@ userRouter.post('/register', validateRegister, createUser);
 
 userRouter.post('/login', validateLogin, loginUser);
 
-
 module.exports = userRouter;

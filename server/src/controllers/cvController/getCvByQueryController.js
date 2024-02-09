@@ -1,4 +1,4 @@
-const { Cv, sequelize  } = require('../../db');
+const { Cv } = require('../../db');
 const { Op } = require('sequelize');
 
 const getCvByQueryController = async (queryParam, page, pageSize) => {
@@ -17,12 +17,7 @@ const getCvByQueryController = async (queryParam, page, pageSize) => {
                         description: {
                             [Op.iLike]: `%${queryParam}%`
                         }
-                    },
-                    sequelize.literal(`"Cv"."experience"->>'jobPosition' ILIKE '%${queryParam}%'`),
-                    sequelize.literal(`"Cv"."experience"->>'description' ILIKE '%${queryParam}%'`),
-                    sequelize.literal(`"Cv"."education"->>'institution: ' ILIKE '%${queryParam}%'`),
-                    sequelize.literal(`"Cv"."education"->>'title' ILIKE '%${queryParam}%'`),
-                    sequelize.literal(`"Cv"."education"->>'description' ILIKE '%${queryParam}%'`),
+                    }   
                 ]
             },
             limit: pageSize,
@@ -32,7 +27,8 @@ const getCvByQueryController = async (queryParam, page, pageSize) => {
         return cvsByQueryFound.rows;
         
     } catch (error) {
-        throw new Error(`Error al obtener todos los CVs: ${error.message}`);
+        console.error('Error searching for CVs by query:', error);
+        throw error;       
     }
 }
 

@@ -1,10 +1,10 @@
 const getAllCvsController = require('../../controllers/cvController/getAllCvsController');
 const getCvByQueryController = require('../../controllers/cvController/getCvByQueryController');
-const paginateData = require('../../controllers/cvController/paginateController');
+
 const getAllCvs = async (req, res) => {
     try {
 
-        const { queryParam  } = req.query;
+        const { queryParam } = req.query;
 
         const page = parseInt(req.query.page) || 1; // Página actual (por defecto es 1)
         const pageSize = parseInt(req.query.pageSize) || 6; 
@@ -21,12 +21,11 @@ const getAllCvs = async (req, res) => {
         } else {
             const allCvs = await getAllCvsController(page, pageSize);
 
-        if (!allCvs || allCvs.length === 0) {
-            return res.status(404).json({ error: "No CVs found." });
-        }
+            if (!allCvs || allCvs.length === 0) {
+                return res.status(404).json({ error: "No CVs found." });
+            }
 
-        res.status(200).json(allCvs);
-        
+            res.status(200).json(allCvs);
         } 
        }catch (error) {
         res.status(500).json({ error: error.message });

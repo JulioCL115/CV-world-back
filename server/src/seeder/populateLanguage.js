@@ -1,27 +1,20 @@
 const { Lenguaje } = require("../db");
 
 async function populateLanguage() {
-  try {
+    try {
+        const languages = await Lenguaje.bulkCreate([
+            {
+                name: "Español",
+            },
+            {
+                name: "Inglés",
+            },
+        ]);
 
-    const languages = await Lenguaje.bulkCreate([
-      {
-        name: "Español",
-      },
-      {
-        name: "Ingles",
-      },
-      {
-        name: "Frances",
-      },
-      {
-        name: "Aleman",
-      },
-
-    ]);
-    console.log("language table populated successfully");
-  } catch (error) {
-    console.error("Error populating language database:", error);
-  }
-}
+        console.log("language table populated successfully");
+    } catch (error) {
+        console.error("Error populating language database:", error);
+    };
+};
 
 module.exports = populateLanguage;

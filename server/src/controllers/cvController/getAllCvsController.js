@@ -13,9 +13,9 @@ const getAllCvsController = async (page, pageSize) => {
         return allCvsFound.rows;
         
     } catch (error) {
-        throw new Error(`Error al obtener todos los CVs: ${error.message}`);
+        console.error('Error searching for all CVs:', error);
+        throw error;    
     }
-
 }
 
 module.exports = getAllCvsController;
