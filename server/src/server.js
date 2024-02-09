@@ -12,12 +12,10 @@ server.use(morgan('dev'));
 server.use(express.json());
 server.use(cookieParser());
 server.use(cors());
-server.use(
-    fileUpload({
-      useTempFiles: true,
-      tempFileDir: "./uploads",
-    })
-  );
+server.use(fileUpload({ 
+    useTempFiles: true, 
+    tempFileDir: "./uploads", 
+}));
 
 server.use('/', routes);
 

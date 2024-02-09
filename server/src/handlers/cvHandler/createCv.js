@@ -7,9 +7,9 @@ const createCv = async (req, res) => {
 
         const { userId, categoryId, lenguajeId } = req.params; 
 
-        // createCvSchema.parse({ name, image, header, description, experience, education, contact, skils, speakingLanguages, otherInterests, creationDate, views });
+        // createCvSchema.parse({ name, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests, creationDate, views });
 
-        const cvCreated = await postCvController(name,req, image, header, description, experience, education, contact, skils, speakingLanguages, otherInterests, views, userId, categoryId, lenguajeId);
+        const cvCreated = await postCvController(name, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests, views, userId, categoryId, lenguajeId, req);
 
         res.status(201).json(cvCreated);
 

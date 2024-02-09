@@ -7,7 +7,7 @@ const createComment = async (req, res) => {
 
         const { cvId, userId } = req.params;
 
-        commentSchema.parse({comment});
+        commentSchema.parse({ comment });
 
         const commentCreated = await createCommentController(comment, cvId, userId);
 

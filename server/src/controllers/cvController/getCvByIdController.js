@@ -28,7 +28,7 @@ const getCvByIdController = async (cvId) => {
     
         return cvFormat;
     } catch (error) {
-        console.error('Error searching for CV:', error);
+        console.error('Error searching for CV by ID:', error);
         throw error;
     }
 }

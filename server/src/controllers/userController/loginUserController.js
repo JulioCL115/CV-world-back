@@ -1,7 +1,6 @@
 const { User } = require('../../db');
 // const bcrypt = require('bcrypt');
 
-
 const loginUserController = async (email, password) => {
     try {
         
@@ -10,14 +9,8 @@ const loginUserController = async (email, password) => {
         });
 
         if (!userFound) {
-            throw new Error('Usuario no encontrado');
+            throw new Error('User not found');
         }
-
-        // const isPasswordValid = await bcrypt.compare(password, userFound.password);
-
-        // if (!isPasswordValid) {
-        //     throw new Error('Contraseña incorrecta');
-        // }
 
         return userFound;
         

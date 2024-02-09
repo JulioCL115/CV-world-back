@@ -11,7 +11,7 @@ const createUserController = async (name, email, password, role) => {
 
         return newUser;
     } catch (error) {
-        console.error("Error registering a user:", error);
+        console.error("Error registering user:", error);
         throw error;
     }
 };
