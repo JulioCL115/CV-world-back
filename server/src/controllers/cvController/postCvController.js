@@ -18,7 +18,7 @@ const postCvController = async (name,req, image, header, description, experience
                 experience:jsonObjectExperience, 
                 education:jsonObjectEducation,   
                 contact:jsonObjectContact,           
-                skils, 
+                skills, 
                 speakingLanguages, 
                 otherInterests, 
                 creationDate: formattedDate, 

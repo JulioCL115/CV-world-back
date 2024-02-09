@@ -1,5 +1,5 @@
 const validateCv = (req, res, next) => {
-    const { name, header, description, experience, education, contact, skils, speakingLanguages, otherInterests } = req.body;
+    const { name, header, description, experience, education, contact, skills, speakingLanguages, otherInterests } = req.body;
 
     const { userId, categoryId, lenguajeId } = req.params; 
 
@@ -31,8 +31,8 @@ const validateCv = (req, res, next) => {
         return res.status(400).json({ error: 'Please enter a contact' });
     }  
     
-    if (!skils) {
-        return res.status(400).json({ error: 'Please enter a skils' });
+    if (!skills) {
+        return res.status(400).json({ error: 'Please enter a skills' });
     } 
 
     if (!speakingLanguages) {

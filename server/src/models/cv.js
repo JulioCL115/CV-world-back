@@ -36,7 +36,7 @@ module.exports = (sequelize) => {
             type: DataTypes.JSONB,
             allowNull: false
         },
-        skils: {
+        skills: {
             type: DataTypes.ARRAY(DataTypes.STRING),
             allowNull: false
         },
