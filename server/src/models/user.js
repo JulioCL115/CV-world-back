@@ -9,13 +9,15 @@ module.exports = (sequelize) => {
             primaryKey: true,
             defaultValue: DataTypes.UUIDV4
         },
-        name: {
+        userName: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
         email: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
         password: {
             type: DataTypes.STRING,

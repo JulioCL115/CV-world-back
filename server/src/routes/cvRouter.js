@@ -4,11 +4,12 @@ const getAllCvs = require('../handlers/cvHandler/getAllCvs');
 const getCvById = require('../handlers/cvHandler/getCvById');
 const createCv = require('../handlers/cvHandler/createCv');
 const validateCv = require('../middlewares/validateCv');
+const { verifyToken } =  require('../middlewares/authorization');
 
 cvRouter.get('/', getAllCvs);
 
 cvRouter.get('/:cvId', getCvById);
 
-cvRouter.post('/:userId/:categoryId/:lenguajeId', validateCv, createCv);
+cvRouter.post('/:userId/:categoryId/:lenguajeId',verifyToken, validateCv, createCv);
 
 module.exports = cvRouter;

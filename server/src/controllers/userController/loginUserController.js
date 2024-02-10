@@ -21,7 +21,7 @@ const loginUserController = async (email, password) => {
             throw new Error('Incorrect password');
         }
 
-        const payload = { email: userFound.email }
+        const payload = { id: userFound.id }
 
         const options = { expiresIn: '1d' }
 
@@ -31,12 +31,7 @@ const loginUserController = async (email, password) => {
             options
         );
 
-        const cookieOption = {
-            expires: new Date(Date.now() + (24 * 60 * 60 * 1000)), // Expire en 1 día
-            path: '/'
-        }
-
-        return { token, cookieOption, userId: userFound.id};
+        return { token, userId: userFound.id };
         
     } catch (error) {
         console.error('Error searching User:', error);
