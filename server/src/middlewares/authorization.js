@@ -1,12 +1,6 @@
 require("dotenv").config();
 const jwt = require('jsonwebtoken');
 
-const verifyLogin = (req, res, next) => {
-
-
-    next();
-}
-
 const verifyToken = (req, res, next) => {
 
     const token = req.headers.authorization;
@@ -19,9 +13,12 @@ const verifyToken = (req, res, next) => {
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
 
         if (err) {
-            return res.status(401).json({ message: 'Failed to authenticate token' });
+            if (err.name === 'TokenExpiredError') {
+                return res.status(401).json({ error: 'Token expired' });
+            }
+            return res.status(401).json({ error: 'Failed to authenticate token' });
         }
-
+        
         // Si la verificación es exitosa, adjuntamos los datos decodificados del token a la solicitud
         req.userId = decoded.id;
 
@@ -31,6 +28,5 @@ const verifyToken = (req, res, next) => {
 }
 
 module.exports = {
-    verifyLogin,
     verifyToken
 };
