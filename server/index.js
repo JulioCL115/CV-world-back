@@ -17,5 +17,4 @@ conn
     .then(() => populateCategory())
     .then(() => populateLanguage())
     .then(() => populateSubscription())
-    .catch((error) => console.error(error))
     .catch((error) => console.error(error));
