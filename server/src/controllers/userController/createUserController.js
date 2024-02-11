@@ -9,7 +9,9 @@ const createUserController = async (userName, email, password, role) => {
         });
 
         if(userFound) {
-            throw new Error('The email address is already in use. Please try with another email');
+            const error = new Error('Email address already in use. Please try with another email.');
+            error.statusCode = 409; 
+            throw error;
         }
 
         const salt = await bcrypt.genSalt(10);

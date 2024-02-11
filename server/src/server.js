@@ -5,7 +5,6 @@ const cors = require('cors');
 const routes = require('./routes/index');
 const fileUpload = require("express-fileupload");
 
-
 const server = express();
 
 server.use(morgan('dev'));

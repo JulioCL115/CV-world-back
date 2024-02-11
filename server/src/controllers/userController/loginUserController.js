@@ -1,7 +1,6 @@
 const { User } = require('../../db');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-require("dotenv").config();
 
 const loginUserController = async (email, password) => {
     try {
@@ -11,17 +10,21 @@ const loginUserController = async (email, password) => {
         });
 
         if (!userFound) {
-            throw new Error('User not found');
+            const error = new Error('User not found');
+            error.statusCode = 404;
+            throw error;
         }
 
         // Comparar la contraseña proporcionada con la contraseña almacenada en la base de datos
         const passwordMatch = await bcrypt.compare(password, userFound.password);
 
         if (!passwordMatch) {
-            throw new Error('Incorrect password');
+            const error = new Error('Incorrect password');
+            error.statusCode = 401; 
+            throw error;
         }
 
-        const payload = { id: userFound.id }
+        const payload = { id: userFound.id, userName: userFound.userName }
 
         const options = { expiresIn: '1d' }
 
@@ -34,7 +37,7 @@ const loginUserController = async (email, password) => {
         return { token, userId: userFound.id };
         
     } catch (error) {
-        console.error('Error searching User:', error);
+        console.error('Error logging user:', error);
         throw error; 
     }
 }

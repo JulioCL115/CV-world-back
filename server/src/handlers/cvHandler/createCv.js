@@ -1,5 +1,5 @@
 const postCvController = require('../../controllers/cvController/postCvController');
-// const { createCvSchema, ZodError } = require('../../schemas/cvSchema');
+const { createCvSchema, ZodError } = require('../../schemas/cvSchema');
 
 const createCv = async (req, res) => {
     try {
@@ -14,9 +14,9 @@ const createCv = async (req, res) => {
         res.status(201).json(cvCreated);
 
     } catch (error) {
-        // if(error instanceof ZodError) {
-        //     return res.status(400).json(error.issues.map( (issue) => ({ error: issue.message }) ))
-        // }
+        if(error instanceof ZodError) {
+            return res.status(400).json(error.issues.map( (issue) => ({ error: issue.message }) ))
+        }
 
         return res.status(500).json({ error: error.message });
     }

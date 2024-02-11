@@ -19,6 +19,11 @@ const createUser = async (req, res) => {
         if (error instanceof ZodError) {
             return res.status(400).json(error.issues.map(issue => ({ error: issue.message })));
         }
+
+        if (error.statusCode === 409) {
+            return res.status(409).json({ error: error.message });
+        }
+
         return res.status(500).json({ error: error.message });
     }
 };

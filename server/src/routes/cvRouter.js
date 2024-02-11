@@ -6,7 +6,7 @@ const createCv = require('../handlers/cvHandler/createCv');
 const deleteCv = require('../handlers/cvHandler/deleteCv');
 const updateCv = require('../handlers/cvHandler/updateCv');
 const validateCv = require('../middlewares/validateCv');
-const { verifyToken } =  require('../middlewares/authorization');
+const verifyToken =  require('../middlewares/verifyToken');
 
 cvRouter.get('/', getAllCvs);
 

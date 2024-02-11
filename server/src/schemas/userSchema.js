@@ -8,7 +8,7 @@ const registerUserSchema = z.object({
 
 const loginUserSchema = z.object({
     email: z.string().email(),
-    password: z.string()
+    password: z.string().min(6, 'Password is too short').max(16, 'Password is too long')
 });
 
 module.exports = {
