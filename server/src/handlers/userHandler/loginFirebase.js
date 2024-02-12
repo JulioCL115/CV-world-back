@@ -20,6 +20,13 @@ const loginFirebase = async (req, res) => {
             include: [{ model: Cv }, { model: Subscription }]        
         });
 
+        
+        if (!userFound) {
+            const error = new Error('User not found');
+            error.statusCode = 404;
+            throw error;
+        }
+
         const userFoundFiltered = {
             id: userFound.id,
             userName: userFound.userName,

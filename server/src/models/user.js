@@ -20,8 +20,7 @@ module.exports = (sequelize) => {
             unique: true
         },
         password: {
-            type: DataTypes.STRING,
-            allowNull: false
+            type: DataTypes.STRING        
         },
         role: {
             type: DataTypes.STRING,
