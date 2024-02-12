@@ -2,6 +2,7 @@ const {register} = require('../../handlers/userHandler/registerUser')
 const { createAccesToken } = require('../../libs/jwt')
 const {User} = require('../../db')
 const bcrypt = require('bcrypt')
+const {} = require('firebase/auth')
 
 const createUserController = async (req,res) => {
     const {username,email, password, phoneNumber} = req.body
@@ -23,7 +24,8 @@ const createUserController = async (req,res) => {
         res.json({
             id: userCreated.id,
             username: userCreated.username,
-            email: userCreated.email
+            email: userCreated.email,
+            phoneNumber: userCreated.phoneNumber,
         })
      
     } catch (error) {

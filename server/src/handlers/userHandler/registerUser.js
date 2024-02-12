@@ -1,20 +1,16 @@
+const { createUserWithEmailAndPassword } = require('firebase/auth');
 const {createUserController} = require('../../controllers/userController/registerUserController');
 const { createAccesToken } = require('../../libs/jwt');
 
-const register = async (req,res) =>{
-    const {username,email, password} = req.body
+const registerUserHandler = async(req,res) =>{
     try {
-        const registered = await createUserController(username,email, password)
-        const token = await createAccesToken({id: registered.id})
-        res.cookie('token', token)
-        res.status(201).json({
-            id: registered.id,
-            username: registered.username,
-            email: registered.email,
-        })
+        const {email, password} = req.body
+        if(!email || !password){
+            res.status(400).json({message: 'Email and password are required'})
+        }
+        const userCredentials = await createUserWithEmailAndPassword(auth, email, password)
+        console.log(userCredentials)
     } catch (error) {
-        res.status(500).json({error: error.message})
+         res.status(500).json({message: error.message})        
     }
 }
-
-module.exports = {register}
