@@ -15,8 +15,8 @@ const loginUser = async (req, res) => {
 
         res.header('auth-token', loginCreated.token).json({
             message: 'Authenticated user',
-            userId: loginCreated.userId,
-            token: loginCreated.token
+            token: loginCreated.token,
+            user: loginCreated.userFoundFiltered,
         });
 
     } catch (error) {

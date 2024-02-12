@@ -2,6 +2,7 @@
 
 POST "http://localhost:3001/user/login" --> to log in
 POST "http://localhost:3001/user/register" --> to sign up
+POST "http://localhost:3001/user/firebase" --> to sign up with firebase
 
 POST "http://localhost:3001/cv/:userId" --> to create a cv
 GET "http://localhost:3001/cv" --> to get all cvs

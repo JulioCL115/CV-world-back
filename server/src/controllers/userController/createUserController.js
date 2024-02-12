@@ -21,10 +21,16 @@ const createUserController = async (userName, email, password, role) => {
             userName,
             email,
             password: hashPassword,
-            role
+            role,
         });
 
-        return newUser;
+        const newUserFiltered = {
+            userName: newUser.userName,
+            email: newUser.email,
+            role: newUser.role
+        }
+        
+        return newUserFiltered;
 
     } catch (error) {
         console.error("Error registering user:", error);
