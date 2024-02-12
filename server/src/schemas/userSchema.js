@@ -1,18 +1,17 @@
-const { z, ZodError } = require('zod');
+const joi = require('@hapi/joi');
 
-const registerUserSchema = z.object({
-    userName: z.string().min(5, 'User Name is too short').max(15, 'User Name is too long'),
-    email: z.string().email(),
-    password: z.string().min(6, 'Password is too short').max(16, 'Password is too long')
+const registerUserSchema = joi.object({
+    userName: joi.string().min(5).max(20).required(),
+    email: joi.string().min(6).max(50).required().email(),
+    password: joi.string().min(6).max(20).required()
 });
 
-const loginUserSchema = z.object({
-    email: z.string().email(),
-    password: z.string().min(6, 'Password is too short').max(16, 'Password is too long')
+const loginUserSchema = joi.object({
+    email: joi.string().min(6).max(50).required().email(),
+    password: joi.string().min(6).max(20).required()
 });
 
 module.exports = {
     loginUserSchema,
-    registerUserSchema,
-    ZodError
+    registerUserSchema
 };
