@@ -1,4 +1,4 @@
-const { User } = require('../../db');
+const { User, Cv, Subscription } = require('../../db');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -6,7 +6,8 @@ const loginUserController = async (email, password) => {
     try {
         
         const userFound = await User.findOne({
-            where: { email }
+            where: { email },
+            include: [{ model: Cv }, { model: Subscription }]        
         });
 
         if (!userFound) {
@@ -34,7 +35,16 @@ const loginUserController = async (email, password) => {
             options
         );
 
-        return { token, userId: userFound.id };
+        const userFoundFiltered = {
+            id: userFound.id,
+            userName: userFound.userName,
+            email: userFound.email,
+            role: userFound.role,
+            Cvs: userFound.Cvs,
+            Subscription: userFound.Subscription
+        }
+
+        return { token, userFoundFiltered };
         
     } catch (error) {
         console.error('Error logging user:', error);

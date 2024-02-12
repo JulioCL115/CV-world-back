@@ -3,7 +3,7 @@ const joi = require('@hapi/joi');
 const createCvSchema = joi.object({
     name: joi.string().min(3).max(20).required(),
     header: joi.string().min(3).max(20),
-    description: joi.string().min(10).max(50),
+    description: joi.string().min(10).max(200),
     contact: joi.object({
         phoneNumber: joi.string().min(6).max(15).required(),
         location: joi.string().min(3).max(50).required(),
@@ -16,3 +16,10 @@ const createCvSchema = joi.object({
 });
 
 module.exports = createCvSchema;
+/*
+ - experience: [ { from: '', to: '', company: '', role: '', responsabilities: ''  } ]
+
+ - education: [ { from: '', to: '', where: '', about: '' } ]
+
+ - contact: [ { direction: '', phone: '', email: ''  } ]
+*/
