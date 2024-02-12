@@ -3,11 +3,18 @@ const cvRouter = Router();
 const getAllCvs = require('../handlers/cvHandler/getAllCvs');
 const getCvById = require('../handlers/cvHandler/getCvById');
 const createCv = require('../handlers/cvHandler/createCv');
+const deleteCv = require('../handlers/cvHandler/deleteCv');
+const updateCv = require('../handlers/cvHandler/updateCv');
+const verifyToken =  require('../middlewares/verifyToken');
 
 cvRouter.get('/', getAllCvs);
 
-cvRouter.get('/:id', getCvById);
+cvRouter.get('/:cvId', getCvById);
 
-cvRouter.post('/', createCv);
+cvRouter.post('/:userId/:categoryId/:lenguajeId',verifyToken, createCv);
+
+cvRouter.delete('/:cvId',verifyToken, deleteCv);
+
+cvRouter.put('/:cvId',verifyToken, updateCv);
 
 module.exports = cvRouter;
