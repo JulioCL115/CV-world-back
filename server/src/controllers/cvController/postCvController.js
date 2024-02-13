@@ -10,7 +10,7 @@ const postCvController = async (name,req, image, header, description, experience
         const jsonObjectEducation = JSON.parse(education);
         const jsonObjectContact = JSON.parse(contact);
 
-        const [newCv,create] = await Cv.findOrCreate({
+        const [newCv,created] = await Cv.findOrCreate({
             where:{
                 name, 
                 image:[], 

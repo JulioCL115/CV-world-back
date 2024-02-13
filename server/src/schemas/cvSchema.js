@@ -12,7 +12,7 @@ const createCvSchema = z.object({
         message: 'Education is required'
     }),
     contact: z.object(),
-    skils: z.array(z.string()),
+    skills: z.array(z.string()),
     speakingLanguages: z.array(z.string()),
     otherInterests: z.array(z.string()),
     creationDate: z.string(),
