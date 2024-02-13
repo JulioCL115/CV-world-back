@@ -1,14 +1,14 @@
 const { Cv } = require('../../db');
 
-const updateCvController = async (cvId, porpertiesToBeUpdated) => {
+const updateCvController = async (cvId, propertiesToBeUpdated ) => {
     try {
+        const cvFound = await Cv.findByPk(cvId);
 
-        const cvUpdated = await Cv.update( 
-            porpertiesToBeUpdated,
-            {
-                where: { id: cvId}
-            }
-        );
+        if (!cvFound) {
+            throw new Error("CV not found");
+        }
+
+        const cvUpdated = await cvFound.update(propertiesToBeUpdated );
 
         return cvUpdated;
 

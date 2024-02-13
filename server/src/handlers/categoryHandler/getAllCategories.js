@@ -2,7 +2,6 @@ const getAllCategoriesController = require('../../controllers/categoryController
 
 const getAllCategories = async (req, res) => {
     try {
-
         const allCategories = await getAllCategoriesController();
 
         if(!allCategories || allCategories.length === 0) {

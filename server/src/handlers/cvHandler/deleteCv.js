@@ -2,20 +2,15 @@ const deleteCvController = require('../../controllers/cvController/deleteCvContr
 
 const deleteCv = async (req, res) => {
     try {
-
         const { cvId } = req.params;
 
         if(!cvId) {
             return res.status(400).json({ error: "ID is required" });
         }
 
-        const cvDeleted = await deleteCvController(cvId);
+        await deleteCvController(cvId);
 
-        if(!cvDeleted) {
-            throw new Error('CV not found for deletion.');
-        }
-
-        res.status(200).json({ message: 'CV successfully deleted' });
+        res.status(200).json({ message: "CV deleted successfully" });
 
     } catch (error) {
         return res.status(500).json({ error: error.message });

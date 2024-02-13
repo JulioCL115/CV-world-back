@@ -7,17 +7,24 @@ const getCvByQueryController = async (queryParam, page, pageSize) => {
 
         const cvsByQueryFound = await Cv.findAndCountAll({
             where: {
-                [Op.or]: [
+                [Op.and]: [
                     {
-                        header: {
-                            [Op.iLike]: `%${queryParam}%`
-                        }
+                        deleted: false
                     },
                     {
-                        description: {
-                            [Op.iLike]: `%${queryParam}%`
-                        }
-                    }   
+                        [Op.or]: [
+                            {
+                                header: {
+                                    [Op.iLike]: `%${queryParam}%`
+                                }
+                            },
+                            {
+                                description: {
+                                    [Op.iLike]: `%${queryParam}%`
+                                }
+                            }   
+                        ]
+                    }
                 ]
             },
             limit: pageSize,

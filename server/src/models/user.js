@@ -26,6 +26,10 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             defaultValue: 'user'
         },
+        deleted: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        }
     },
     {
         timestamps: false
