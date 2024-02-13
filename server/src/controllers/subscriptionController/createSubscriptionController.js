@@ -1,5 +1,4 @@
 const { Subscription, User } = require("../../db");
-const user = require("../../models/user");
 
 const createSubscriptionController = async (name, price, included, notIncluded, userId) => {
     try {
