@@ -1,6 +1,8 @@
 require("dotenv").config();
 const { API_KEY, CLOUD_NAME } = process.env;
 const cloudinary = require("cloudinary").v2;
+const axios = require('axios');
+
 const cloudinaryConfig = cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.API_KEY,
@@ -20,7 +22,7 @@ const signatureResponse = () => {
 };
 
 const cloudinaryHandler = async (req, res) => {
-  const file = req.body;
+  const { file } = req.body;
   const formData = new FormData();
   formData.append("file", file);
   formData.append("api_key", signatureResponse().API_KEY);
@@ -28,9 +30,7 @@ const cloudinaryHandler = async (req, res) => {
   formData.append("timestamp", signatureResponse().timestamp);
 
   const cloudinaryResponse = await axios.post(
-    `https://api.cloudinary.com/v1_1/${
-      signatureResponse().CLOUD_NAME
-    }/auto/upload`,
+    `https://api.cloudinary.com/v1_1/${signatureResponse().CLOUD_NAME}/auto/upload`,
     formData,
     {
       headers: { "Content-Type": "multipart/form-data" },

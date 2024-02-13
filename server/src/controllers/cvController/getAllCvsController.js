@@ -6,6 +6,7 @@ const getAllCvsController = async (page, pageSize) => {
 
         // Realiza la consulta a la base de datos para obtener los CVs paginados
         const allCvsFound = await Cv.findAndCountAll({
+            where: { deleted: false },
             limit: pageSize,
             offset: offset,
         });

@@ -4,9 +4,13 @@ const getCvByIdController = async (cvId) => {
 
     try {
         const cvFound = await Cv.findOne({
-            where: { id: cvId },
+            where: { id: cvId, deleted: false },
             include: [{ model: Comment }] // Incluye los comentarios asociados al currículum
         });
+
+        if(!cvFound) {
+            return null;
+        }
 
         const cvFormat = {
             id: cvFound.cvId,

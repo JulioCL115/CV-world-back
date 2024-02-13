@@ -2,10 +2,17 @@ const { Cv } = require('../../db');
 
 const deleteCvController = async (cvId) => {
     try {
+        const cvFound = await Cv.findByPk(cvId);
 
-        const cvDeleted = await Cv.destroy({
-            where: { id: cvId}
-        });
+        if (!cvFound) {
+            const error = new Error("CV not found for deletion");
+            error.statusCode = 404; 
+            throw error;
+        }
+
+        const cvDeleted= await cvFound.update( 
+            { deleted: true }, 
+        );
 
         return cvDeleted;
 

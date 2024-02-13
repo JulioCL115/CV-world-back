@@ -3,16 +3,16 @@ const { registerUserSchema } = require('../../schemas/userSchema');
 
 const createUser = async (req, res) => {
     try {
-        const { userName, email, password, role } = req.body;
+        const { name, email, password, role } = req.body;
 
-        const { error } = registerUserSchema.validate(req.body);
+        // const { error } = registerUserSchema.validate(req.body);
 
-        if(error) {
-            return res.status(400).json({ error: error.details[0].message });
-        }
+        // if(error) {
+        //     return res.status(400).json({ error: error.details[0].message });
+        // }
 
         const newUser = await createUserController(
-            userName,
+            name,
             email,
             password,
             role
@@ -20,8 +20,8 @@ const createUser = async (req, res) => {
 
         res.status(201).json(newUser);
     } catch (error) {
-        if (error.statusCode === 409) {
-            return res.status(409).json({ error: error.message });
+        if (error.statusCode) {
+            return res.status(error.statusCode).json({ error: error.message });
         }
 
         return res.status(500).json({ error: error.message });

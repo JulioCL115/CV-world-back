@@ -4,27 +4,46 @@ const { Cv } = require('../../db');
 
 const postCvController = async (name, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests, views = 0, userId, categoryId, lenguajeId) => {
     try {
-        const currentDate = new Date();
-        const formattedDate = currentDate.toISOString().slice(0, 10);
-
-        const [newCv, created] = await Cv.findOrCreate({
+        const existingCv = await Cv.findOne({
             where: {
                 name,
-                image,
                 header,
                 description,
-                experience,
-                education,
                 contact,
                 skills,
                 speakingLanguages,
                 otherInterests,
-                creationDate: formattedDate,
-                views,
                 UserId: userId,
                 CategoryId: categoryId,
                 LenguajeId: lenguajeId
-            },
+            }
+        });
+
+        if(existingCv) {
+            const error = new Error('CV with similar characteristics already exists');
+            error.statusCode = 409;
+            throw error;
+        }
+
+        const currentDate = new Date();
+        const formattedDate = currentDate.toISOString().slice(0, 10);
+
+        const newCv = await Cv.create({
+            name,
+            image,
+            header,
+            description,
+            experience,
+            education,
+            contact,
+            skills,
+            speakingLanguages,
+            otherInterests,
+            creationDate: formattedDate,
+            views,
+            UserId: userId,
+            CategoryId: categoryId,
+            LenguajeId: lenguajeId
         });
 
         return newCv;

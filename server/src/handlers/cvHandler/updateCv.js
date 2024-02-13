@@ -2,7 +2,7 @@ const updateCvController = require('../../controllers/cvController/updateCvContr
 
 const updateCv = async (req, res) => {
     try {
-        const porpertiesToBeUpdated = req.body
+        const propertiesToBeUpdated  = req.body
 
         const { cvId } = req.params;
         
@@ -10,19 +10,22 @@ const updateCv = async (req, res) => {
             return res.status(400).json({ error: "ID is required" });
         }
 
-        if(Object.keys(porpertiesToBeUpdated).length === 0) {
+        if(Object.keys(propertiesToBeUpdated ).length === 0) {
             return res.status(400).json({ error: "The properties to be updated cannot be empty" });
         }
 
-        const cvUpdated = await updateCvController(cvId, porpertiesToBeUpdated);
+        const cvUpdated = await updateCvController(cvId, propertiesToBeUpdated );
 
         if(!cvUpdated) {
-            throw new Error('CV not found for update.');
+            throw new Error('Failed to update CV');
         }
 
-        res.status(200).json({ message: 'CV successfully updated' });
+        res.status(200).json({ message: 'CV successfully updated', cvUpdated });
 
     } catch (error) {
+        if (error.statusCode) {
+            return res.status(error.statusCode).json({ error: error.message });
+        } 
         return res.status(500).json({ error: error.message });
     }
 };
