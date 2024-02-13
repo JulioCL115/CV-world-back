@@ -17,7 +17,7 @@ const loginFirebase = async (req, res) => {
 
         const userFound = await User.findOne({
             where: { email },
-            include: [{ model: Cv }, { model: Subscription }]        
+            include: [{ model: Cv }, { model: Subscription }]       
         });
 
         
