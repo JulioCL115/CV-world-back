@@ -1,14 +1,19 @@
 const createUserController = require("../../controllers/userController/createUserController");
-const { registerUserSchema, ZodError } = require('../../schemas/userSchema');
+const { registerUserSchema } = require('../../schemas/userSchema');
 
 const createUser = async (req, res) => {
     try {
-        const { name, email, password, role } = req.body;
+        const { name, image, email, password, role } = req.body;
 
-        registerUserSchema.parse({ name, email, password });
+        // const { error } = registerUserSchema.validate(req.body);
+
+        // if(error) {
+        //     return res.status(400).json({ error: error.details[0].message });
+        // }
 
         const newUser = await createUserController(
-            name,
+            userName = name,
+            image = image ? image : null,
             email,
             password,
             role
@@ -16,9 +21,10 @@ const createUser = async (req, res) => {
 
         res.status(201).json(newUser);
     } catch (error) {
-        if (error instanceof ZodError) {
-            return res.status(400).json(error.issues.map(issue => ({ error: issue.message })));
+        if (error.statusCode === 409) {
+            return res.status(409).json({ error: error.message });
         }
+
         return res.status(500).json({ error: error.message });
     }
 };

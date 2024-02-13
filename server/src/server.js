@@ -5,7 +5,6 @@ const cors = require('cors');
 const routes = require('./routes/index');
 const fileUpload = require("express-fileupload");
 
-
 const server = express();
 
 server.use(morgan('dev'));
@@ -18,5 +17,10 @@ server.use(fileUpload({
 }));
 
 server.use('/', routes);
+
+server.use((req, res, next) => {
+    res.status(404).json({ error: 'Route not found' });
+});
+  
 
 module.exports = server;
