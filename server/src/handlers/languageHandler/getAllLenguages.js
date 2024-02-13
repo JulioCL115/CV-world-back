@@ -6,7 +6,7 @@ const getAllLenguages = async (req, res) => {
         const allLenguagues = await getAllLenguagesController();
 
         if(!allLenguagues || allLenguagues.length === 0) {
-            return res.status(404).json({ error: "No Lenguagues found." });
+            return res.status(404).json({ error: "No Lenguages found." });
         }
 
         res.status(200).json(allLenguagues);

@@ -20,8 +20,8 @@ const createUser = async (req, res) => {
 
         res.status(201).json(newUser);
     } catch (error) {
-        if (error.statusCode === 409) {
-            return res.status(409).json({ error: error.message });
+        if (error.statusCode) {
+            return res.status(error.statusCode).json({ error: error.message });
         }
 
         return res.status(500).json({ error: error.message });

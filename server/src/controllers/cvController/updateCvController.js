@@ -5,13 +5,15 @@ const updateCvController = async (cvId, propertiesToBeUpdated ) => {
         const cvFound = await Cv.findByPk(cvId);
 
         if (!cvFound) {
-            throw new Error("CV not found");
+            const error = new Error("CV not found for updating");
+            error.statusCode = 404; 
+            throw error;
         }
 
-        const cvUpdated = await cvFound.update(propertiesToBeUpdated );
+        const cvUpdated= await cvFound.update(propertiesToBeUpdated);
 
         return cvUpdated;
-
+        
     } catch (error) {
         console.error('Error updating CV:', error);
         throw error;

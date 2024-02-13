@@ -8,10 +8,23 @@ const createUserController = async (name, email, password, role) => {
             where: { email }
         });
 
-        if(userFound) {
+        if(userFound && !userFound.deleted) {
             const error = new Error('Email address already in use. Please try with another email.');
             error.statusCode = 409; 
             throw error;
+        }
+
+        if (userFound && userFound.deleted) {
+
+            const salt = await bcrypt.genSalt(10);
+            const hashPassword = await bcrypt.hash(password, salt);
+
+            userFound.name = name;
+            userFound.password = hashPassword;
+            userFound.role = role;
+            userFound.deleted = false;
+            await userFound.save();
+            return userFound;
         }
 
         const salt = await bcrypt.genSalt(10);

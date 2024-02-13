@@ -8,11 +8,18 @@ const deleteCv = async (req, res) => {
             return res.status(400).json({ error: "ID is required" });
         }
 
-        await deleteCvController(cvId);
+        const cvDeleted = await deleteCvController(cvId);
 
-        res.status(200).json({ message: "CV deleted successfully" });
+        if(!cvDeleted) {
+            throw new Error('Failed to delete CV');
+        }
+
+        res.status(200).json({ message: "CV deleted successfully", cvDeleted });
 
     } catch (error) {
+        if (error.statusCode) {
+            return res.status(error.statusCode).json({ error: error.message });
+        } 
         return res.status(500).json({ error: error.message });
     }
 };

@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');
 
 const loginUserController = async (email, password) => {
     try {
-        
         const userFound = await User.findOne({
             where: { email },
             include: [{ model: Cv }, { model: Subscription }]        

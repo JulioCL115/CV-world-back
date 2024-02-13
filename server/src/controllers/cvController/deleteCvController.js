@@ -5,10 +5,12 @@ const deleteCvController = async (cvId) => {
         const cvFound = await Cv.findByPk(cvId);
 
         if (!cvFound) {
-            throw new Error("CV not found for deleting");
+            const error = new Error("CV not found for deletion");
+            error.statusCode = 404; 
+            throw error;
         }
 
-        const cvDeleted = await cvFound.update( 
+        const cvDeleted= await cvFound.update( 
             { deleted: true }, 
         );
 

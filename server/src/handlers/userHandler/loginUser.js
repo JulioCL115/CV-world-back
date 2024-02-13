@@ -20,12 +20,9 @@ const loginUser = async (req, res) => {
         });
 
     } catch (error) {
-        if (error.statusCode === 404) {
-            return res.status(404).json({ error: error.message });
-        } else if (error.statusCode === 401) {
-            return res.status(401).json({ error: error.message });
+        if (error.statusCode) {
+            return res.status(error.statusCode).json({ error: error.message });
         }
-
         return res.status(500).json({ error: error.message });
     }
 };

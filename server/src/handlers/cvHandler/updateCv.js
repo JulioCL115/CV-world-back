@@ -17,12 +17,15 @@ const updateCv = async (req, res) => {
         const cvUpdated = await updateCvController(cvId, propertiesToBeUpdated );
 
         if(!cvUpdated) {
-            throw new Error('CV update failed');
+            throw new Error('Failed to update CV');
         }
 
-        res.status(200).json({ message: 'CV successfully updated' });
+        res.status(200).json({ message: 'CV successfully updated', cvUpdated });
 
     } catch (error) {
+        if (error.statusCode) {
+            return res.status(error.statusCode).json({ error: error.message });
+        } 
         return res.status(500).json({ error: error.message });
     }
 };
