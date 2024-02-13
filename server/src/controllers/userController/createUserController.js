@@ -1,7 +1,7 @@
 const { User } = require('../../db');
 const bcrypt = require('bcrypt');
 
-const createUserController = async (userName, email, password, role) => {
+const createUserController = async (name, email, password, role) => {
     try {
 
         const userFound = await User.findOne({
@@ -18,14 +18,14 @@ const createUserController = async (userName, email, password, role) => {
         const hashPassword = await bcrypt.hash(password, salt);
 
         const newUser = await User.create({
-            userName,
+            name,
             email,
             password: hashPassword,
             role,
         });
 
         const newUserFiltered = {
-            userName: newUser.userName,
+            name: newUser.name,
             email: newUser.email,
             role: newUser.role
         }

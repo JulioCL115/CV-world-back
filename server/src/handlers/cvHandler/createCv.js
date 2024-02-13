@@ -11,11 +11,11 @@ const createCv = async (req, res) => {
             return res.status(400).json({ error: 'Please provide a valid ID in the request parameters' })
         }
 
-        const { error } = createCvSchema.validate({ name, header, description, contact, skills, speakingLanguages, otherInterests, creationDate, views });
+        // const { error } = createCvSchema.validate({ name, header, description, contact, skills, speakingLanguages, otherInterests, creationDate, views });
 
-        if(error) {
-            return res.status(400).json({ error: error.details[0].message });
-        }
+        // if(error) {
+        //     return res.status(400).json({ error: error.details[0].message });
+        // }
 
         const cvCreated = await postCvController(name, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests, views, userId, categoryId, lenguajeId);
 
