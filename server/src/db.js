@@ -1,6 +1,6 @@
-require("dotenv").config();
 const { Sequelize } = require("sequelize");
-const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
+require("dotenv").config();
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 const CvModel = require("./models/cv");
 const UserModel = require("./models/user");
 const CommnetModel = require("./models/comment");
@@ -9,11 +9,11 @@ const LenguajeModel = require("./models/lenguaje");
 const SubscriptionModel = require("./models/subscription");
 
 const sequelize = new Sequelize(
-  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/curriculum`,
-  {
-    logging: false,
-    native: false,
-  }
+    `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+    {
+        logging: false,
+        native: false,
+    }
 );
 
 CvModel(sequelize);
@@ -50,11 +50,11 @@ Subscription.hasMany(User); // Una suscripción puede tener muchos usuarios
 User.belongsTo(Subscription); // Un usuario pertenece a una suscripción
 
 module.exports = {
-  conn: sequelize,
-  Cv,
-  User,
-  Comment,
-  Category,
-  Lenguaje,
-  Subscription,
+    conn: sequelize,
+    Cv,
+    User,
+    Comment,
+    Category,
+    Lenguaje,
+    Subscription,
 };

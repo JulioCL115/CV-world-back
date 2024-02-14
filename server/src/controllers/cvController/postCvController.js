@@ -1,6 +1,6 @@
 const { Cv } = require('../../db');
-const {uploadImage}= require("../../helpers/cloudinary")
-const fs = require ("fs-extra")
+// const { uploadImage } = require("../../helpers/cloudinary");
+// const fs = require("fs-extra");
 
 const postCvController = async (name,req, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests,  views = 0, userId, categoryId, lenguajeId) => {
   
@@ -10,10 +10,10 @@ const postCvController = async (name,req, image, header, description, experience
         const jsonObjectEducation = JSON.parse(education);
         const jsonObjectContact = JSON.parse(contact);
 
-        const [newCv,created] = await Cv.findOrCreate({
-            where:{
+        const [newCv, created] = await Cv.findOrCreate({
+            where: {
                 name, 
-                image:[], 
+                image: [], 
                 header, 
                 description, 
                 experience:jsonObjectExperience, 
@@ -30,7 +30,7 @@ const postCvController = async (name,req, image, header, description, experience
             },}
         );
 
-    if (req.files?.image && req.files && req.files?.image.length>0 ) {
+    if (req.files?.image && req.files?.image.length>0 ) {
         console.log("Subiendo imágenes a Cloudinary");
     
         const uploadPromises = req.files.image.map(async (file) => {
@@ -56,7 +56,7 @@ const postCvController = async (name,req, image, header, description, experience
           }));
           console.log("Guardando producto en la base de datos");
           await newCv.save();
-      } else if (req.files?.image && req.files){
+      } else {
         const result = await uploadImage(req.files.image.tempFilePath)
         newCv.image = [
           {
@@ -73,3 +73,4 @@ const postCvController = async (name,req, image, header, description, experience
 }
 
 module.exports = postCvController;
+

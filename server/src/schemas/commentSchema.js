@@ -1,10 +1,9 @@
-const { z, ZodError } = require('zod');
+const joi = require('@hapi/joi');
 
-const commentSchema = z.object({
-    comment: z.string().min(5, 'Comment is too short').max(200, 'Comment is too long')
-})
+const commentSchema = joi.object({
+    comment: joi.string().min(8).max(200).required()
+});
 
 module.exports = {
     commentSchema,
-    ZodError
 };

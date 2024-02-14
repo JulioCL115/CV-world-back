@@ -1,5 +1,5 @@
 const createCommentController = require("../../controllers/commentController/createCommentController");
-const { commentSchema, ZodError } = require("../../schemas/commentSchema");
+const { commentSchema } = require("../../schemas/commentSchema");
 
 const createComment = async (req, res) => {
     try {
@@ -7,15 +7,20 @@ const createComment = async (req, res) => {
 
         const { cvId, userId } = req.params;
 
-        commentSchema.parse({comment});
+        if (!cvId || !userId) {
+            return res.status(400).json({ error: "Please provide a valid ID in the request parameters" });
+        }
+          
+        const { error } = commentSchema.validate(req.body);
+
+        if(error) {
+            return res.status(400).json({ error: error.details[0].message });
+        }
 
         const commentCreated = await createCommentController(comment, cvId, userId);
 
         res.status(201).json(commentCreated);
     } catch (error) {
-        if (error instanceof ZodError) {
-            return res.status(400).json(error.issues.map((issue) => ({ error: issue.message })));
-        }
         res.status(500).json({ error: error.message });
     }
 };

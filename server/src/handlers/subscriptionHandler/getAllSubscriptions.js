@@ -6,10 +6,10 @@ const getAllSubscriptions = async (req, res) => {
         const allSubscriptions = await getAllSubscriptionsController();
 
         if(!allSubscriptions || allSubscriptions.length === 0) {
-            return res.status(404).json({ error: "No Categories found." });
+            return res.status(404).json({ error: "No subscriptions found" });
         }
 
-        res.status(201).json(allSubscriptions);
+        res.status(200).json(allSubscriptions);
     } catch (error) {
 
         res.status(500).json({ error: error.message });

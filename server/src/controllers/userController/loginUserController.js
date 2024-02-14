@@ -1,28 +1,53 @@
-const { User } = require('../../db');
-// const bcrypt = require('bcrypt');
-
+const { User, Cv, Subscription } = require('../../db');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const loginUserController = async (email, password) => {
     try {
         
         const userFound = await User.findOne({
-            where: { email, password }
+            where: { email },
+            include: [{ model: Cv }, { model: Subscription }]        
         });
 
         if (!userFound) {
-            throw new Error('Usuario no encontrado');
+            const error = new Error('User not found');
+            error.statusCode = 404;
+            throw error;
         }
 
-        // const isPasswordValid = await bcrypt.compare(password, userFound.password);
+        // Comparar la contraseña proporcionada con la contraseña almacenada en la base de datos
+        const passwordMatch = await bcrypt.compare(password, userFound.password);
 
-        // if (!isPasswordValid) {
-        //     throw new Error('Contraseña incorrecta');
-        // }
+        if (!passwordMatch) {
+            const error = new Error('Incorrect password');
+            error.statusCode = 401; 
+            throw error;
+        }
 
-        return userFound;
+        const payload = { id: userFound.id, userName: userFound.userName }
+
+        const options = { expiresIn: '1d' }
+
+        const token = jwt.sign(
+            payload, 
+            process.env.JWT_SECRET,
+            options
+        );
+
+        const userFoundFiltered = {
+            id: userFound.id,
+            userName: userFound.userName,
+            email: userFound.email,
+            role: userFound.role,
+            Cvs: userFound.Cvs,
+            Subscription: userFound.Subscription
+        }
+
+        return { token, userFoundFiltered };
         
     } catch (error) {
-        console.error('Error searching User:', error);
+        console.error('Error logging user:', error);
         throw error; 
     }
 }

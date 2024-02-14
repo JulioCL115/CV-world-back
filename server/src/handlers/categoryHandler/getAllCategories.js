@@ -7,10 +7,9 @@ const getAllCategories = async (req, res) => {
 
         if(!allCategories || allCategories.length === 0) {
             return res.status(404).json({ error: "No Categories found." });
-
         }
 
-        res.status(201).json(allCategories);
+        res.status(200).json(allCategories);
     } catch (error) {
 
         res.status(500).json({ error: error.message });

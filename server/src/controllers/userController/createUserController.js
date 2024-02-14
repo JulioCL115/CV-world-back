@@ -1,27 +1,41 @@
-const admin = require('firebase-admin');
 const { User } = require('../../db');
+const bcrypt = require('bcrypt');
 
-const createUserController = async (name, email, password, role) => {
-  try {
-    const userRecord = await admin.auth().createUser({
-      email,
-      password,
-      displayName: name, 
-    });
+const createUserController = async (userName, email, password, role) => {
+    try {
 
-    
-    const newUser = await User.create({
-      name,
-      email,
-      role,
-      firebaseUid: userRecord.uid,
-    });
+        const userFound = await User.findOne({
+            where: { email }
+        });
 
-    return newUser;
-  } catch (error) {
-    console.error('Error registering a user:', error);
-    throw error;
-  }
+        if(userFound) {
+            const error = new Error('Email address already in use. Please try with another email.');
+            error.statusCode = 409; 
+            throw error;
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const hashPassword = await bcrypt.hash(password, salt);
+
+        const newUser = await User.create({
+            userName,
+            email,
+            password: hashPassword,
+            role,
+        });
+
+        const newUserFiltered = {
+            userName: newUser.userName,
+            email: newUser.email,
+            role: newUser.role
+        }
+        
+        return newUserFiltered;
+
+    } catch (error) {
+        console.error("Error registering user:", error);
+        throw error;
+    }
 };
 
 module.exports = createUserController;
