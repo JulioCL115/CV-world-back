@@ -1,6 +1,6 @@
 const { Cv } = require('../../db');
-// const { uploadImage } = require("../../helpers/cloudinary");
-// const fs = require("fs-extra");
+const { uploadImage } = require("../../helpers/cloudinary");
+ const fs = require("fs-extra");
 
 const postCvController = async (name,req, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests,  views = 0, userId, categoryId, lenguajeId) => {
   
@@ -45,7 +45,7 @@ const postCvController = async (name,req, image, header, description, experience
         console.log("uploadPromises", uploadPromises)
         const uploadedImages = await Promise.all(uploadPromises);
     
-        // Asignar las imágenes subidas al producto
+        
         console.log("uploadImage prueba ", uploadPromises)
         newCv.image = uploadedImages;
         console.log(image)
