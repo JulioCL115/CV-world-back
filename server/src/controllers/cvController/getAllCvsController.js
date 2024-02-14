@@ -1,14 +1,12 @@
 const { Cv } = require('../../db');
 
-const getAllCvsController = async (page, pageSize) => {
+const getAllCvsController = async (offset, limit) => {
     try {
-        const offset = (page - 1) * pageSize;
-
         // Realiza la consulta a la base de datos para obtener los CVs paginados
         const allCvsFound = await Cv.findAndCountAll({
             where: { deleted: false },
-            limit: pageSize,
-            offset: offset,
+            limit,
+            offset
         });
 
         return allCvsFound.rows;

@@ -3,13 +3,12 @@ const getCvByQueryController = require('../../controllers/cvController/getCvByQu
 
 const getAllCvs = async (req, res) => {
     try {
-        const { queryParam } = req.query;
+        const search  = req.query.search;
+        const offset = parseInt(req.query.offset) || 1; // Página actual (por defecto es 1)
+        const limit = parseInt(req.query.limit) || 6; // Tamaño de página (por defecto es 6)
 
-        const page = parseInt(req.query.page) || 1; // Página actual (por defecto es 1)
-        const pageSize = parseInt(req.query.pageSize) || 6; // Tamaño de página (por defecto es 6)
-
-        if(queryParam) {
-            const cvsByQuery = await getCvByQueryController(queryParam, page, pageSize);
+        if(search) {
+            const cvsByQuery = await getCvByQueryController(search, offset, limit);
 
             if (!cvsByQuery || cvsByQuery.length === 0) {
                 return res.status(404).json({ error: "CVs not found." });
@@ -17,7 +16,7 @@ const getAllCvs = async (req, res) => {
     
             res.status(200).json(cvsByQuery);
         } else {
-            const allCvs = await getAllCvsController(page, pageSize);
+            const allCvs = await getAllCvsController(offset, limit);
 
             if (!allCvs || allCvs.length === 0) {
                 return res.status(404).json({ error: "CVs not found." });

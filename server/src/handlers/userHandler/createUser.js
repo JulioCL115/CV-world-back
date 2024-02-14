@@ -5,7 +5,7 @@ const createUser = async (req, res) => {
     try {
         const { name, email, password, role } = req.body;
 
-        // const { error } = registerUserSchema.validate(req.body);
+        // const { error } = registerUserSchema.validate({ name, email, password });
 
         // if(error) {
         //     return res.status(400).json({ error: error.details[0].message });

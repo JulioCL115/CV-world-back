@@ -1,10 +1,8 @@
 const { Cv } = require('../../db');
 const { Op } = require('sequelize');
 
-const getCvByQueryController = async (queryParam, page, pageSize) => {
+const getCvByQueryController = async (search, offset, limit) => {
     try {
-        const offset = (page - 1) * pageSize;
-
         const cvsByQueryFound = await Cv.findAndCountAll({
             where: {
                 [Op.and]: [
@@ -15,20 +13,20 @@ const getCvByQueryController = async (queryParam, page, pageSize) => {
                         [Op.or]: [
                             {
                                 header: {
-                                    [Op.iLike]: `%${queryParam}%`
+                                    [Op.iLike]: `%${search}%`
                                 }
                             },
                             {
                                 description: {
-                                    [Op.iLike]: `%${queryParam}%`
+                                    [Op.iLike]: `%${search}%`
                                 }
                             }   
                         ]
                     }
                 ]
             },
-            limit: pageSize,
-            offset: offset,
+            limit,
+            offset
         });
 
         return cvsByQueryFound.rows;
