@@ -1,7 +1,7 @@
 const { User } = require('../../db');
 const bcrypt = require('bcrypt');
 
-const createUserController = async (name, email, password, role) => {
+const createUserController = async (name, email, password, photo, role) => {
     try {
 
         const userFound = await User.findOne({
@@ -22,6 +22,7 @@ const createUserController = async (name, email, password, role) => {
             userFound.name = name;
             userFound.email = email.toLowerCase();
             userFound.password = hashPassword;
+            userFound.photo = photo
             userFound.role = role;
             userFound.deleted = false;
             await userFound.save();
@@ -35,12 +36,14 @@ const createUserController = async (name, email, password, role) => {
             name,
             email: email.toLowerCase(),
             password: hashPassword,
+            photo,
             role,
         });
 
         const newUserFiltered = {
             name: newUser.name,
             email: newUser.email,
+            photo,
             role: newUser.role
         }
         

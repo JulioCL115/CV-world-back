@@ -5,6 +5,7 @@ POST "http://localhost:3001/user/login" --> to log in
 POST "http://localhost:3001/user/register" --> to sign up
 POST "http://localhost:3001/user/firebase" --> to sign up and log in with firebase
 PUT "http://localhost:3001/user/delete" --> to delete user
+PUT "http://localhost:3001/user/:userId" --> to update user
 
 # Cv
 POST "http://localhost:3001/cv/:userId/:categoryId/:lenguajeId" --> to create a cv
@@ -26,6 +27,7 @@ GET "http://localhost:3001/language" --> to get all language
 # Subscription
 GET "http://localhost:3001/subscription" --> to get all subscription
 POST "http://localhost:3001/subscription/:userId" --> to create a subscription
+PUT "http://localhost:3001/subscription/:userId" --> to update a subscription
 
 
 

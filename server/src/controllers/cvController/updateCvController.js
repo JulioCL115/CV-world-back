@@ -10,7 +10,7 @@ const updateCvController = async (cvId, propertiesToBeUpdated ) => {
             throw error;
         }
 
-        const cvUpdated= await cvFound.update(propertiesToBeUpdated);
+        const cvUpdated = await cvFound.update(propertiesToBeUpdated);
 
         return cvUpdated;
         

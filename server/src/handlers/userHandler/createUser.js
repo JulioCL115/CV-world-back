@@ -3,7 +3,7 @@ const { registerUserSchema } = require('../../schemas/userSchema');
 
 const createUser = async (req, res) => {
     try {
-        const { name, email, password, role } = req.body;
+        const { name, email, password, photo, role } = req.body;
 
         // const { error } = registerUserSchema.validate({ name, email, password });
 
@@ -15,6 +15,7 @@ const createUser = async (req, res) => {
             name,
             email,
             password,
+            photo,
             role
         );
 
