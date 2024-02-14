@@ -1,6 +1,4 @@
-const { Cv, User, Category, Lenguaje } = require('../../db');
-// const { uploadImage } = require("../../helpers/cloudinary");
-// const fs = require("fs-extra");
+const { Cv, User, Category, Lenguaje, Subscription } = require('../../db');
 
 const postCvController = async (name, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests, views = 0, userId, categoryId, lenguajeId) => {
     try {
@@ -46,7 +44,38 @@ const postCvController = async (name, image, header, description, experience, ed
             LenguajeId: lenguajeId
         });
 
-        return newCv;
+        await newCv.reload({
+            include: [
+                { model: User, include: [{ model: Subscription }] }, // Incluir la relación con User
+                { model: Category }, // Incluir la relación con Category
+                { model: Lenguaje } // Incluir la relación con Lenguaje
+            ]
+        });
+
+        const newCvFound = {
+            name,
+            image,
+            header,
+            description,
+            experience,
+            education,
+            contact,
+            skills,
+            speakingLanguages,
+            otherInterests,
+            creationDate: formattedDate,
+            views,
+            user: {
+                userName: newCv.User.name,
+                subscription: newCv.User.Subscription.name,
+                photo: newCv.User.photo
+            },
+            category: newCv.Category.name,
+            language: newCv.Lenguaje.name,
+        }
+
+        return newCvFound;
+   
     } catch (error) {
         console.error('Error creating CV:', error);
         throw error;

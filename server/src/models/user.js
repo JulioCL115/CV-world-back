@@ -26,6 +26,9 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             defaultValue: 'user'
         },
+        photo: {
+            type: DataTypes.STRING
+        },
         deleted: {
             type: DataTypes.BOOLEAN,
             defaultValue: false

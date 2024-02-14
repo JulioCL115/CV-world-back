@@ -51,31 +51,3 @@ const cloudinaryHandler = async (req, res) => {
 
 module.exports = cloudinaryHandler;
 
-// const sendDataToCloudinary = async (file) => {
-//   const formData = new FormData();
-//   formData.append("file", file);
-//   formData.append("api_key", signatureResponse().API_KEY);
-//   formData.append("signature", signatureResponse().signature);
-//   formData.append("timestamp", signatureResponse().timestamp);
-
-//   const cloudinaryResponse = await axios.post(
-//     `https://api.cloudinary.com/v1_1/${
-//       signatureResponse().CLOUD_NAME
-//     }/auto/upload`,
-//     formData,
-//     {
-//       headers: { "Content-Type": "multipart/form-data" },
-//       onUploadProgress: function (e) {
-//         console.log(e.loaded / e.total);
-//       },
-//     }
-//   );
-
-//   const photoData = {
-//     public_id: cloudinaryResponse.data.public_id,
-//     version: cloudinaryResponse.data.version,
-//     signature: cloudinaryResponse.data.signature,
-//     url: cloudinaryResponse.data.url,
-//   };
-//   return photoData;
-// };
