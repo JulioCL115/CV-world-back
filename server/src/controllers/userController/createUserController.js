@@ -5,7 +5,7 @@ const createUserController = async (name, email, password, role) => {
     try {
 
         const userFound = await User.findOne({
-            where: { email }
+            where: { email: email.toLowerCase() }
         });
 
         if(userFound && !userFound.deleted) {
@@ -20,6 +20,7 @@ const createUserController = async (name, email, password, role) => {
             const hashPassword = await bcrypt.hash(password, salt);
 
             userFound.name = name;
+            userFound.email = email.toLowerCase();
             userFound.password = hashPassword;
             userFound.role = role;
             userFound.deleted = false;
@@ -32,7 +33,7 @@ const createUserController = async (name, email, password, role) => {
 
         const newUser = await User.create({
             name,
-            email,
+            email: email.toLowerCase(),
             password: hashPassword,
             role,
         });
@@ -52,3 +53,4 @@ const createUserController = async (name, email, password, role) => {
 };
 
 module.exports = createUserController;
+
