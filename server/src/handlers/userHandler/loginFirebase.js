@@ -15,6 +15,7 @@ const loginFirebase = async (req, res) => {
 
         const uid = decodedToken.uid;
         const email = decodedToken.email;
+        console.log(email)
 
         const userFound = await User.findOne({
             where: { email },
