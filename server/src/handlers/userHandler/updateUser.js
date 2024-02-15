@@ -1,12 +1,12 @@
-const updateCvController = require('../../controllers/cvController/updateCvController');
+const updateUserController = require('../../controllers/userController/updateUserController');
 
-const updateCv = async (req, res) => {
+const updateUser = async (req, res) => {
     try {
-        const propertiesToBeUpdated  = req.body
+        const propertiesToBeUpdated = req.body;
 
-        const { cvId } = req.params;
-        
-        if(!cvId) {
+        const { userId } = req.params;
+
+        if(!userId) {
             return res.status(400).json({ error: "ID is required" });
         }
 
@@ -14,13 +14,13 @@ const updateCv = async (req, res) => {
             return res.status(400).json({ error: "The properties to be updated cannot be empty" });
         }
 
-        const cvUpdated = await updateCvController(cvId, propertiesToBeUpdated );
+        const userUpdated = await updateUserController(userId, propertiesToBeUpdated);
 
-        if(!cvUpdated) {
+        if(!userUpdated) {
             throw new Error('Failed to update CV');
         }
 
-        res.status(200).json({ message: 'CV successfully updated', cvUpdated });
+        res.status(200).json({ message: "User updated successfully", userUpdated });
 
     } catch (error) {
         if (error.statusCode) {
@@ -30,4 +30,4 @@ const updateCv = async (req, res) => {
     }
 };
 
-module.exports = updateCv;
+module.exports = updateUser;

@@ -14,15 +14,14 @@ const loginFirebase = async (req, res) => {
         const decodedToken = await firebaseAdmin.auth().verifyIdToken(idToken);
 
         const uid = decodedToken.uid;
-        const email = decodedToken.email;
-        console.log(email)
+        const email = decodedToken.email.toLowerCase();
+        const name = decodedToken.name
 
         const userFound = await User.findOne({
-            where: { email },
+            where: { email: email.toLowerCase() },
             include: [{ model: Cv }, { model: Subscription }]       
         });
 
-        
         if (!userFound) {
             const error = new Error('User not found');
             error.statusCode = 404;
@@ -31,7 +30,7 @@ const loginFirebase = async (req, res) => {
 
         const userFoundFiltered = {
             id: userFound.id,
-            userName: userFound.userName,
+            name: userFound.name,
             email: userFound.email,
             role: userFound.role,
             Cvs: userFound.Cvs,
@@ -39,7 +38,7 @@ const loginFirebase = async (req, res) => {
         }
 
         // Generamos un token JWT para el usuario
-        const token = jwt.sign({ uid, email }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ uid, email, name }, process.env.JWT_SECRET, { expiresIn: '2h' });
 
         res.header('auth-token', token).json({
             message: 'Authenticated user',
@@ -48,6 +47,7 @@ const loginFirebase = async (req, res) => {
         });
 
     } catch (error) {
+        console.error('Error:', error);
         return res.status(500).json({ error: 'Failed to authenticate with Firebase' });
     }
 };

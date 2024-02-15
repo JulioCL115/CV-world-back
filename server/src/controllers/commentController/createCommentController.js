@@ -1,4 +1,4 @@
-const { Comment } = require("../../db");
+const { Comment, User, Cv } = require("../../db");
 
 const createCommentController = async (comment, cvId, userId) => {
     try {
@@ -6,6 +6,13 @@ const createCommentController = async (comment, cvId, userId) => {
             comment,
             CvId: cvId,
             UserId: userId,
+        });
+
+        await newComment.reload({
+            include: [
+                { model: User }, // Cargar el modelo de usuario asociado al comentario
+                { model: Cv }    // Cargar el modelo de CV asociado al comentario
+            ]
         });
 
         return newComment;

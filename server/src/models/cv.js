@@ -55,6 +55,10 @@ module.exports = (sequelize) => {
         views: {
             type: DataTypes.INTEGER,
             defaultValue: 0
+        },
+        deleted: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         }
     },
     {

@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
             primaryKey: true,
             defaultValue: DataTypes.UUIDV4
         },
-        userName: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true
@@ -26,6 +26,13 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             defaultValue: 'user'
         },
+        photo: {
+            type: DataTypes.STRING
+        },
+        deleted: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        }
     },
     {
         timestamps: false

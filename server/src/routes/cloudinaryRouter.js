@@ -1,7 +1,7 @@
-const { Router } = require("express");
-const cloudinaryRouter = Router();
-const cloudinaryHandler = require("../handlers/cloudinaryHandler/index");
+// const { Router } = require("express");
+// const cloudinaryRouter = Router();
+// const cloudinaryHandler = require("../handlers/cloudinaryHandler/index");
 
-cloudinaryRouter.get("/", cloudinaryHandler);
+// cloudinaryRouter.get("/", cloudinaryHandler);
 
-module.exports = cloudinaryRouter;
+// module.exports = cloudinaryRouter;
