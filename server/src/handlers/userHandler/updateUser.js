@@ -14,6 +14,10 @@ const updateUser = async (req, res) => {
             return res.status(400).json({ error: "The properties to be updated cannot be empty" });
         }
 
+        if (propertiesToBeUpdated.email) {
+            propertiesToBeUpdated.email = propertiesToBeUpdated.email.toLowerCase();
+        }
+
         const userUpdated = await updateUserController(userId, propertiesToBeUpdated);
 
         if(!userUpdated) {

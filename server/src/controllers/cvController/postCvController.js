@@ -2,10 +2,8 @@ const { Cv, User, Category, Lenguaje, Subscription } = require('../../db');
 const { uploadImage } = require("../../helpers/cloudinary");
  const fs = require("fs-extra");
 
-const postCvController = async ({name,req, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests,  views = 0}, userId, categoryId, lenguajeId) => {
-    console.log(otherInterests,name,contact)
+const postCvController = async (name, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests,  views = 0, userId, categoryId, lenguajeId, req) => {
     try {
-        console.log(name)
         const existingCv = await Cv.findOne({
             where: {
                 name,
@@ -35,15 +33,15 @@ const postCvController = async ({name,req, image, header, description, experienc
 
         const newCv = await Cv.create({
             name,
-            image:[],
+            image: [],
             header,
             description,
-            experience:jsonObjectExperience, 
-            education:jsonObjectEducation,   
-            contact:jsonObjectContact,
+            experience: jsonObjectExperience, 
+            education: jsonObjectEducation,   
+            contact: jsonObjectContact,
             skills,
             speakingLanguages,
-            otherInterests:otherInterests !== undefined ? otherInterests : 'default_value',
+            otherInterests: otherInterests,
             creationDate: formattedDate,
             views,
             UserId: userId,
@@ -59,48 +57,48 @@ const postCvController = async ({name,req, image, header, description, experienc
             ]
         });
 
-        if (req.files?.image && req.files?.image.length>0 ) {
+        let subscription = newCv.User.Subscription ? newCv.User.Subscription.name : 'No subscription';
+
+        if (req.files?.image && req.files?.image.length > 0) {
             console.log("Subiendo imágenes a Cloudinary");
         
             const uploadPromises = req.files.image.map(async (file) => {
-              const result = await uploadImage(file.tempFilePath);
-              console.log("Resultado de la subida a Cloudinary: ", result);
-              return {
-                public_id: result.public_id,
-                secure_url: result.secure_url,
-              };
+                const result = await uploadImage(file.tempFilePath);
+                console.log("Resultado de la subida a Cloudinary: ", result);
+                return {
+                    public_id: result.public_id,
+                    secure_url: result.secure_url,
+                };
             });
         
             console.log("uploadPromises", uploadPromises)
             const uploadedImages = await Promise.all(uploadPromises);
-        
-            
             console.log("uploadImage prueba ", uploadPromises)
             newCv.image = uploadedImages;
-            console.log(image)
         
-              console.log("Eliminando archivo temporal");
-              await Promise.all(req.files.image.map(async (file) => {
+            console.log("Eliminando archivos temporales");
+            await Promise.all(req.files.image.map(async (file) => {
                 await fs.unlink(file.tempFilePath);
-              }));
-              console.log("Guardando producto en la base de datos");
-              await newCv.save();
-          } else {
+            }));
+
+            console.log("Guardando producto en la base de datos");
+            await newCv.save();
+        } else {
             const result = await uploadImage(req.files.image.tempFilePath)
             newCv.image = [
-              {
-              public_id : result.public_id,
-              secure_url : result.secure_url
-            }
-          ]
+                {
+                    public_id : result.public_id,
+                    secure_url : result.secure_url
+                }
+            ]
             await fs.unlink(req.files.image.tempFilePath)
             console.log(result)
             await newCv.save();
-          }
+        }
 
         const newCvFound = {
             name,
-            image,
+            image: newCv.image,
             header,
             description,
             experience,
@@ -113,7 +111,7 @@ const postCvController = async ({name,req, image, header, description, experienc
             views,
             user: {
                 userName: newCv.User.name,
-                subscription: newCv.User.Subscription,
+                subscription,                
                 photo: newCv.User.photo
             },
             category: newCv.Category.name,
@@ -129,4 +127,3 @@ const postCvController = async ({name,req, image, header, description, experienc
 }
 
 module.exports = postCvController;
-

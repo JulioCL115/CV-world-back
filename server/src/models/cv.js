@@ -14,8 +14,7 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         image: {
-            type: DataTypes.JSONB,
-            allowNull: false,
+            type: DataTypes.JSONB
         },
         header: {
             type: DataTypes.STRING,
