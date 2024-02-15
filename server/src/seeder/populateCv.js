@@ -175,26 +175,6 @@ async function populateLanguage() {
             views: 1589
         }
     ]);
-
-    // Cargar las relaciones asociadas a cada CV
-    await Promise.all(Cvs.map(async (cv) => {
-      await cv.reload({
-          include: [
-              { model: User }, // Incluir la relación con User
-              { model: Category }, // Incluir la relación con Category
-              { model: Lenguaje } // Incluir la relación con Lenguaje
-          ]
-      });
-  }));
-
-  // Imprimir los resultados con las relaciones cargadas
-  Cvs.forEach(cv => {
-      console.log(`CV Name: ${cv.name}`);
-      console.log(`User Name: ${cv.User.name}`);
-      console.log(`Category: ${cv.Category.name}`);
-      console.log(`Lenguage: ${cv.Lenguaje.name}`);
-      console.log("--------------------------------------------------");
-  });
   
     console.log("Cv table populated successfully");
   } catch (error) {
