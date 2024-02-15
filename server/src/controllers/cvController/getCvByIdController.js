@@ -26,6 +26,8 @@ const getCvByIdController = async (cvId) => {
             otherInterests: cvFound.otherInterests,
             creationDate: cvFound.creationDate,
             views: cvFound.views,
+            category: cvFound.category,
+            language: cvFound.language,
             UserId: cvFound.UserId,
             Comments: cvFound.Comments.map( (comment) => comment.comment)
         }
