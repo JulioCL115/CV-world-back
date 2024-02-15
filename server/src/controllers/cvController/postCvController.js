@@ -2,7 +2,7 @@ const { Cv, User, Category, Lenguaje, Subscription } = require('../../db');
 const { uploadImage } = require("../../helpers/cloudinary");
  const fs = require("fs-extra");
 
-const postCvController = async (name, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests,  views = 0, userId, categoryId, lenguajeId, req) => {
+const postCvController = async (name, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests,  views = 0,category, language, userId, req) => {
     try {
         const existingCv = await Cv.findOne({
             where: {
@@ -13,9 +13,9 @@ const postCvController = async (name, image, header, description, experience, ed
                 skills,
                 speakingLanguages,
                 otherInterests,
-                UserId: userId,
-                CategoryId: categoryId,
-                LenguajeId: lenguajeId
+                category,
+                language,
+                UserId: userId
             }
         });
 
@@ -44,16 +44,14 @@ const postCvController = async (name, image, header, description, experience, ed
             otherInterests: otherInterests,
             creationDate: formattedDate,
             views,
+            category,
+            language,
             UserId: userId,
-            CategoryId: categoryId,
-            LenguajeId: lenguajeId
         });
 
         await newCv.reload({
             include: [
                 { model: User, include: [{ model: Subscription }] }, // Incluir la relación con User
-                { model: Category }, // Incluir la relación con Category
-                { model: Lenguaje } // Incluir la relación con Lenguaje
             ]
         });
 
@@ -109,13 +107,14 @@ const postCvController = async (name, image, header, description, experience, ed
             otherInterests,
             creationDate: formattedDate,
             views,
+            category,  
+            language,      
             user: {
+                id: newCv.User.id,
                 userName: newCv.User.name,
                 subscription,                
                 photo: newCv.User.photo
             },
-            category: newCv.Category.name,
-            language: newCv.Lenguaje.name,
         }
 
         return newCvFound;
