@@ -174,9 +174,8 @@ async function populateLanguage() {
             creationDate: "2024-02-13",
             views: 1589
         }
-     
     ]);
-
+  
     console.log("Cv table populated successfully");
   } catch (error) {
     console.error("Error populating language database:", error);

@@ -20,6 +20,6 @@ router.use('/language', languageRouter);
 
 router.use('/subscription', subscriptionRouter);
 
-router.use("/cloudinary", cloudinaryRouter);
+// router.use("/cloudinary", cloudinaryRouter);
 
 module.exports = router;
