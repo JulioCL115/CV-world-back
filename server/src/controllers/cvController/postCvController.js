@@ -52,6 +52,8 @@ const postCvController = async (name, image, header, description, experience, ed
             ]
         });
 
+        let subscription = newCv.User.Subscription ? newCv.User.Subscription.name : 'No subscription';
+
         const newCvFound = {
             name,
             image,
@@ -67,7 +69,7 @@ const postCvController = async (name, image, header, description, experience, ed
             views,
             user: {
                 userName: newCv.User.name,
-                subscription: newCv.User.Subscription.name,
+                subscription,
                 photo: newCv.User.photo
             },
             category: newCv.Category.name,

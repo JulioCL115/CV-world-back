@@ -11,7 +11,8 @@ module.exports = (sequelize) => {
         },
         name: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            defaultValue: 'No subscription'
         },
         price: {
             type: DataTypes.INTEGER,
