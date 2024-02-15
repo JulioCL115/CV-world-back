@@ -2,7 +2,7 @@ const { Cv, User, Category, Lenguaje, Subscription } = require('../../db');
 const { uploadImage } = require("../../helpers/cloudinary");
  const fs = require("fs-extra");
 
-const postCvController = async ({name,req, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests,  views = 0}, userId, categoryId, lenguajeId) => {
+const postCvController = async ({name, req ,image, header, description,experience, education, contact, skills, speakingLanguages, otherInterests,  views = 0,category, lenguaje}, userId) => {
     console.log(otherInterests,name,contact)
     try {
         console.log(name)
@@ -16,8 +16,8 @@ const postCvController = async ({name,req, image, header, description, experienc
                 speakingLanguages,
                 otherInterests,
                 UserId: userId,
-                CategoryId: categoryId,
-                LenguajeId: lenguajeId
+                category:category,
+                lenguaje:lenguaje
             }
         });
 
@@ -43,19 +43,19 @@ const postCvController = async ({name,req, image, header, description, experienc
             contact:jsonObjectContact,
             skills,
             speakingLanguages,
-            otherInterests:otherInterests !== undefined ? otherInterests : 'default_value',
+            otherInterests,
             creationDate: formattedDate,
             views,
             UserId: userId,
-            CategoryId: categoryId,
-            LenguajeId: lenguajeId
+            category:category,
+            lenguaje:lenguaje
         });
 
         await newCv.reload({
             include: [
                 { model: User, include: [{ model: Subscription }] }, // Incluir la relación con User
-                { model: Category }, // Incluir la relación con Category
-                { model: Lenguaje } // Incluir la relación con Lenguaje
+                // { model: Category }, // Incluir la relación con Category
+                // { model: Lenguaje } // Incluir la relación con Lenguaje
             ]
         });
 
@@ -100,12 +100,12 @@ const postCvController = async ({name,req, image, header, description, experienc
 
         const newCvFound = {
             name,
-            image,
+            image:newCv.image,
             header,
             description,
-            experience,
-            education,
-            contact,
+            experience:jsonObjectExperience, 
+            education:jsonObjectEducation,   
+            contact:jsonObjectContact,
             skills,
             speakingLanguages,
             otherInterests,
@@ -116,8 +116,8 @@ const postCvController = async ({name,req, image, header, description, experienc
                 subscription: newCv.User.Subscription,
                 photo: newCv.User.photo
             },
-            category: newCv.Category.name,
-            language: newCv.Lenguaje.name,
+            category:category,
+            lenguaje:lenguaje
         }
 
         return newCvFound;
