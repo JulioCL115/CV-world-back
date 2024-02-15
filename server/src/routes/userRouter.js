@@ -2,11 +2,19 @@ const { Router } = require("express");
 const userRouter = Router();
 const createUser = require('../handlers/userHandler/createUser');
 const loginUser = require('../handlers/userHandler/loginUser');
-const validateLogin = require('../middlewares/validateLogin');
-const validateRegister = require('../middlewares/validateRegister');
+const loginFirebase = require('../handlers/userHandler/loginFirebase');
+const deleteUser = require('../handlers/userHandler/deleteUser');
+const updateUser = require('../handlers/userHandler/updateUser');
+const verifyToken = require('../middlewares/verifyToken');
 
-userRouter.post('/register', validateRegister, createUser);
+userRouter.post('/register', createUser);
 
-userRouter.post('/login', validateLogin, loginUser);
+userRouter.post('/login', loginUser);
+
+userRouter.post('/firebase', loginFirebase);
+
+userRouter.put('/:userId', verifyToken, updateUser);
+
+userRouter.put('/delete', verifyToken, deleteUser);
 
 module.exports = userRouter;

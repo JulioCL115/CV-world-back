@@ -11,19 +11,27 @@ module.exports = (sequelize) => {
         },
         name: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
         email: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
         password: {
-            type: DataTypes.STRING,
-            allowNull: false
+            type: DataTypes.STRING        
         },
         role: {
             type: DataTypes.STRING,
             defaultValue: 'user'
+        },
+        photo: {
+            type: DataTypes.STRING
+        },
+        deleted: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         }
     },
     {

@@ -8,13 +8,13 @@ const getCvById = async (req, res) => {
             return res.status(400).json({ error: "ID is required" });
         }
 
-        const cv = await getCvByIdController(cvId);
+        const cvFound = await getCvByIdController(cvId);
 
-        if(!cv) {
+        if(!cvFound) {
             return res.status(404).json({ error: 'Cv not found' });
         }
 
-        res.status(200).json(cv);
+        res.status(200).json(cvFound);
 
     } catch (error) {
         res.status(500).json({ error: error.message });

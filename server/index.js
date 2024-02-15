@@ -5,10 +5,9 @@ const PORT = process.env.PORT;
 const populateCategory = require("./src/seeder/populateCategory.js");
 const populateLanguage = require("./src/seeder/populateLanguage.js");
 const populateSubscription = require("./src/seeder/populateSubscription.js");
+const populateCv = require("./src/seeder/populateCv");
 
-
-conn
-    .sync({ force: true })
+conn.sync({ force: true })
     .then(() => {
         server.listen(PORT, () => {
             console.log(`Server listening on port ${PORT}`);
@@ -17,5 +16,5 @@ conn
     .then(() => populateCategory())
     .then(() => populateLanguage())
     .then(() => populateSubscription())
-    .catch((error) => console.error(error))
+    .then(() => populateCv())
     .catch((error) => console.error(error));

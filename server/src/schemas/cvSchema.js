@@ -1,25 +1,32 @@
-const { z, ZodError } = require('zod');
+const joi = require('@hapi/joi');
 
-const createCvSchema = z.object({
-    name: z.string().min(3, 'Name is too short').max(20, 'Name is too long'),
-    image: z.string().url({ message: 'Invalid URL format for image' }),
-    header: z.string().min(3, 'Name is too short').max(20, 'Name is too long'),
-    description: z.string().min(10, 'Description is too short').max(50, 'Description is too long'),
-    experience: z.array(z.unknown()).refine(arr => arr && arr.length >  0, {
-        message: 'Experience is required'
-    }),
-    education: z.array(z.unknown()).refine(arr => arr && arr.length >  0, {
-        message: 'Education is required'
-    }),
-    contact: z.object(),
-    skils: z.array(z.string()),
-    speakingLanguages: z.array(z.string()),
-    otherInterests: z.array(z.string()),
-    creationDate: z.string(),
-    views: z.number()
+const createCvSchema = joi.object({
+    name: joi.string().min(1).max(20).required(),
+    header: joi.string().min(3).max(20).required(),
+    description: joi.string().min(10).max(200).required(),
+    experience: joi.array().items(joi.object({
+        from: joi.string().allow('', null),
+        to: joi.string().allow('', null),
+        company: joi.string().allow('', null),
+        role: joi.string().allow('', null),
+        responsabilities: joi.string().allow('', null),
+    })).required(),
+    education: joi.array().items(joi.object({
+        from: joi.string().allow('', null),
+        to: joi.string().allow('', null),
+        where: joi.string().allow('', null),
+        about: joi.string().allow('', null),
+    })).required(),
+    contact: joi.object({
+        phone: joi.number().min(5).max(20).required(),
+        location: joi.string().min(3).max(50).required(),
+        email: joi.string().min(1).max(50).required().email(),
+    }).required(),
+    skills: joi.array().items(joi.string()).required(),
+    speakingLanguages: joi.array().items(joi.string()).required(),
+    otherInterests: joi.array().items(joi.string()).required(),
+    creationDate: joi.string().allow('', null), 
+    views: joi.number().allow(null) 
 });
 
-module.exports = {
-    createCvSchema,
-    ZodError
-};
+module.exports = createCvSchema;

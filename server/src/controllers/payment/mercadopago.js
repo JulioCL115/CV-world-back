@@ -1,19 +1,37 @@
-const mercadopago = require('mercadopago')
+const { MercadoPagoConfig, Payment, Preference } = require("mercadopago");
+const mercadopago = require("mercadopago");
+const {ACCES_TOKEN} = process.env
 
-const createOrder = async(req,res) =>{
-    mercadopago.configure({
-        access_token : "TEST-1127404855878397-021315-d22d177cf405ab6d16972fd357795017-1680068297"
-    })
+const createPayment = async (req, res) => {
+  const client = new MercadoPagoConfig({
+    accessToken: ACCES_TOKEN});
+  const { tittle, description, quantity, unit_price } = req.body;
+  const preference = new Preference(client);
+  try {
+    const body = {
+      items: [
+        {
+          tittle,
+          description,
+          quantity,
+          unit_price, 
+          currency_id: "USD",
+        },
+      ],
+      back_urls: {
+        success: "http://localhost:4000/success",
+        failure: "http://localhost:4000/failure",
+        pending: "http://localhost:4000/pending",
+      },
+      notification_url: "http://localhost:4000/webhook",
+    };
+    
+    const response = await preference.create({ body });
+    console.log(response);
+    res.json(response.init_point)
+    // res.json({id: response.id})
+  } catch (error) {
+    res.json(error);
+  }
+};
 
-    const result = await mercadopago.preferences.create({
-        items : [
-            {
-                tittle: 'Laptop Lenovo',
-                unit_price: 100,
-                currency_id : 'ARS',
-                quantity: 1,
-            }
-        ]
-    })
-    console.log(result)
-}

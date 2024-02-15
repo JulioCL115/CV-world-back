@@ -1,18 +1,29 @@
 const loginUserController = require('../../controllers/userController/loginUserController');
-const { loginUserSchema, ZodError } =  require('../../schemas/userSchema');
+const { loginUserSchema } =  require('../../schemas/userSchema');
 
 const loginUserHandler = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        loginUserSchema.parse({ email, password });
+        const { error } = loginUserSchema.validate(req.body);
+
+        if(error) {
+            return res.status(400).json({ error: error.details[0].message });
+        }
 
         const loginCreated = await loginUserController(email, password);
 
-        res.status(201).json(loginCreated);
+        res.header('auth-token', loginCreated.token).json({
+            message: 'Authenticated user',
+            token: loginCreated.token,
+            user: loginCreated.userFoundFiltered,
+        });
 
     } catch (error) {
-        res.status(500).json({message: error.message})
+        if (error.statusCode) {
+            return res.status(error.statusCode).json({ error: error.message });
+        }
+        return res.status(500).json({ error: error.message });
     }
 }
 
