@@ -12,20 +12,24 @@ const getCvByIdController = async (cvId) => {
             id: cvFound.cvId,
             name: cvFound.name,
             image: cvFound.image,
+            header: cvFound.header,
             description: cvFound.description,
             experience: cvFound.experience,
+            education: cvFound.education,
             contact: cvFound.contact,
-            study: cvFound.study,
-            applying: cvFound.applying,
+            skills: cvFound.skills,
+            speakingLanguages: cvFound.speakingLanguages,
+            otherInterests: cvFound.otherInterests,
+            creationDate: cvFound.creationDate,
+            views: cvFound.views,
             UserId: cvFound.UserId,
             Comments: cvFound.Comments.map( (comment) => comment.comment)
         }
     
         return cvFormat;
     } catch (error) {
-        console.error('Error searching for CV:', error);
+        console.error('Error searching for CV by ID:', error);
         throw error;
     }
 }
-
 module.exports = getCvByIdController;
