@@ -16,7 +16,7 @@ const createCv = async (req, res) => {
         //     return res.status(400).json({ error: error.details[0].message });
         // }
         
-        const cvCreated = await postCvController({name,req, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests, views, category, lenguaje}, userId);
+        const cvCreated = await postCvController(name, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests, views, category, lenguaje, userId, req);
 
         res.status(201).json(cvCreated);
 
