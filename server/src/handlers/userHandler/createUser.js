@@ -4,6 +4,7 @@ const { registerUserSchema } = require('../../schemas/userSchema');
 const createUser = async (req, res) => {
     try {
         const { name, email, password, photo, role } = req.body;
+        console.log(req.body)
 
         // const { error } = registerUserSchema.validate({ name, email, password });
 
