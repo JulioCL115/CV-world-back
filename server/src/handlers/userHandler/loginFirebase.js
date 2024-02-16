@@ -39,7 +39,7 @@ const loginFirebase = async (req, res) => {
         }
 
         // Generamos un token JWT para el usuario
-        const token = jwt.sign({ uid, email, name }, process.env.JWT_SECRET, { expiresIn: '10h' });
+        const token = jwt.sign({ uid, email, name }, process.env.JWT_SECRET, { expiresIn: '10d' });
 
         res.header('auth-token', token).json({
             message: 'Authenticated user',
