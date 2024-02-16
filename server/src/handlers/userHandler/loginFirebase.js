@@ -31,6 +31,7 @@ const loginFirebase = async (req, res) => {
         const userFoundFiltered = {
             id: userFound.id,
             name: userFound.name,
+            photo: userFound.photo,
             email: userFound.email,
             role: userFound.role,
             Cvs: userFound.Cvs,

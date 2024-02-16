@@ -1,4 +1,4 @@
-const { Cv } = require("../db");
+// const { Cv } = require("../db");
 
 async function populateLanguage() {
   try {
@@ -84,4 +84,4 @@ async function populateLanguage() {
   };
 };
 
-module.exports = populateLanguage;
+// module.exports = populateLanguage;
