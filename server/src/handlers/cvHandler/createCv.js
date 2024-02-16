@@ -2,12 +2,12 @@ const postCvController = require('../../controllers/cvController/postCvControlle
 
 const createCv = async (req, res) => {
     try {
-        const { name, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests, views,category, lenguaje } = req.body;
+        const { name, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests, views, category, lenguaje } = req.body;
 
         const { userId } = req.params; 
       
         if (!userId) {
-            return res.status(400).json({ error: 'Please provide a valid ID in the request parameters' })
+            return res.status(400).json({ error: 'Please provide a valid ID in the request parameters' });
         }
 
         // const { error } = createCvSchema.validate({ name, header, description, contact, skills, speakingLanguages, otherInterests, creationDate, views });
@@ -15,8 +15,8 @@ const createCv = async (req, res) => {
         // if(error) {
         //     return res.status(400).json({ error: error.details[0].message });
         // }
-        console.log(name,contact)
-        const cvCreated = await postCvController({name, req,image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests, views,category, lenguaje}, userId);
+        
+        const cvCreated = await postCvController({name,req, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests, views, category, lenguaje}, userId);
 
         res.status(201).json(cvCreated);
 
