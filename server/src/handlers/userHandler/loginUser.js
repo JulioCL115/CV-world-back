@@ -27,4 +27,4 @@ const loginUserHandler = async (req, res) => {
     }
 }
 
-module.exports = {loginUserHandler}
+module.exports = loginUserHandler
