@@ -2,7 +2,7 @@ const { Cv, User, Subscription } = require('../../db');
 const { uploadImage } = require("../../helpers/cloudinary");
  const fs = require("fs-extra");
 
-const postCvController = async ({name, req,image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests,  views = 0,category, lenguaje}, userId) => {
+const postCvController = async (name, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests,  views = 0,category, lenguaje, userId, req) => {
     try {
         const existingCv = await Cv.findOne({
             where: {
@@ -45,7 +45,7 @@ const postCvController = async ({name, req,image, header, description, experienc
             creationDate: formattedDate,
             views,
             UserId: userId,
-            category:category,
+            category,
             language:lenguaje
         });
 
@@ -113,7 +113,7 @@ const postCvController = async ({name, req,image, header, description, experienc
                 subscription,                
                 photo: newCv.User.photo
             },
-            category:category,
+            category,
             language:lenguaje
         }
 
