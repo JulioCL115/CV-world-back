@@ -4,6 +4,7 @@ const { loginUserSchema } =  require('../../schemas/userSchema');
 const loginUserHandler = async (req, res) => {
     try {
         const { email, password } = req.body;
+        console.log(req.body)
 
         const { error } = loginUserSchema.validate(req.body);
 

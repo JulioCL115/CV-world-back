@@ -31,6 +31,7 @@ const loginFirebase = async (req, res) => {
         const userFoundFiltered = {
             id: userFound.id,
             name: userFound.name,
+            photo: userFound.photo,
             email: userFound.email,
             role: userFound.role,
             Cvs: userFound.Cvs,
@@ -38,7 +39,7 @@ const loginFirebase = async (req, res) => {
         }
 
         // Generamos un token JWT para el usuario
-        const token = jwt.sign({ uid, email, name }, process.env.JWT_SECRET, { expiresIn: '2h' });
+        const token = jwt.sign({ uid, email, name }, process.env.JWT_SECRET, { expiresIn: '10d' });
 
         res.header('auth-token', token).json({
             message: 'Authenticated user',
@@ -47,7 +48,7 @@ const loginFirebase = async (req, res) => {
         });
 
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error:', error.message);
         return res.status(500).json({ error: 'Failed to authenticate with Firebase' });
     }
 };
