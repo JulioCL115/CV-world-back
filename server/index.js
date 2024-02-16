@@ -14,7 +14,7 @@ conn.sync({ force: true })
             console.log(`Server listening on port ${PORT}`);
         });
     })
-    .then(() => populateUsers())
+    // .then(() => populateUsers())
     .then(() => populateCategory())
     .then(() => populateLanguage())
     .then(() => populateSubscription())

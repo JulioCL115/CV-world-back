@@ -1,4 +1,4 @@
-const { Cv, User, Category, Lenguaje, Subscription } = require('../../db');
+const { Cv, User, Subscription } = require('../../db');
 const { uploadImage } = require("../../helpers/cloudinary");
  const fs = require("fs-extra");
 
