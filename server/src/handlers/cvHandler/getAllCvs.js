@@ -8,7 +8,6 @@ const getAllCvs = async (req, res) => {
         console.log(`filtro por sort: ${sort}`);
         console.log(`filtro por categories: ${categories}`);
         console.log(`filtro por languages: ${languages}`);
-        console.log(`filtro por subscriptions: ${subscriptions}`);
         console.log(`filtro por limit: ${limit}`);
         console.log(`filtro por offset: ${page}`);
 
@@ -37,20 +36,16 @@ const getAllCvs = async (req, res) => {
         }
 
         if (languages && languages.length > 0 ) {
-            allCvs = allCvs.filter(cv => languages.toLowerCase().includes (cv.lenguaje.toLowerCase()));
-        }
-          
-        if(sort) {
-
-            if(sort === "views") {
-                allCvs.sort((a, b) => b.views - a.views);
+            allCvs = allCvs.filter(cv => languages.toLowerCase().includes (cv.language.toLowerCase()));
+          }
+          if(sort){
+         if(sort === "views") {
+             allCvs.sort((a, b) => b.views - a.views);
             }
-
-            if (sort === "date"){
+         if (sort === "date"){
                 allCvs.sort((a, b) =>new Date(b.creationDate) - new Date(a.creationDate));
             }
         }
-      
         res.status(200).json( allCvs);
     } catch (error) {
         res.status(500).json({ error: error.message });
