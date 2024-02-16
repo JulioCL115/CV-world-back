@@ -3,6 +3,7 @@ const getCvByIdController = require('../../controllers/cvController/getCvByIdCon
 const getCvById = async (req, res) => {
     try {
         const { cvId } = req.params;
+        console.log(cvId)
 
         if(!cvId) {
             return res.status(400).json({ error: "ID is required" });
@@ -13,6 +14,8 @@ const getCvById = async (req, res) => {
         if(!cvFound) {
             return res.status(404).json({ error: 'Cv not found' });
         }
+
+        console.log("este es un cv",cvFound)
 
         res.status(200).json(cvFound);
 
