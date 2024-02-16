@@ -3,7 +3,7 @@ const getCvByQueryController = require('../../controllers/cvController/getCvByQu
 
 const getAllCvs = async (req, res) => {
     try {
-        const { limit, page ,search,sort,categories,languages,subscriptions  } = req.query;
+        const { limit, page , search, sort, categories, languages } = req.query;
         console.log(`filtro por search: ${search} `)
         console.log(`filtro por sort: ${sort}`);
         console.log(`filtro por categories: ${categories}`);
@@ -34,22 +34,25 @@ const getAllCvs = async (req, res) => {
 
         if (categories && categories.length > 0) {
             allCvs = allCvs.filter(cv => categories.includes(cv.category));
-          }
+        }
 
         if (languages && languages.length > 0 ) {
             allCvs = allCvs.filter(cv => languages.toLowerCase().includes (cv.lenguaje.toLowerCase()));
-          }
-          if(sort){
-         if(sort === "views") {
-             allCvs.sort((a, b) => b.views - a.views);
-            }
-        if (sort === "date"){
-            allCvs.sort((a, b) =>new Date(b.creationDate) - new Date(a.creationDate));
-        }}
+        }
+          
+        if(sort) {
 
+            if(sort === "views") {
+                allCvs.sort((a, b) => b.views - a.views);
+            }
+
+            if (sort === "date"){
+                allCvs.sort((a, b) =>new Date(b.creationDate) - new Date(a.creationDate));
+            }
+        }
       
         res.status(200).json( allCvs);
-       }catch (error) {
+    } catch (error) {
         res.status(500).json({ error: error.message });
     }
 };

@@ -14,8 +14,7 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         image: {
-            type: DataTypes.JSONB,
-            allowNull: false,
+            type: DataTypes.JSONB
         },
         header: {
             type: DataTypes.STRING,
@@ -56,11 +55,11 @@ module.exports = (sequelize) => {
             type: DataTypes.INTEGER,
             defaultValue: 0
         },
-        category:{
+        category: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        lenguaje:{
+        language: {
             type: DataTypes.STRING,
             allowNull: false
         },

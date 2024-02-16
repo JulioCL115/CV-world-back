@@ -1,6 +1,6 @@
 const { Cv } = require('../../db');
 
-const getAllCvsController = async (limit, offset) => {
+const getAllCvsController = async (sort, categories, languages, limit, offset) => {
     try {
         const allCvsFound = await Cv.findAndCountAll({
             where: { deleted: false },
