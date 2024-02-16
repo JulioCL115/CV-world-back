@@ -37,7 +37,7 @@ const getAllCvs = async (req, res) => {
           }
 
         if (languages && languages.length > 0 ) {
-            allCvs = allCvs.filter(cv => languages.toLowerCase().includes (cv.lenguaje.toLowerCase()));
+            allCvs = allCvs.filter(cv => languages.toLowerCase().includes (cv.language.toLowerCase()));
           }
           if(sort){
          if(sort === "views") {

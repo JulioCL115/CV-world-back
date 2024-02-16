@@ -17,7 +17,7 @@ const postCvController = async ({name, req ,image, header, description,experienc
                 otherInterests,
                 UserId: userId,
                 category:category,
-                lenguaje:lenguaje
+                language:lenguaje
             }
         });
 
@@ -48,7 +48,7 @@ const postCvController = async ({name, req ,image, header, description,experienc
             views,
             UserId: userId,
             category:category,
-            lenguaje:lenguaje
+            language:lenguaje
         });
 
         await newCv.reload({
@@ -117,7 +117,7 @@ const postCvController = async ({name, req ,image, header, description,experienc
                 photo: newCv.User.photo
             },
             category:category,
-            lenguaje:lenguaje
+            language:lenguaje
         }
 
         return newCvFound;
