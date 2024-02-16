@@ -1,4 +1,4 @@
-const { Cv, User, Category, Lenguaje, Subscription } = require('../../db');
+const { Cv, User, Subscription } = require('../../db');
 const { uploadImage } = require("../../helpers/cloudinary");
  const fs = require("fs-extra");
 
@@ -99,9 +99,9 @@ const postCvController = async (name, image, header, description, experience, ed
             image: newCv.image,
             header,
             description,
-            experience,
-            education,
-            contact,
+            experience:jsonObjectExperience, 
+            education:jsonObjectEducation,   
+            contact:jsonObjectContact,
             skills,
             speakingLanguages,
             otherInterests,

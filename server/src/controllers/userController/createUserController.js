@@ -43,7 +43,7 @@ const createUserController = async (name, email, password, photo, role) => {
         const newUserFiltered = {
             name: newUser.name,
             email: newUser.email,
-            photo,
+            photo: newUser.photo,
             role: newUser.role
         }
         

@@ -8,7 +8,7 @@ PUT "http://localhost:3001/user/delete" --> to delete user
 PUT "http://localhost:3001/user/:userId" --> to update user
 
 # Cv
-POST "http://localhost:3001/cv/:userId/:categoryId/:lenguajeId" --> to create a cv
+POST "http://localhost:3001/cv/:userId" --> to create a cv
 GET "http://localhost:3001/cv?offset=Pagina&limit=limitePorPagina" --> to get all cvs
 GET "http://localhost:3001/cv?search=searchValue&offset=Pagina&limit=limitePorPagina" --> to get cvs for searchBar
 GET "http://localhost:3001/cv/:cvId" --> to get a cv by id
