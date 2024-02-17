@@ -6,7 +6,6 @@ const transporter = require('../../nodemailer/mailer');
 const loginFirebase = async (req, res) => {
     try {
         const { idToken } = req.body;
-        console.log(idToken)
 
         if (!idToken) {
             return res.status(400).json({ error: 'No idToken provided' });

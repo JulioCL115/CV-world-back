@@ -4,9 +4,10 @@ const getAllCvsController = async (limit, offset) => {
     try {
         const allCvsFound = await Cv.findAndCountAll({
             where: { deleted: false },
-            limit,
-            offset
+            
         });
+
+        console.log("controller",allCvsFound.count)
 
         return {
             totalCvs: allCvsFound.count, 
