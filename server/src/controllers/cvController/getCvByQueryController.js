@@ -25,14 +25,9 @@ const getCvByQueryController = async (search, limit, offset) => {
                     }
                 ]
             },
-            limit,
-            offset,
         });
 
-        return {
-            totalCvs: cvsByQueryFound.count,
-            cvs: cvsByQueryFound.rows
-        };
+        return cvsByQueryFound.rows;
         
     } catch (error) {
         console.error('Error searching for CVs by query:', error);

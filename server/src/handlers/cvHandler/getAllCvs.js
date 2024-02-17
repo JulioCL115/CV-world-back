@@ -16,44 +16,48 @@ const getAllCvs = async (req, res) => {
 
         const offset = (page - 1) * limit;
 
-        let { totalCvs, cvs } = await getAllCvsController(limit, offset);
+        let { totalCvs, cvs } = await getAllCvsController();
 
-        if(!cvs || cvs.length === 0) {
+        if (!cvs || cvs.length === 0) {
             return res.status(404).json({ error: "CVs not found." });
         }
 
-        if(search) {
-            const { totalCvs: searchTotalCvs, cvs: searchCvs  } = await getCvByQueryController(search, limit, offset);
-        
-            if (!searchCvs || searchCvs.length === 0) {
+        if (search) {
+            const allCvsFound = await getCvByQueryController(search);
+            if (!allCvsFound || allCvsFound.length === 0) {
                 return res.status(404).json({ error: "CVs not found." });
             }
-
-            totalCvs = searchTotalCvs;
-            cvs = searchCvs
+            // Actualizar cvs con los CVs encontrados por la búsqueda
+            cvs = allCvsFound;
         }
 
-        if(categories && categories.length > 0) {
+        // Filtrar por categorías
+        if (categories && categories.length > 0) {
             cvs = cvs.filter(cv => categories.includes(cv.category));
+            
+            console.log("cvss",cvs.length)
         }
 
-        if(languages && languages.length > 0 ) {
+        // Filtrar por idiomas
+        if (languages && languages.length > 0) {
             cvs = cvs.filter(cv => languages.toLowerCase().includes(cv.language.toLowerCase()));
         }
 
-        if(sort) {
-            if(sort === "views") {
+        if (sort) {
+            if (sort === "views") {
                 cvs.sort((a, b) => b.views - a.views);
             }
 
-            if(sort === "date"){
-                cvs.sort((a, b) =>new Date(b.creationDate) - new Date(a.creationDate));
+            if (sort === "date") {
+                cvs.sort((a, b) => new Date(b.creationDate) - new Date(a.creationDate));
             }
         }
+        console.log(page)
+        totalCvs =cvs.length
+        const totalPages = Math.ceil(totalCvs / limit);
+        const paginatedCvs = cvs.slice(offset, offset + limit)
 
-        const totalPages = Math.ceil(cvs.length / limit);
-
-        res.status(200).json({ cvs, totalPages });
+        res.status(200).json({ cvs:paginatedCvs, totalPages });
 
     } catch (error) {
         res.status(500).json({ error: error.message });
