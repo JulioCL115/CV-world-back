@@ -2,7 +2,7 @@ const { Cv, User, Subscription } = require('../../db');
 const { uploadImage } = require("../../helpers/cloudinary");
  const fs = require("fs-extra");
 
-const postCvController = async (name, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests,  views = 0,category, lenguaje, userId, req) => {
+const postCvController = async (name, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests,  views = 0,category, language, userId, req) => {
     try {
         const existingCv = await Cv.findOne({
             where: {
@@ -14,8 +14,8 @@ const postCvController = async (name, image, header, description, experience, ed
                 speakingLanguages,
                 otherInterests,
                 UserId: userId,
-                category:category,
-                language:lenguaje
+                category: category,
+                language: language
             }
         });
 
@@ -27,9 +27,9 @@ const postCvController = async (name, image, header, description, experience, ed
 
         const currentDate = new Date();
         const formattedDate = currentDate.toISOString().slice(0, 10);
-        const jsonObjectExperience = JSON.parse(experience);
-        const jsonObjectEducation = JSON.parse(education);
-        const jsonObjectContact = JSON.parse(contact);
+        const jsonObjectExperience = experience;
+        const jsonObjectEducation = education;
+        const jsonObjectContact = contact;
 
         const newCv = await Cv.create({
             name,
@@ -46,7 +46,7 @@ const postCvController = async (name, image, header, description, experience, ed
             views,
             UserId: userId,
             category,
-            language:lenguaje
+            language:language
         });
 
         await newCv.reload({
@@ -114,7 +114,7 @@ const postCvController = async (name, image, header, description, experience, ed
                 photo: newCv.User.photo
             },
             category,
-            language:lenguaje
+            language: language
         }
 
         return newCvFound;
