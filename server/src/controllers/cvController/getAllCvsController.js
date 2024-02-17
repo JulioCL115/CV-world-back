@@ -8,7 +8,11 @@ const getAllCvsController = async (limit, offset) => {
             offset
         });
 
-        return allCvsFound.rows;
+        return {
+            totalCvs: allCvsFound.count, 
+            cvs: allCvsFound.rows  
+        }
+
     } catch (error) {
         console.error('Error searching for all CVs:', error);
         throw error;    

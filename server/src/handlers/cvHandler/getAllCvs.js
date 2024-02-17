@@ -16,41 +16,44 @@ const getAllCvs = async (req, res) => {
 
         const offset = (page - 1) * limit;
 
-        let allCvs = await getAllCvsController(limit, offset);
+        let { totalCvs, cvs } = await getAllCvsController(limit, offset);
 
-        if(!allCvs || allCvs.length === 0) {
+        if(!cvs || cvs.length === 0) {
             return res.status(404).json({ error: "CVs not found." });
         }
 
         if(search) {
-            const allCvsFound = await getCvByQueryController(search, limit, offset);
-
-            if (!allCvsFound || allCvsFound.length === 0) {
+            const { totalCvs: searchTotalCvs, cvs: searchCvs  } = await getCvByQueryController(search, limit, offset);
+        
+            if (!searchCvs || searchCvs.length === 0) {
                 return res.status(404).json({ error: "CVs not found." });
             }
 
-            allCvs = allCvsFound
-        } 
+            totalCvs = searchTotalCvs;
+            cvs = searchCvs
+        }
 
         if(categories && categories.length > 0) {
-            allCvs = allCvs.filter(cv => categories.includes(cv.category));
+            cvs = cvs.filter(cv => categories.includes(cv.category));
         }
 
         if(languages && languages.length > 0 ) {
-            allCvs = allCvs.filter(cv => languages.toLowerCase().includes(cv.language.toLowerCase()));
+            cvs = cvs.filter(cv => languages.toLowerCase().includes(cv.language.toLowerCase()));
         }
 
         if(sort) {
-
             if(sort === "views") {
-                allCvs.sort((a, b) => b.views - a.views);
+                cvs.sort((a, b) => b.views - a.views);
             }
 
             if(sort === "date"){
-                allCvs.sort((a, b) =>new Date(b.creationDate) - new Date(a.creationDate));
+                cvs.sort((a, b) =>new Date(b.creationDate) - new Date(a.creationDate));
             }
         }
-        res.status(200).json( allCvs);
+
+        const totalPages = Math.ceil(cvs.length / limit);
+
+        res.status(200).json({ cvs, totalPages });
 
     } catch (error) {
         res.status(500).json({ error: error.message });
