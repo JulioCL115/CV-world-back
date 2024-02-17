@@ -4,12 +4,13 @@ const getCvByQueryController = require('../../controllers/cvController/getCvByQu
 const getAllCvs = async (req, res) => {
     try {
         const search  = req.query.search;
-        const limit = parseInt(req.query.limit) || 6; // Tamaño de página (por defecto es 6)
-        const offset = parseInt(req.query.offset) || 1; // Página actual (por defecto es 1)
         const sort = req.query.sort;
         const categories = req.query.categories;
         const languages = req.query.languages;
-        const subscriptions = req.query.subscriptions;
+        const limit = parseInt(req.query.limit) || 6; // Tamaño de página (por defecto es 6)
+        const page = parseInt(req.query.page) || 1; // Página actual (por defecto es 1)
+
+        const offset = (page - 1) * limit;
 
         console.log(`filtro por search: ${search} `)
         console.log(`filtro por sort: ${sort}`);
