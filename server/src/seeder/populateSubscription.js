@@ -26,7 +26,11 @@ async function populateSubscription() {
 
     console.log("subscription table populated successfully");
   } catch (error) {
-    console.error("Error populating subscription database:", error);
+    if (error.name === "SequelizeUniqueConstraintError") {
+      console.log("Users table already populated");
+      return;
+    }
+    console.error("Error populating subscription database");
   };
 };
 

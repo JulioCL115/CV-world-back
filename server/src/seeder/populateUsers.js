@@ -28,7 +28,12 @@ async function populateUsers() {
 
         console.log("Users table populated successfully");
     } catch (error) {
-        console.error("Error populating users database:", error);
+        // check if error is a SequelizeUniqueConstraintError
+        if (error.name === "SequelizeUniqueConstraintError") {
+            console.log("Users table already populated");
+            return;
+        }
+        console.error("Error populating users database");
     }; 
 };
 
