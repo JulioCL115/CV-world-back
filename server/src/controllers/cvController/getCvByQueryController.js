@@ -25,8 +25,6 @@ const getCvByQueryController = async (search, limit, offset) => {
                     }
                 ]
             },
-            limit,
-            offset,
         });
 
         return cvsByQueryFound.rows;
