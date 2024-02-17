@@ -59,7 +59,7 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        language: {
+        language:{
             type: DataTypes.STRING,
             allowNull: false
         },

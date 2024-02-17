@@ -3,41 +3,59 @@ const getCvByQueryController = require('../../controllers/cvController/getCvByQu
 
 const getAllCvs = async (req, res) => {
     try {
-        const search  = req.query.search;
-        const sort = req.query.sort;
-        const categories = req.query.categories;
-        const languages = req.query.languages;
-        const limit = parseInt(req.query.limit) || 6; // Tamaño de página (por defecto es 6)
-        const page = parseInt(req.query.page) || 1; // Página actual (por defecto es 1)
-
-        const offset = (page - 1) * limit;
+        const { search, sort, categories, languages } = req.query;
+        const page = parseInt(req.query.page);
+        const limit = parseInt(req.query.limit);
 
         console.log(`filtro por search: ${search} `)
         console.log(`filtro por sort: ${sort}`);
         console.log(`filtro por categories: ${categories}`);
         console.log(`filtro por languages: ${languages}`);
-        console.log(`filtro por subscriptions: ${subscriptions}`);
         console.log(`filtro por limit: ${limit}`);
-        console.log(`filtro por offset: ${offset}`);
+        console.log(`filtro por page: ${page}`);
+
+        const offset = (page - 1) * limit;
+
+        let { totalCvs, cvs } = await getAllCvsController(limit, offset);
+
+        if(!cvs || cvs.length === 0) {
+            return res.status(404).json({ error: "CVs not found." });
+        }
 
         if(search) {
-            const cvsByQuery = await getCvByQueryController(search, limit, offset);
-
-            if (!cvsByQuery || cvsByQuery.length === 0) {
-                return res.status(404).json({ error: "CVs not found." });
-            }
-    
-            res.status(200).json(cvsByQuery);
-        } else {
-            const allCvs = await getAllCvsController(limit, offset);
-
-            if (!allCvs || allCvs.length === 0) {
+            const { totalCvs: searchTotalCvs, cvs: searchCvs  } = await getCvByQueryController(search, limit, offset);
+        
+            if (!searchCvs || searchCvs.length === 0) {
                 return res.status(404).json({ error: "CVs not found." });
             }
 
-            res.status(200).json(allCvs);
-        } 
-       }catch (error) {
+            totalCvs = searchTotalCvs;
+            cvs = searchCvs
+        }
+
+        if(categories && categories.length > 0) {
+            cvs = cvs.filter(cv => categories.includes(cv.category));
+        }
+
+        if(languages && languages.length > 0 ) {
+            cvs = cvs.filter(cv => languages.toLowerCase().includes(cv.language.toLowerCase()));
+        }
+
+        if(sort) {
+            if(sort === "views") {
+                cvs.sort((a, b) => b.views - a.views);
+            }
+
+            if(sort === "date"){
+                cvs.sort((a, b) =>new Date(b.creationDate) - new Date(a.creationDate));
+            }
+        }
+
+        const totalPages = Math.ceil(cvs.length / limit);
+
+        res.status(200).json({ cvs, totalPages });
+
+    } catch (error) {
         res.status(500).json({ error: error.message });
     }
 };

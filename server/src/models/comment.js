@@ -12,10 +12,6 @@ module.exports = (sequelize) => {
         comment: {
             type: DataTypes.TEXT,
             allowNull: false
-        },
-        deleted: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false
         }
     },
     {
