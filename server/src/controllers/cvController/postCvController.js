@@ -1,4 +1,4 @@
-const { Cv, User, Subscription } = require('../../db');
+const { Cv, User, Subscription, Category, Language } = require('../../db');
 const { uploadImage } = require("../../helpers/cloudinary");
 const fs = require('fs');
 const path = require('path');
@@ -31,6 +31,22 @@ const postCvController = async (name, image, header, description, experience, ed
         const currentDate = new Date();
         const formattedDate = currentDate.toISOString().slice(0, 10);
 
+        const categoryInDB = await Category.findOne({
+            where: {
+                name: {
+                    [Op.like]: category,
+                }
+            }
+        });
+
+        const languageInDB = await Language.findOne({
+            where: {
+                name: {
+                    [Op.like]: category,
+                }
+            }
+        });
+
         const newCv = await Cv.create({
             name,
             image: '',
@@ -45,8 +61,8 @@ const postCvController = async (name, image, header, description, experience, ed
             creationDate: formattedDate,
             views,
             UserId: userId,
-            category,
-            language,
+            CategoryId: category,
+            LanguageId, language
         });
 
         await newCv.reload({

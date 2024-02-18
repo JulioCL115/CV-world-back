@@ -1,8 +1,8 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define('Lenguaje',
-    // Definición de las columnas de la tabla 'Lenguaje'
+    sequelize.define('Language',
+    // Definición de las columnas de la tabla 'Language'
     {
         id: {
             type: DataTypes.UUID,

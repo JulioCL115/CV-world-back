@@ -1,8 +1,8 @@
-const { Lenguaje } = require("../db");
+const { Language } = require("../db");
 
 async function populateLanguage() {
   try {
-    const languages = await Lenguaje.bulkCreate([
+    const languages = await Language.bulkCreate([
       {
         name: "Español",
       },
