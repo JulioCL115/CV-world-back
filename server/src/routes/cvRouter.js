@@ -13,8 +13,8 @@ cvRouter.get('/:cvId', getCvById);
 
 cvRouter.post('/:userId', createCv);
 
-cvRouter.put('/:cvId',verifyToken, updateCv);
+cvRouter.put('/:cvId', verifyToken, updateCv);
 
-cvRouter.put('/delete/:cvId',verifyToken, deleteCv);
+cvRouter.put('/delete/:cvId', verifyToken, deleteCv);
 
 module.exports = cvRouter;

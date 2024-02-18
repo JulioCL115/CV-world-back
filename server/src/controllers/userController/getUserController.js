@@ -22,7 +22,15 @@ const getUser = async (email) => {
             ],
         });
 
-        return userFound;
+        const result = JSON.parse(JSON.stringify(userFound));
+
+        if (result && result.Cvs) {
+            result.Cvs = result.Cvs.filter(cv => cv.deleted === false);
+        }
+
+        console.log(result)
+
+        return result
 
     } catch (error) {
         console.error("Error searching for User: ", error);
