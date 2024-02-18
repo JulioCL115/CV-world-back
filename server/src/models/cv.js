@@ -13,8 +13,9 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        // Conviene que sea de tipo string en vez de jsonB porque guardamos la url que hace referencia al a imagen en cloudinary
         image: {
-            type: DataTypes.JSONB
+            type: DataTypes.STRING
         },
         header: {
             type: DataTypes.STRING,

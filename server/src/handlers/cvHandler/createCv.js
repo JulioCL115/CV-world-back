@@ -3,7 +3,7 @@ const postCvController = require('../../controllers/cvController/postCvControlle
 const createCv = async (req, res) => {
     try {
         const { name, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests, views, category, language } = req.body;
-
+        console.log("req.body", req.body)
         const { userId } = req.params; 
       
         if (!userId) {

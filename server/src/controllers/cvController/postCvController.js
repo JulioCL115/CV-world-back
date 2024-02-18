@@ -1,8 +1,11 @@
 const { Cv, User, Subscription } = require('../../db');
 const { uploadImage } = require("../../helpers/cloudinary");
- const fs = require("fs-extra");
+const fs = require('fs');
+const path = require('path');
 
-const postCvController = async (name, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests,  views = 0,category, language, userId, req) => {
+const tempFileFolder = 'tempFiles';
+
+const postCvController = async (name, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests, views = 0, category, language, userId, req) => {
     try {
         const existingCv = await Cv.findOne({
             where: {
@@ -14,12 +17,12 @@ const postCvController = async (name, image, header, description, experience, ed
                 speakingLanguages,
                 otherInterests,
                 UserId: userId,
-                category: category,
-                language: language
+                category,
+                language
             }
         });
 
-        if(existingCv) {
+        if (existingCv) {
             const error = new Error('CV with similar characteristics already exists');
             error.statusCode = 409;
             throw error;
@@ -27,26 +30,23 @@ const postCvController = async (name, image, header, description, experience, ed
 
         const currentDate = new Date();
         const formattedDate = currentDate.toISOString().slice(0, 10);
-        const jsonObjectExperience = experience;
-        const jsonObjectEducation = education;
-        const jsonObjectContact = contact;
 
         const newCv = await Cv.create({
             name,
-            image: [],
+            image: '',
             header,
             description,
-            experience: jsonObjectExperience, 
-            education: jsonObjectEducation,   
-            contact: jsonObjectContact,
+            experience,
+            education,
+            contact,
             skills,
             speakingLanguages,
-            otherInterests: otherInterests,
+            otherInterests,
             creationDate: formattedDate,
             views,
             UserId: userId,
             category,
-            language:language
+            language,
         });
 
         await newCv.reload({
@@ -57,41 +57,28 @@ const postCvController = async (name, image, header, description, experience, ed
 
         let subscription = newCv.User.Subscription ? newCv.User.Subscription.name : 'No subscription';
 
-        if (req.files?.image && req.files?.image.length > 0) {
-            console.log("Subiendo imágenes a Cloudinary");
-        
-            const uploadPromises = req.files.image.map(async (file) => {
-                const result = await uploadImage(file.tempFilePath);
-                console.log("Resultado de la subida a Cloudinary: ", result);
-                return {
-                    public_id: result.public_id,
-                    secure_url: result.secure_url,
-                };
-            });
-        
-            console.log("uploadPromises", uploadPromises)
-            const uploadedImages = await Promise.all(uploadPromises);
-            console.log("uploadImage prueba ", uploadPromises)
-            newCv.image = uploadedImages;
-        
-            console.log("Eliminando archivos temporales");
-            await Promise.all(req.files.image.map(async (file) => {
-                await fs.unlink(file.tempFilePath);
-            }));
+        const dataUrl = image ? image : null;
 
-            console.log("Guardando producto en la base de datos");
-            await newCv.save();
-        } else {
-            const result = await uploadImage(req.files.image.tempFilePath)
-            newCv.image = [
-                {
-                    public_id : result.public_id,
-                    secure_url : result.secure_url
-                }
-            ]
-            await fs.unlink(req.files.image.tempFilePath)
-            console.log(result)
-            await newCv.save();
+        if (dataUrl) {
+            const base64Data = dataUrl.replace(/^data:image\/png;base64,/, '');
+
+            // make random string for filename
+            const randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+            const fileName = `${randomString}.png`;
+            const completeFilePath = `./${tempFileFolder}/${fileName}`;
+
+            // write the file to the temp folder
+            saveFile(base64Data, completeFilePath);
+
+            const result = await uploadImage(completeFilePath);
+            console.log(`Result of uploading to Cloudinary: ${result}`);
+
+            newCv.image = result.secure_url
+
+            newCv.save();
+
+            // delete the file from the temp folder
+            deleteFile(completeFilePath);
         }
 
         const newCvFound = {
@@ -99,18 +86,18 @@ const postCvController = async (name, image, header, description, experience, ed
             image: newCv.image,
             header,
             description,
-            experience:jsonObjectExperience, 
-            education:jsonObjectEducation,   
-            contact:jsonObjectContact,
+            experience,
+            education,
+            contact,
             skills,
             speakingLanguages,
             otherInterests,
             creationDate: formattedDate,
-            views,   
+            views,
             user: {
                 id: newCv.User.id,
                 userName: newCv.User.name,
-                subscription,                
+                subscription,
                 photo: newCv.User.photo
             },
             category,
@@ -118,10 +105,36 @@ const postCvController = async (name, image, header, description, experience, ed
         }
 
         return newCvFound;
-   
+
     } catch (error) {
         console.error('Error creating CV:', error);
         throw error;
+    }
+}
+
+function saveFile(base64Data, completeFilePath) {
+    // Ensure the directory exists
+    const dir = path.dirname(completeFilePath);
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+    }
+
+    // Write the file to the temp folder
+    try {
+        fs.writeFileSync(completeFilePath, base64Data, 'base64');
+        console.log('File saved successfully');
+    } catch (err) {
+        console.error('Error writing file', err);
+        throw err;
+    }
+}
+
+function deleteFile(filepath) {
+    try {
+        fs.unlinkSync(filepath);
+        console.log('File deleted successfully');
+    } catch (err) {
+        console.error('Error deleting file:', err);
     }
 }
 
