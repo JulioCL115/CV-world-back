@@ -56,14 +56,6 @@ module.exports = (sequelize) => {
             type: DataTypes.INTEGER,
             defaultValue: 0
         },
-        category: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        language:{
-            type: DataTypes.STRING,
-            allowNull: false
-        },
         deleted: {
             type: DataTypes.BOOLEAN,
             defaultValue: false

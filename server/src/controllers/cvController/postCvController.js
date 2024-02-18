@@ -2,11 +2,28 @@ const { Cv, User, Subscription, Category, Language } = require('../../db');
 const { uploadImage } = require("../../helpers/cloudinary");
 const fs = require('fs');
 const path = require('path');
+const { Op } = require("sequelize");
 
 const tempFileFolder = 'tempFiles';
 
 const postCvController = async (name, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests, views = 0, category, language, userId, req) => {
     try {
+        const categoryInDB = await Category.findOne({
+            where: {
+                name: {
+                    [Op.like]: category,
+                }
+            }
+        });
+
+        const languageInDB = await Language.findOne({
+            where: {
+                name: {
+                    [Op.like]: language,
+                }
+            }
+        });
+
         const existingCv = await Cv.findOne({
             where: {
                 name,
@@ -17,8 +34,8 @@ const postCvController = async (name, image, header, description, experience, ed
                 speakingLanguages,
                 otherInterests,
                 UserId: userId,
-                category,
-                language
+                CategoryId: categoryInDB.id,
+                LanguageId: languageInDB.id
             }
         });
 
@@ -31,21 +48,6 @@ const postCvController = async (name, image, header, description, experience, ed
         const currentDate = new Date();
         const formattedDate = currentDate.toISOString().slice(0, 10);
 
-        const categoryInDB = await Category.findOne({
-            where: {
-                name: {
-                    [Op.like]: category,
-                }
-            }
-        });
-
-        const languageInDB = await Language.findOne({
-            where: {
-                name: {
-                    [Op.like]: category,
-                }
-            }
-        });
 
         const newCv = await Cv.create({
             name,
@@ -61,8 +63,8 @@ const postCvController = async (name, image, header, description, experience, ed
             creationDate: formattedDate,
             views,
             UserId: userId,
-            CategoryId: category,
-            LanguageId, language
+            CategoryId: categoryInDB.id,
+            LanguageId: languageInDB.id
         });
 
         await newCv.reload({
@@ -71,7 +73,7 @@ const postCvController = async (name, image, header, description, experience, ed
             ]
         });
 
-        let subscription = newCv.User.Subscription ? newCv.User.Subscription.name : 'No subscription';
+        let subscription = newCv.User.Subscription ? newCv.User.Subscription.name : 'Plan Básico';
 
         const dataUrl = image ? image : null;
 
@@ -117,7 +119,7 @@ const postCvController = async (name, image, header, description, experience, ed
                 photo: newCv.User.photo
             },
             category,
-            language: language
+            language,
         }
 
         return newCvFound;

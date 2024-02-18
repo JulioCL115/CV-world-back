@@ -1,4 +1,4 @@
-const getAllLanguagesController = require('../../controllers/languageController/getAllLanguagesController'); 
+const getAllLanguagesController = require('../../controllers/languageController/getAllLanguageController'); 
 
 const getAllLanguages = async (req, res) => {
     try {
