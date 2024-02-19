@@ -9,6 +9,7 @@ const createPayment = async (req, res) => {
   const client = new MercadoPagoConfig({
     accessToken: ACCES_TOKEN
   });
+  const {idKey} = req.params;
   const { tittle, description, quantity, unit_price } = req.body;
   const preference = new Preference(client);
   try {
@@ -28,7 +29,7 @@ const createPayment = async (req, res) => {
         pending: "http://localhost:4000/pending",
       },
       
-      notification_url: "https://1c1b-190-192-123-174.ngrok-free.app/webhook",
+      notification_url: `https://856a-2-57-171-45.ngrok-free.app/webhook/${idKey}`,
     };
     const response = await preference.create({ body });
     console.log(response);
@@ -50,7 +51,7 @@ const receiveWebhooks = async (req,res) => {
     console.log( "esta es el id", idKeyString);
     if(payment.type === "payment" &&  payment['data.id']){
         const paymentId = payment['data.id']; 
-        
+
         if (processedWebhooks.has(paymentId)) {
             console.log("Webhook ya procesado. Ignorando...");
             return res.send("Webhook ya procesado");
@@ -62,15 +63,16 @@ const receiveWebhooks = async (req,res) => {
                 }
             });
         await User.update(
-            {compras: Sequelize.literal( `"compras" || ARRAY['${JSON.stringify(mercadoPagoResponse.data)}']::json[]`) },
-            { where: { id: response.id } }
+            // {compras: Sequelize.literal( `"compras" || ARRAY['${JSON.stringify(mercadoPagoResponse.data)}']::json[]`) },
+            // { where: { id: response.id } },
+            {suscription : true},{ where: { id: response.id}}
           ); 
-            console.log("este es mercado status",mercadoPagoResponse.data.status)
+            // console.log("este es mercado status",mercadoPagoResponse.data.status)
             processedWebhooks.add(paymentId);
-          if(mercadoPagoResponse.data.status === "approved"){
-            const remove = await CartItem.destroy({ where: { idUser: idKeyString } })
-            console.log("eliminando",remove)
-          }
+          // if(mercadoPagoResponse.data.status === "approved"){
+          //   const remove = await CartItem.destroy({ where: { idUser: idKeyString } })
+          //   console.log("eliminando",remove)
+          // }
           console.log(mercadoPagoResponse)
         console.log("prueba depues", payment)
         console.log("esta es la response" , response)

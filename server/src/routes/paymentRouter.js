@@ -4,7 +4,7 @@ const router = Router()
 const {createPayment, receiveWebhooks} = require('../controllers/payment/mercadopago')
 
 
-router.post('/create-order', createPayment)
+router.post('/create-order/:idKey', createPayment)
 router.get('/success', (req,res) =>{
     res.send("Pago exitoso")
 })
