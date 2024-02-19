@@ -28,8 +28,7 @@ GET "http://localhost:3001/subscription" --> to get all subscription
 POST "http://localhost:3001/subscription/:userId" --> to create a subscription
 PUT "http://localhost:3001/subscription/:userId" --> to update a subscription
 
-
-
-
+# Payment
+POST "http://localhost:3001/create-order/:userId" --> to create a payment
 
 
