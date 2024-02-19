@@ -14,7 +14,6 @@ const getAllCvs = async (req, res) => {
         const { totalCvs, cvs } = await getCvByQueryController(search, categories, languages, limit, offset);
 
         if (!cvs || cvs.length === 0) {
-        if (!cvs || cvs.length === 0) {
             return res.status(404).json({ error: "CVs not found." });
         }
 
@@ -36,14 +35,8 @@ const getAllCvs = async (req, res) => {
 
             if (sort === "date") {
                 cvs.sort((a, b) => new Date(b.creationDate) - new Date(a.creationDate));
-            if (sort === "date") {
-                cvs.sort((a, b) => new Date(b.creationDate) - new Date(a.creationDate));
             }
         }
-        console.log(page)
-        totalCvs =cvs.length
-        const totalPages = Math.ceil(totalCvs / limit);
-        const paginatedCvs = cvs.slice(offset, offset + limit)
 
         const totalPages = Math.ceil(totalCvs / limit);
 

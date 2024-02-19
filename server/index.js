@@ -7,7 +7,7 @@ const populateLanguage = require("./src/seeder/populateLanguage.js");
 const populateSubscription = require("./src/seeder/populateSubscription.js");
 const populateCv = require("./src/seeder/populateCv");
 
-conn.sync({ force: false })
+conn.sync({ force: true })
     .then(() => {
         server.listen(PORT, () => {
             console.log(`Server listening on port ${PORT}`);
