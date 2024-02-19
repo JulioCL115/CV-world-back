@@ -1,7 +1,7 @@
 const { Cv } = require('../../db');
 const { Op } = require('sequelize');
 
-const getCvByQueryController = async (search, offset, limit) => {
+const getCvByQueryController = async (search, limit, offset) => {
     try {
         const cvsByQueryFound = await Cv.findAndCountAll({
             where: {
@@ -25,8 +25,6 @@ const getCvByQueryController = async (search, offset, limit) => {
                     }
                 ]
             },
-            limit,
-            offset
         });
 
         return cvsByQueryFound.rows;

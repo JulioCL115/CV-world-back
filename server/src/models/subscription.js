@@ -11,7 +11,9 @@ module.exports = (sequelize) => {
         },
         name: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true,
+            defaultValue: 'No subscription'
         },
         price: {
             type: DataTypes.INTEGER,
@@ -23,10 +25,6 @@ module.exports = (sequelize) => {
         },
         notIncluded: {
             type: DataTypes.ARRAY(DataTypes.STRING)
-        },
-        deleted: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false
         }
     },
     {
