@@ -1,7 +1,7 @@
 const loginUserController = require('../../controllers/userController/loginUserController');
 const { loginUserSchema } =  require('../../schemas/userSchema');
 
-const loginUser = async (req, res) => {
+const loginUserHandler = async (req, res) => {
     try {
         const { email, password } = req.body;
         console.log(req.body)
@@ -26,6 +26,6 @@ const loginUser = async (req, res) => {
         }
         return res.status(500).json({ error: error.message });
     }
-};
+}
 
-module.exports = loginUser;
+module.exports = loginUserHandler

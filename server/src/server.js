@@ -2,9 +2,10 @@ const express = require('express');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const routes = require('./routes/index');
 const fileUpload = require("express-fileupload");
-
+const path = require('path');
 const server = express();
 
 server.use(morgan('dev'));
@@ -15,6 +16,7 @@ server.use(fileUpload({
     useTempFiles: true, 
     tempFileDir: "./uploads", 
 }));
+server.use(express.static(path.resolve('src/public')));
 
 server.use('/', routes);
 
