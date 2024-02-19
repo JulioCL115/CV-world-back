@@ -13,7 +13,7 @@ const getUser = async (email) => {
                 // Assuming 'Subscription' is the associated model for the 'subscription' field
                 {
                     model: Subscription,
-                    attributes: ['name'], // Specify the attributes you want to include
+                    // attributes: ['price'], // Specify the attributes you want to include
                 },
                 // Assuming 'Cv' is the associated model for the 'Cv' field
                 {
@@ -21,6 +21,7 @@ const getUser = async (email) => {
                 },
             ],
         });
+
 
         const result = JSON.parse(JSON.stringify(userFound));
 

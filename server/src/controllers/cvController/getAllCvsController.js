@@ -8,6 +8,9 @@ const getAllCvsController = async (limit, offset) => {
             offset
         });
 
+
+        console.log(allCvsFound.count, 'ROWS')
+
         return {
             totalCvs: allCvsFound.count, 
             cvs: allCvsFound.rows  

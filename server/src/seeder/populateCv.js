@@ -1,8 +1,8 @@
-const { Cv } = require("../db");
+const { Cv, Category, Language } = require("../db");
 
 async function populateCv() {
   try {
-    const Cvs = await Cv.bulkCreate(
+    const Cvs = 
         [
             {
                 "name": "Alice Johnson",
@@ -904,14 +904,37 @@ async function populateCv() {
                 "category": "Logística y Cadena de Suministro",
                 "language": "Inglés"
             }
-        ]        
-    )
+        ];
+
+    // asignarle a cada Cv un category ID random
+    const categories = await Category.findAll()
+    const categoriesIds = categories.map(category => category.id);
+    Cvs.forEach(cv => {
+        cv.CategoryId = categoriesIds[Math.floor(Math.random() * categoriesIds.length)];
+    });
+
+    // asginarle a cada Cv un languageId
+    const languages = await Language.findAll()
+    const languagesIds = languages.map(language => language.id);
+    Cvs.forEach(cv => {
+        cv.LanguageId = languagesIds[Math.floor(Math.random() * languagesIds.length)];
+    });
+
+    // iterar los Cvs y fijarse si existe uno con ese nombre, si no existe, lo crea
+    for (const cv of Cvs) {
+        const existingCv = await Cv.findOne({ where: { name: cv.name, description: cv.description } });
+        if (!existingCv) {
+            await Cv.create(cv);
+        }
+    }
+
     console.log("Cv table populated successfully");
   } catch (error) {
     if (error.name === "SequelizeUniqueConstraintError") {
         console.log("Users table already populated");
         return;
     }
+    console.log(error)
     console.error("Error populating CV database");
   };
 };
