@@ -1,11 +1,13 @@
-const express = require('express');
-const router = express.Router();
-const { createPayment, receiveWebhooks } = require('../controllers/payment/mercadopago');
-const verifyToken = require('../middlewares/verifyToken');
+const {Router} = require('express')
+const router = Router()
 
-router.post('/create-order/:userId', verifyToken, createPayment);
+const {createPayment, receiveWebhooks} = require('../controllers/payment/mercadopago')
 
-router.get('success', (req, res) =>{
+const verifyToken = require('../middlewares/verifyToken')
+
+router.post('/create-order/:userId', verifyToken, createPayment)
+
+router.get('/success', (req,res) =>{
     res.send("Pago exitoso")
 });
 
