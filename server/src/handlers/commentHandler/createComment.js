@@ -7,6 +7,8 @@ const createComment = async (req, res) => {
 
         const { cvId, userId } = req.params;
 
+        console.log(cvId, userId)
+
         console.log(req);
 
         if (!cvId || !userId) {
