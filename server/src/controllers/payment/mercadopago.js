@@ -10,13 +10,13 @@ const createPayment = async (req, res) => {
     accessToken: ACCES_TOKEN
   });
   const {idKey} = req.params;
-  const { tittle, description, quantity, unit_price } = req.body;
+  const { title, description, quantity, unit_price } = req.body;
   const preference = new Preference(client);
   try {
     const body = {
       items: [
         {
-          tittle,
+          title,
           description,
           quantity,
           unit_price,
@@ -33,8 +33,8 @@ const createPayment = async (req, res) => {
     };
     const response = await preference.create({ body });
     console.log(response);
-    // res.json(response.init_point);
-    res.json({id: response.id})
+    res.json(response.init_point);
+    // res.json({id: response.id})
   } catch (error) {
     res.json(error);
   }
