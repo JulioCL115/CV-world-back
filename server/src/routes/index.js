@@ -9,8 +9,9 @@ const subscriptionRouter = require('./subscriptionRouter');
 const paymentRouter = require('./paymentRouter');
 
 router.use('/cv', cvRouter);
-router.use('/', userRouter);
+
 router.use('/', paymentRouter)
+
 router.use('/user', userRouter);
 
 router.use('/comment', commentRouter);

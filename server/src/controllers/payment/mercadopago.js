@@ -33,8 +33,8 @@ const createPayment = async (req, res) => {
     };
     const response = await preference.create({ body });
     console.log(response);
-    // res.json(response.init_point);
-    res.json({id: response.id})
+    res.json(response.init_point);
+    // res.json({id: response.id})
   } catch (error) {
     res.json(error);
   }
@@ -84,33 +84,6 @@ const receiveWebhooks = async (req,res) => {
     res.status(500).json({error: error.message})
   }
 }
-
-
-
-// const receiveWebhooks = async (req, res) => {
-//   const payment = req.query
-//   try {
-//     if (payment.type === 'payment') {
-//       const paymentInfo = await axios.get(`https://api.mercadopago.com/v1/payments/${payment.id}`, {
-//         headers: {
-//           Authorization: `Bearer ${accessToken}` // Replace 'ACCES_TOKEN' with 'accessToken'
-//         }
-//       });
-//       console.log('webhook-------------------------------------------------------')
-//       console.log(paymentInfo.data)
-//       res.status(200).json(paymentInfo.data)
-//     }
-//   } catch (error) {
-//     if (error.response && error.response.status === 404) {
-//       console.log('Payment not found');
-//       res.sendStatus(404);
-//     } else {
-//       console.log(error);
-//       res.status(500).json({ error: error.message });
-//     }
-//   }
-// }
-
 
 module.exports = {
   createPayment,
