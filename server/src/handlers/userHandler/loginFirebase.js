@@ -1,11 +1,11 @@
 const firebaseAdmin = require('../../firebase/firebaseConfig');
 const jwt = require('jsonwebtoken');
 const { User, Cv, Subscription } = require('../../db');
+const transporter = require('../../nodemailer/mailer');
 
 const loginFirebase = async (req, res) => {
     try {
         const { idToken } = req.body;
-        console.log(idToken)
 
         if (!idToken) {
             return res.status(400).json({ error: 'No idToken provided' });
@@ -40,6 +40,13 @@ const loginFirebase = async (req, res) => {
 
         // Generamos un token JWT para el usuario
         const token = jwt.sign({ uid, email, name }, process.env.JWT_SECRET, { expiresIn: '10d' });
+
+        await transporter.sendMail({
+            from: "Login Cv-world <cvwordweb@gmail.com>",
+            to: userFoundFiltered.email,
+            subject: "Login Cv-world",
+            text: `Welcome ${userFound.name}`
+        });
 
         res.header('auth-token', token).json({
             message: 'Authenticated user',
