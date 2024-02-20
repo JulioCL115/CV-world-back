@@ -1,6 +1,6 @@
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, PORT } = process.env;
 const CvModel = require("./models/cv");
 const UserModel = require("./models/user");
 const CommnetModel = require("./models/comment");
@@ -9,7 +9,7 @@ const LenguajeModel = require("./models/lenguaje");
 const SubscriptionModel = require("./models/subscription");
 
 const sequelize = new Sequelize(
-    `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+    `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${PORT}/${DB_NAME}`,
     {
         logging: false,
         native: false,
