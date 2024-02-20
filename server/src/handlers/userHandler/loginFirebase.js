@@ -34,6 +34,7 @@ const loginFirebase = async (req, res) => {
             photo: userFound.photo,
             email: userFound.email,
             role: userFound.role,
+            image: userFound.image ? userFound.image : null,
             Cvs: userFound.Cvs,
             Subscription: userFound.Subscription
         }

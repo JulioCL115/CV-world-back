@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const languageRouter = Router();
-const getAllLenguages = require('../handlers/languageHandler/getAllLenguages');
+const getAllLanguages = require('../handlers/languageHandler/getAllLanguages');
 
-languageRouter.get('/', getAllLenguages);
+languageRouter.get('/', getAllLanguages);
 
 module.exports = languageRouter;

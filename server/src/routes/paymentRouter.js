@@ -1,6 +1,5 @@
 const {Router} = require('express')
 const router = Router()
-
 const {createPayment, receiveWebhooks} = require('../controllers/payment/mercadopago')
 
 const verifyToken = require('../middlewares/verifyToken')

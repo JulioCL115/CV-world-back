@@ -4,6 +4,8 @@ const deleteCv = async (req, res) => {
     try {
         const { cvId } = req.params;
 
+        console.log(cvId);
+
         if(!cvId) {
             return res.status(400).json({ error: "ID is required" });
         }

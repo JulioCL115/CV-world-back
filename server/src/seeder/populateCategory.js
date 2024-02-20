@@ -61,7 +61,11 @@ async function populateCategory() {
 
         console.log("Category table populated successfully");
     } catch (error) {
-        console.error("Error populating category database:", error);
+        if (error.name === "SequelizeUniqueConstraintError") {
+            console.log("Users table already populated");
+            return;
+        }
+        console.error("Error populating category database");
     }; 
 };
 
