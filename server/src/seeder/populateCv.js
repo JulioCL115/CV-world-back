@@ -1,4 +1,4 @@
-const { Cv, Category, Language } = require("../db");
+const { Cv, Category, Language, User } = require("../db");
 
 async function populateCv() {
   try {
@@ -918,6 +918,12 @@ async function populateCv() {
     const languagesIds = languages.map(language => language.id);
     Cvs.forEach(cv => {
         cv.LanguageId = languagesIds[Math.floor(Math.random() * languagesIds.length)];
+    });
+
+    const users = await User.findAll()
+    const usersIds = users.map(user => user.id);
+    Cvs.forEach(cv => {
+        cv.UserId = usersIds[Math.floor(Math.random() * usersIds.length)];
     });
 
     // iterar los Cvs y fijarse si existe uno con ese nombre, si no existe, lo crea
