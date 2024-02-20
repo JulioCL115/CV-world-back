@@ -3,7 +3,7 @@ const { Cv, Comment, User } = require('../../db');
 const getCvByIdController = async (cvId) => {
     try {
         console.log("CV ID: ", cvId);
-        
+
         const cvFound = await Cv.findOne({
             where: { id: cvId, deleted: false },
             include: [
@@ -38,6 +38,7 @@ const getCvByIdController = async (cvId) => {
             userImage: cvFound.User.photo ? cvFound.User.photo : null, // Access the user's photo
             Comments: cvFound.Comments.map((comment) => ({
                 comment: comment.comment,
+                createdAt: comment.createdAt,
                 photo: comment.User.photo ? comment.User.photo : null, // Access the user's photo
                 username: comment.User.name // Access the user's username
             }))
