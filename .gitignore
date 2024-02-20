@@ -1,3 +1,6 @@
 node_modules
 .env
-serviceAccountKey.json
+
+
+# Firebase config
+/server/src/firebase/serviceAccount.json

@@ -12,6 +12,10 @@ module.exports = (sequelize) => {
         comment: {
             type: DataTypes.TEXT,
             allowNull: false
+        },
+        createdAt: { // New field for creation date
+            type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW
         }
     },
     {
