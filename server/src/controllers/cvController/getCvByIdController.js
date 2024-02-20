@@ -20,6 +20,23 @@ const getCvByIdController = async (cvId) => {
 
         console.log(cvFound);
 
+        function formatDate(inputDate) {
+            const date = new Date(inputDate);
+          
+            const monthNames = [
+              "jan", "feb", "mar", "apr", "may", "jun",
+              "jul", "aug", "sep", "oct", "nov", "dec"
+            ];
+          
+            const day = date.getDate();
+            const monthIndex = date.getMonth();
+            const year = date.getFullYear();
+          
+            const formattedDate = `${day} ${monthNames[monthIndex]} ${year}`;
+          
+            return formattedDate;
+          }
+
         
         const cvFormat = {
             image: cvFound.image,
@@ -38,8 +55,8 @@ const getCvByIdController = async (cvId) => {
             userImage: cvFound.User.photo ? cvFound.User.photo : null, // Access the user's photo
             Comments: cvFound.Comments.map((comment) => ({
                 comment: comment.comment,
-                createdAt: comment.createdAt,
-                photo: comment.User.photo ? comment.User.photo : null, // Access the user's photo
+                createdAt: formatDate(comment.createdAt),
+                userImage: comment.User.photo ? comment.User.photo : null, // Access the user's photo
                 username: comment.User.name // Access the user's username
             }))
         };
