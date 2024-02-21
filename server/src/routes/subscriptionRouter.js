@@ -7,6 +7,8 @@ const verifyToken = require('../middlewares/verifyToken');
 
 subscriptionRouter.get('/', getAllSubscriptions);
 
+subscriptionRouter.get('/:subscriptionId', getAllSubscriptions);
+
 subscriptionRouter.post('/:userId', verifyToken, createSubscription);
 
 subscriptionRouter.put('/:userId', verifyToken, updateSubscription);
