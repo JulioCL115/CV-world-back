@@ -1,4 +1,4 @@
-const { Cv, Comment, User } = require('../../db');
+const { Cv, Comment, User, Category, Language } = require('../../db');
 
 const getCvByIdController = async (cvId) => {
     try {
@@ -14,6 +14,14 @@ const getCvByIdController = async (cvId) => {
                 {
                     model: User,
                     attributes: ['name', 'photo'] // Include user's name and image
+                },
+                {
+                    model: Category,
+                    attributes: ['name']
+                },
+                {
+                    model: Language,
+                    attributes: ['name']
                 }
             ]
         });
@@ -49,8 +57,8 @@ const getCvByIdController = async (cvId) => {
             skills: cvFound.skills,
             speakingLanguages: cvFound.speakingLanguages,
             otherInterests: cvFound.otherInterests,
-            category: cvFound.category,
-            language: cvFound.language,
+            category: cvFound.Category ? cvFound.Category.name : null,
+            language: cvFound.Language ? cvFound.Language.name : null,
             userName: cvFound.User.name, // Access the user's username
             userImage: cvFound.User.photo ? cvFound.User.photo : null, // Access the user's photo
             Comments: cvFound.Comments.map((comment) => ({
