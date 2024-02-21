@@ -12,11 +12,11 @@ const deleteUserController = async (email) => {
             throw error;
         }
 
-        const UserDeleted = await userFound.update( 
+        await userFound.update( 
             { deleted: true }, 
         );
 
-        return UserDeleted;
+        return userFound;
 
     } catch (error) {
         console.error('Error deleting User:', error);

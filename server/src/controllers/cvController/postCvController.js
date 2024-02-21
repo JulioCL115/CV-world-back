@@ -100,6 +100,7 @@ const postCvController = async (name, image, header, description, experience, ed
         }
 
         const newCvFound = {
+            id: newCv.id,
             name,
             image: newCv.image,
             header,
@@ -118,8 +119,8 @@ const postCvController = async (name, image, header, description, experience, ed
                 subscription,
                 photo: newCv.User.photo
             },
-            category,
-            language,
+            category: categoryInDB.name,
+            language: languageInDB.name,
         }
 
         return newCvFound;
