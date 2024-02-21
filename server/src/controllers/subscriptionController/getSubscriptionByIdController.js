@@ -2,9 +2,7 @@ const { Subscription } = require('../../db');
 
 const getSubscriptionByIdController = async (subscriptionId) => {
     try {
-        console.log("CV ID: ", cvId);
-
-        const subscriptionFound = await Cv.findOne({
+        const subscriptionFound = await Subscription.findOne({
             where: { id: subscriptionId},
         });
 
@@ -12,7 +10,7 @@ const getSubscriptionByIdController = async (subscriptionId) => {
 
         return subscriptionFound;
     } catch (error) {
-        console.error('Error searching for CV by ID:', error);
+        console.error('Error searching for Subscription by ID:', error);
         throw error;
     }
 };

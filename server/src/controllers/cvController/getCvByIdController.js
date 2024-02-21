@@ -57,7 +57,7 @@ const getCvByIdController = async (cvId) => {
                 comment: comment.comment,
                 createdAt: formatDate(comment.createdAt),
                 userImage: comment.User.photo ? comment.User.photo : null, // Access the user's photo
-                username: comment.User.name // Access the user's username
+                userName: comment.User.name // Access the user's username
             }))
         };
 
