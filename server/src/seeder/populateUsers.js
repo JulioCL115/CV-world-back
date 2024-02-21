@@ -8,19 +8,19 @@ async function populateUsers() {
                 name: "Usuario 1",
                 email: "usuario1@example.com",
                 password: await bcrypt.hash("password1", 10), // Hasheamos la contraseña
-                photo: "url_de_la_foto_1.jpg"
+                photo: ""
             },
             {
                 name: "Usuario 2",
                 email: "usuario2@example.com",
                 password: await bcrypt.hash("password2", 10), // Hasheamos la contraseña
-                photo: "url_de_la_foto_2.jpg"
+                photo: ""
             },
             {
                 name: "Usuario 3",
                 email: "usuario3@example.com",
                 password: await bcrypt.hash("password3", 10), // Hasheamos la contraseña
-                photo: "url_de_la_foto_3.jpg"
+                photo: ""
             }
         ];
 

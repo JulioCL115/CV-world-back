@@ -6,6 +6,8 @@ const createSubscription = async (req, res) => {
 
         const { userId } = req.params;
 
+        console.log('ID' + userId);
+
         if (!userId) {
             return res.status(400).json({ error: 'Please provide a valid ID in the request parameters' })
         }

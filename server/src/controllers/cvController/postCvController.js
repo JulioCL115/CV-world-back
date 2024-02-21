@@ -6,7 +6,7 @@ const { Op } = require("sequelize");
 
 const tempFileFolder = 'tempFiles';
 
-const postCvController = async (name, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests, views = 0, category, language, userId, req) => {
+const postCvController = async (name, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests, views = 0, category, language, userId) => {
     try {
         const categoryInDB = await Category.findOne({
             where: {

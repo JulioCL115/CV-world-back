@@ -3,7 +3,6 @@ const postCvController = require('../../controllers/cvController/postCvControlle
 const createCv = async (req, res) => {
     try {
         const { name, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests, views, category, language } = req.body;
-        console.log("req.body", req.body)
         const { userId } = req.params; 
       
         if (!userId) {
@@ -16,7 +15,7 @@ const createCv = async (req, res) => {
         //     return res.status(400).json({ error: error.details[0].message });
         // }
         
-        const cvCreated = await postCvController(name, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests, views, category, language, userId, req);
+        const cvCreated = await postCvController(name, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests, views, category, language, userId);
 
         res.status(201).json(cvCreated);
 
