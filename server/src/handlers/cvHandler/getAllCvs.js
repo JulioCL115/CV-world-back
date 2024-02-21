@@ -1,4 +1,3 @@
-const getAllCvsController = require('../../controllers/cvController/getAllCvsController');
 const getCvByQueryController = require('../../controllers/cvController/getCvByQueryController');
 
 const getAllCvs = async (req, res) => {
@@ -16,17 +15,6 @@ const getAllCvs = async (req, res) => {
         if (!cvs || cvs.length === 0) {
             return res.status(404).json({ error: "CVs not found." });
         }
-
-        // // Empiezan filtros 
-        // if (categories && categories.length > 0) {
-        //     cvs = cvs.filter(cv => categories.includes(cv.category));
-        // }
-
-        // if (languages && languages.length > 0) {
-        //     cvs = cvs.filter(cv => languages.toLowerCase().includes(cv.language.toLowerCase()));
-        // }
-
-        // // Terminan los filtros
 
         if (sort) {
             if (sort === "views") {
