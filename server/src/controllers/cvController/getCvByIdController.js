@@ -43,9 +43,8 @@ const getCvByIdController = async (cvId) => {
             const formattedDate = `${day} ${monthNames[monthIndex]} ${year}`;
           
             return formattedDate;
-          }
+        }
 
-        
         const cvFormat = {
             image: cvFound.image,
             id: cvFound.id,

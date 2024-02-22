@@ -13,6 +13,7 @@ GET "http://localhost:3001/cv?search=searchValue&sort=sortValue&page=pageValue&l
 GET "http://localhost:3001/cv/:cvId" --> to get a cv by id
 POST "http://localhost:3001/cv/:userId" --> to create a cv
 PUT "http://localhost:3001/cv/:cvId" --> to update a cv by id
+PUT "http://localhost:3001/cv/updateView/:cvId" --> to update views
 PUT "http://localhost:3001/cv/delete/:cvId" --> to delete a cv by id
 
 # Subscription
