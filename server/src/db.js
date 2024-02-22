@@ -9,7 +9,7 @@ const LanguageModel = require("./models/language");
 const SubscriptionModel = require("./models/subscription");
 
 const sequelize = new Sequelize(
-    `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${PORT}/${DB_NAME}`,
+    `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
     {
         logging: false,
         native: false,

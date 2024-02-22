@@ -33,10 +33,6 @@ module.exports = (sequelize) => {
             type: DataTypes.BOOLEAN,
             defaultValue: false
         },
-        suscription: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false
-        },
     },
     {
         timestamps: false
