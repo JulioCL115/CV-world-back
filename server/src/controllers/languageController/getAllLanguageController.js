@@ -2,8 +2,9 @@ const { Language } = require("../../db");
 
 const getAllLanguagesController = async () => {
     try {
-   
-        const allLanguagesFound = await Language.findAll({});
+        const allLanguagesFound = await Language.findAll({
+            where: { deleted: false }
+        });
 
         return allLanguagesFound;
 

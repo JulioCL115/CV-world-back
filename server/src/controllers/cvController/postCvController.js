@@ -12,7 +12,8 @@ const postCvController = async (name, image, header, description, experience, ed
             where: {
                 name: {
                     [Op.like]: category,
-                }
+                },
+                deleted: false          
             }
         });
 
@@ -20,7 +21,8 @@ const postCvController = async (name, image, header, description, experience, ed
             where: {
                 name: {
                     [Op.like]: language,
-                }
+                },
+                deleted: false
             }
         });
 
@@ -35,7 +37,8 @@ const postCvController = async (name, image, header, description, experience, ed
                 otherInterests,
                 UserId: userId,
                 CategoryId: categoryInDB.id,
-                LanguageId: languageInDB.id
+                LanguageId: languageInDB.id,
+                deleted: false
             }
         });
 
