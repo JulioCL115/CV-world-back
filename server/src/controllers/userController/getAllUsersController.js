@@ -2,7 +2,7 @@ const { User, Cv, Subscription, Comment } = require("../../db");
 
 const getUser = async () => {
     try {   
-        const usersFound = await User.findAll({
+        const AllUsersFound = await User.findAll({
             where: { deleted: false },
             include: [
                 { model: Cv },
@@ -11,7 +11,7 @@ const getUser = async () => {
             ]
         });
 
-        return usersFound;
+        return AllUsersFound;
 
     } catch (error) {
         console.error("Error searching Users: ", error);

@@ -15,6 +15,6 @@ subscriptionRouter.get('/:subscriptionId', getSubscriptionById);
 
 subscriptionRouter.put('/:userId', verifyToken, updateSubscription);
 
-subscriptionRouter.put('/delete/:subscriptionId', deleteSubscription);
+subscriptionRouter.put('/delete/:subscriptionId', verifyToken, deleteSubscription);
 
 module.exports = subscriptionRouter;

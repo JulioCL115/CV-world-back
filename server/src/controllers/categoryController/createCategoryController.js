@@ -2,11 +2,11 @@ const { Category } = require("../../db");
 
 const createCategoryController = async (categoryName) => {
     try {
-        const existingCategory = await Category.findOne(
+        const categoryFound = await Category.findOne(
             { where: { name: categoryName, deleted: false } }
         );
 
-        if (existingCategory) {
+        if (categoryFound) {
             const error = new Error('Category already exists');
             error.statusCode = 409; 
             throw error;

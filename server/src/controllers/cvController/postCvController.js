@@ -26,7 +26,7 @@ const postCvController = async (name, image, header, description, experience, ed
             }
         });
 
-        const existingCv = await Cv.findOne({
+        const cvFound = await Cv.findOne({
             where: {
                 name,
                 header,
@@ -42,7 +42,7 @@ const postCvController = async (name, image, header, description, experience, ed
             }
         });
 
-        if (existingCv) {
+        if (cvFound) {
             const error = new Error('CV with similar characteristics already exists');
             error.statusCode = 409;
             throw error;
@@ -102,7 +102,7 @@ const postCvController = async (name, image, header, description, experience, ed
             deleteFile(completeFilePath);
         }
 
-        const newCvFound = {
+        const newCvFiltered = {
             id: newCv.id,
             name,
             image: newCv.image,
@@ -126,7 +126,7 @@ const postCvController = async (name, image, header, description, experience, ed
             language: languageInDB.name,
         }
 
-        return newCvFound;
+        return newCvFiltered;
 
     } catch (error) {
         console.error('Error creating CV:', error);

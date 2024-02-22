@@ -2,11 +2,11 @@ const { Subscription } = require("../../db");
 
 const createSubscriptionController = async (name, price, included, notIncluded) => {
     try {
-        const existingSubscription = await Subscription.findOne(
+        const subscriptionFound = await Subscription.findOne(
             { where: { name, deleted: false } }
         );
 
-        if (existingSubscription) {
+        if (subscriptionFound) {
             const error = new Error('Subscription already exists');
             error.statusCode = 409; 
             throw error;
