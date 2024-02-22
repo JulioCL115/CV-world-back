@@ -8,6 +8,8 @@ const updateUser = require('../handlers/userHandler/updateUser');
 const getUser = require('../handlers/userHandler/getUser');
 const verifyToken = require('../middlewares/verifyToken');
 
+userRouter.get('/', getUser);
+
 userRouter.post('/register', createUser);
 
 userRouter.post('/login', loginUser);
@@ -17,7 +19,5 @@ userRouter.post('/firebase', loginFirebase);
 userRouter.put('/:userId', verifyToken, updateUser);
 
 userRouter.put('/delete', verifyToken, deleteUser);
-
-userRouter.get('/', getUser);
 
 module.exports = userRouter;
