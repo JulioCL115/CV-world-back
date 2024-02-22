@@ -1,9 +1,9 @@
 const { Category } = require("../../db");
 
-const createCategoryController = async (categoryName) => {
+const createCategoryController = async (name) => {
     try {
         const categoryFound = await Category.findOne(
-            { where: { name: categoryName, deleted: false } }
+            { where: { name, deleted: false } }
         );
 
         if (categoryFound) {
@@ -13,7 +13,7 @@ const createCategoryController = async (categoryName) => {
         }
 
         const categoryCreated = await Category.create({
-            name: categoryName
+            name
         })
 
         return categoryCreated;

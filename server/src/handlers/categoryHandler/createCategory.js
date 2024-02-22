@@ -2,9 +2,9 @@ const createCategoryController = require('../../controllers/categoryController/c
 
 const createCategory = async (req, res) => {
     try {
-        const { categoryName } = req.body;
+        const { name } = req.body;
 
-        const categoryCreated = await createCategoryController(categoryName);
+        const categoryCreated = await createCategoryController(name);
 
         if(!categoryCreated) {
             return res.status(404).json({ error: "No Category created." });

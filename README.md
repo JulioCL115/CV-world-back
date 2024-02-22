@@ -26,6 +26,7 @@ PUT "http://localhost:3001/subscription/delete/:subscriptionId" --> to delete a 
 GET "http://localhost:3001/category" --> to get all category
 GET "http://localhost:3001/category/:categoryId" --> to get a category by id
 POST "http://localhost:3001/category" --> to create a category
+PUT "http://localhost:3001/category/:categoryId" --> to update a category
 PUT "http://localhost:3001/category/delete/:categoryId" --> to delete a category
 
 # Language
