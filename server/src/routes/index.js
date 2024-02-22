@@ -6,8 +6,11 @@ const commentRouter = require('./commentRouter');
 const categoryRouter = require('./categoryRouter');
 const languageRouter = require('./languageRouter');
 const subscriptionRouter = require('./subscriptionRouter');
+const paymentRouter = require('./paymentRouter');
 
 router.use('/cv', cvRouter);
+
+router.use('/', paymentRouter)
 
 router.use('/user', userRouter);
 

@@ -2,7 +2,7 @@ const { User, Cv, Subscription } = require('../../db');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const loginUserController = async (email, password) => {
+const loginUser = async (email, password) => {
     try {
         const userFound = await User.findOne({
             where: { email: email.toLowerCase() },
@@ -51,4 +51,4 @@ const loginUserController = async (email, password) => {
     }
 }
 
-module.exports = loginUserController;
+module.exports = loginUser;

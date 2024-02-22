@@ -2,46 +2,31 @@ const getAllCvsController = require('../../controllers/cvController/getAllCvsCon
 const getCvByQueryController = require('../../controllers/cvController/getCvByQueryController');
 
 const getAllCvs = async (req, res) => {
+    console.log('getAllCvs')
     try {
         const { search, sort, categories, languages } = req.query;
-        const page = parseInt(req.query.page);
-        const limit = parseInt(req.query.limit);
 
-        console.log(`filtro por search: ${search} `)
-        console.log(`filtro por sort: ${sort}`);
-        console.log(`filtro por categories: ${categories}`);
-        console.log(`filtro por languages: ${languages}`);
-        console.log(`filtro por limit: ${limit}`);
-        console.log(`filtro por page: ${page}`);
+        console.log(categories, 'CATEGORIES')
 
-        const offset = (page - 1) * limit;
+        const offset = parseInt(req.query.offset ? req.query.offset : 0);
+        const limit = parseInt(req.query.limit ? req.query.limit : 16);
 
-        let { totalCvs, cvs } = await getAllCvsController();
+        const { totalCvs, cvs } = await getCvByQueryController(search, categories, languages, limit, offset);
 
         if (!cvs || cvs.length === 0) {
             return res.status(404).json({ error: "CVs not found." });
         }
 
-        if (search) {
-            const allCvsFound = await getCvByQueryController(search);
-            if (!allCvsFound || allCvsFound.length === 0) {
-                return res.status(404).json({ error: "CVs not found." });
-            }
-            // Actualizar cvs con los CVs encontrados por la búsqueda
-            cvs = allCvsFound;
-        }
+        // // Empiezan filtros 
+        // if (categories && categories.length > 0) {
+        //     cvs = cvs.filter(cv => categories.includes(cv.category));
+        // }
 
-        // Filtrar por categorías
-        if (categories && categories.length > 0) {
-            cvs = cvs.filter(cv => categories.includes(cv.category));
-            
-            console.log("cvss",cvs.length)
-        }
+        // if (languages && languages.length > 0) {
+        //     cvs = cvs.filter(cv => languages.toLowerCase().includes(cv.language.toLowerCase()));
+        // }
 
-        // Filtrar por idiomas
-        if (languages && languages.length > 0) {
-            cvs = cvs.filter(cv => languages.toLowerCase().includes(cv.language.toLowerCase()));
-        }
+        // // Terminan los filtros
 
         if (sort) {
             if (sort === "views") {
@@ -52,14 +37,14 @@ const getAllCvs = async (req, res) => {
                 cvs.sort((a, b) => new Date(b.creationDate) - new Date(a.creationDate));
             }
         }
-        console.log(page)
-        totalCvs =cvs.length
+
         const totalPages = Math.ceil(totalCvs / limit);
-        const paginatedCvs = cvs.slice(offset, offset + limit)
 
-        res.status(200).json({ cvs:paginatedCvs, totalPages });
+        console.log(`total de paginas: ${totalPages}`);
 
+        res.status(200).json({ cvs, totalPages });
     } catch (error) {
+        console.log(error)
         res.status(500).json({ error: error.message });
     }
 };

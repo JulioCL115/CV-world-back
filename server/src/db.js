@@ -1,15 +1,15 @@
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, PORT} = process.env;
 const CvModel = require("./models/cv");
 const UserModel = require("./models/user");
 const CommnetModel = require("./models/comment");
 const CategoryModel = require("./models/category");
-const LenguajeModel = require("./models/lenguaje");
+const LanguageModel = require("./models/language");
 const SubscriptionModel = require("./models/subscription");
 
 const sequelize = new Sequelize(
-    `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+    `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${PORT}/${DB_NAME}`,
     {
         logging: false,
         native: false,
@@ -20,10 +20,10 @@ CvModel(sequelize);
 UserModel(sequelize);
 CommnetModel(sequelize);
 CategoryModel(sequelize);
-LenguajeModel(sequelize);
+LanguageModel(sequelize);
 SubscriptionModel(sequelize);
 
-const { Cv, User, Comment, Category, Lenguaje, Subscription } = sequelize.models;
+const { Cv, User, Comment, Category, Language, Subscription } = sequelize.models;
 
 // Defino la relación N:1 entre User y Cv
 User.hasMany(Cv); // Un usuario puede tener muchos CV
@@ -37,9 +37,9 @@ Comment.belongsTo(Cv); // Un comentario pertenece a un solo Cv
 Category.hasMany(Cv); // Una Category puede tener muchos Cv
 Cv.belongsTo(Category); // Un Cv pertenece a una Category
 
-// Defino la relación N:1 entre Lenguaje y Cv
-Lenguaje.hasMany(Cv); // Un Lenguaje puede tener muchos Cv
-Cv.belongsTo(Lenguaje); // Un Cv pertenece a un Lenguaje
+// Defino la relación N:1 entre Language y Cv
+Language.hasMany(Cv); // Un Language puede tener muchos Cv
+Cv.belongsTo(Language); // Un Cv pertenece a un Language
 
 // Defino la relación N:1 entre User y Comment
 User.hasMany(Comment); // Un User puede tener muchos comentarios
@@ -55,6 +55,6 @@ module.exports = {
     User,
     Comment,
     Category,
-    Lenguaje,
+    Language,
     Subscription,
 };

@@ -13,9 +13,9 @@ module.exports = (sequelize) => {
             type: DataTypes.TEXT,
             allowNull: false
         },
-        deleted: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false
+        createdAt: { // New field for creation date
+            type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW
         }
     },
     {

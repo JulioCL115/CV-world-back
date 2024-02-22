@@ -6,6 +6,8 @@ const updateUser = async (req, res) => {
 
         const { userId } = req.params;
 
+        console.log(userId, propertiesToBeUpdated);
+
         if(!userId) {
             return res.status(400).json({ error: "ID is required" });
         }

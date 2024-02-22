@@ -1,20 +1,24 @@
-const { Lenguaje } = require("../db");
+const { Language } = require("../db");
 
 async function populateLanguage() {
-    try {
-        const languages = await Lenguaje.bulkCreate([
-            {
-                name: "Español",
-            },
-            {
-                name: "Inglés",
-            },
-        ]);
+  try {
+    const languages = await Language.bulkCreate([
+      {
+        name: "Español",
+      },
+      {
+        name: "Inglés",
+      },
+    ]);
 
-        console.log("language table populated successfully");
-    } catch (error) {
-        console.error("Error populating language database:", error);
-    };
+    console.log("language table populated successfully");
+  } catch (error) {
+    if (error.name === "SequelizeUniqueConstraintError") {
+      console.log("Users table already populated");
+      return;
+  }
+    console.error("Error populating language database");
+  };
 };
 
 module.exports = populateLanguage;

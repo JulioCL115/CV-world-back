@@ -5,6 +5,8 @@ const updateCv = async (req, res) => {
         const propertiesToBeUpdated  = req.body
 
         const { cvId } = req.params;
+
+        console.log("CV QUE LLEGA POR PARAMS:", cvId);
         
         if(!cvId) {
             return res.status(400).json({ error: "ID is required" });

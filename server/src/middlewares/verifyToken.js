@@ -14,7 +14,12 @@ const verifyToken = async (req, res, next) => {
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
             req.user = decoded;
 
-            const userFound = await User.findByPk(decoded.id);
+            console.log(decoded);
+
+            // buscamos usuario por email porque el Id que esta encodeado en el token es de firebase
+            const userFound = await User.findOne({
+                where: { email: decoded.email }
+            });
 
             if (!userFound) {
                 return res.status(404).json({ error: 'User not found' });
@@ -22,6 +27,7 @@ const verifyToken = async (req, res, next) => {
 
             next();
         } catch (error) {
+            console.log(error.message)
             if (error.name === 'TokenExpiredError') {
                 return res.status(401).json({ error: 'Token expired' });
             }
