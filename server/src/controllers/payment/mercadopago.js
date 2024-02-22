@@ -32,7 +32,7 @@ const createPayment = async (req, res) => {
         failure: "http://localhost:3001/failure",
         pending: "http://localhost:3001/pending",
       },
-      notification_url: `https://6994-186-118-231-184.ngrok-free.app/webhook/${userId}/${subscriptionId}`,
+      notification_url: `https://cd88-45-70-222-65.ngrok-free.app/webhook/${userId}/${subscriptionId}`,
     };
 
     const response = await preference.create({ body });
