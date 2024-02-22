@@ -2,7 +2,7 @@ const { Language } = require("../../db");
 
 const createLanguageController = async (name) => {
     try {
-        const languageFound = await Category.findOne(
+        const languageFound = await Language.findOne(
             { where: { name, deleted: false } }
         );
        

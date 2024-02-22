@@ -6,7 +6,7 @@ const updateSubscriptionController = async (name, price, included, notIncluded, 
         const subscriptionFound = await Subscription.findByPk(subscriptionId);
 
         if (!subscriptionFound) {
-            const error = new Error("Subscription not found");
+            const error = new Error("Subscription not found for updated");
             error.statusCode = 404; 
             throw error;
         }

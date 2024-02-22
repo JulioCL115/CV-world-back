@@ -5,7 +5,7 @@ const updateCategoryController = async (name, categoryId) => {
         const categoryFound = await Category.findByPk(categoryId);
 
         if (!categoryFound) {
-            const error = new Error("Category not found");
+            const error = new Error("Category not found for updated");
             error.statusCode = 404; 
             throw error;
         }

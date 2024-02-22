@@ -2,7 +2,6 @@ const { Category } = require("../../db");
 
 const getAllCategoriesController = async () => {
     try {
-   
         const allCategoriesFound = await Category.findAll({
             where: { deleted: false }
         });

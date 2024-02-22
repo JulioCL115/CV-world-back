@@ -4,8 +4,8 @@ const deleteCategoryController = async (categoryId) => {
     try {
         const categoryFound = await Category.findByPk(categoryId);
 
-        if (categoryFound) {
-            const error = new Error('Category already exists');
+        if (!categoryFound) {
+            const error = new Error('Category not found for deleted');
             error.statusCode = 409; 
             throw error;
         }

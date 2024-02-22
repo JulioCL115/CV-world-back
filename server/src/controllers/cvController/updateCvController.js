@@ -7,7 +7,7 @@ const updateCvController = async (cvId, propertiesToBeUpdated ) => {
         });
 
         if (!cvFound) {
-            const error = new Error("CV not found for updating");
+            const error = new Error("CV not found for updated");
             error.statusCode = 404; 
             throw error;
         }
