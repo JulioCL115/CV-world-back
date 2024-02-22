@@ -12,6 +12,12 @@ const deleteUserController = async (email) => {
             throw error;
         }
 
+        if (userFound.deleted) {
+            const error = new Error("User is already deleted");
+            error.statusCode = 400;
+            throw error;
+        }
+
         await userFound.update( 
             { deleted: true }, 
         );

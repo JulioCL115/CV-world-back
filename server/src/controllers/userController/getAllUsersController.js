@@ -3,6 +3,7 @@ const { User, Cv, Subscription, Comment } = require("../../db");
 const getUser = async () => {
     try {   
         const usersFound = await User.findAll({
+            where: { deleted: false },
             include: [
                 { model: Cv },
                 { model: Subscription },

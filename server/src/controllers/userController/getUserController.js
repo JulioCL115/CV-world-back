@@ -7,7 +7,8 @@ const getUser = async (email) => {
             where: {
                 email: {
                     [Op.like]: email,
-                }
+                },
+                deleted: false
             },
             include: [
                 {
@@ -24,8 +25,6 @@ const getUser = async (email) => {
         if (result && result.Cvs) {
             result.Cvs = result.Cvs.filter(cv => cv.deleted === false);
         }
-
-        console.log(result)
 
         return result
 

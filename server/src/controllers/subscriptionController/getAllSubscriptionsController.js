@@ -3,7 +3,9 @@ const { Subscription } = require("../../db");
 const getAllSubscriptionsController = async () => {
     try {
    
-        const allSubscriptionsFound = await Subscription.findAll({});
+        const allSubscriptionsFound = await Subscription.findAll({
+            where: { deleted: false }
+        });
 
         return allSubscriptionsFound;
 

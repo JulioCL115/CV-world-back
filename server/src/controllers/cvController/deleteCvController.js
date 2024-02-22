@@ -9,6 +9,12 @@ const deleteCvController = async (cvId) => {
             error.statusCode = 404; 
             throw error;
         }
+
+        if (cvFound.deleted) {
+            const error = new Error("CV already deleted");
+            error.statusCode = 400;
+            throw error;
+        }
     
         await cvFound.update( 
             { deleted: true }

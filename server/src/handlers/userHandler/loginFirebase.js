@@ -18,7 +18,7 @@ const loginFirebase = async (req, res) => {
         const name = decodedToken.name
 
         const userFound = await User.findOne({
-            where: { email: email.toLowerCase() },
+            where: { email: email.toLowerCase(), deleted: false },
             include: [{ model: Cv }, { model: Subscription }]       
         });
 

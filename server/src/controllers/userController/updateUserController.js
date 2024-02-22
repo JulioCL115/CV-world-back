@@ -11,6 +11,12 @@ const updateUserController = async (userId, propertiesToBeUpdated) => {
             throw error;
         }
 
+        if (userFound.deleted) {
+            const error = new Error("Cannot update a deleted user");
+            error.statusCode = 400; 
+            throw error;
+        }
+
         if (propertiesToBeUpdated.password) {
             const hashedPassword = await bcrypt.hash(propertiesToBeUpdated.password, 10);
             propertiesToBeUpdated.password = hashedPassword;

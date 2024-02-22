@@ -25,6 +25,10 @@ module.exports = (sequelize) => {
         },
         notIncluded: {
             type: DataTypes.ARRAY(DataTypes.STRING)
+        },
+        deleted: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         }
     },
     {

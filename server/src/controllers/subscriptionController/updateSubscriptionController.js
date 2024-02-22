@@ -10,6 +10,12 @@ const updateSubscriptionController = async (userId, name, price, included, notIn
             throw error;
         }
 
+        if (userFound.deleted) {
+            const error = new Error("Cannot update a deleted user");
+            error.statusCode = 400; 
+            throw error;
+        }
+
         const userSubscription = await userFound.getSubscription();
 
         if (!userSubscription) {
@@ -19,10 +25,10 @@ const updateSubscriptionController = async (userId, name, price, included, notIn
         }
 
         const subscriptionUpdated = await userSubscription.update({
-            name: name,
-            price: price,
-            included: included,
-            notIncluded: notIncluded
+            name,
+            price,
+            included,
+            notIncluded
         });
 
         return subscriptionUpdated;

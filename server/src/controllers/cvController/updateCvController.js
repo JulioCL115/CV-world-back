@@ -12,6 +12,12 @@ const updateCvController = async (cvId, propertiesToBeUpdated ) => {
             throw error;
         }
 
+        if (cvFound.deleted) {
+            const error = new Error("Cannot update a deleted CV");
+            error.statusCode = 400;
+            throw error;
+        }
+
         const cvUpdated = await cvFound.update(propertiesToBeUpdated);
 
         return cvUpdated;

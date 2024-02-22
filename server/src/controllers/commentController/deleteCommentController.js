@@ -11,6 +11,12 @@ const deleteCommentController = async (commentId) => {
             throw error;
         }
 
+        if (cvFound.deleted) {
+            const error = new Error("Comment already deleted");
+            error.statusCode = 400;
+            throw error;
+        }
+
         await commentFound.update(
             { deleted: true }
         );

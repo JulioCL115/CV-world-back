@@ -5,4 +5,4 @@ firebaseAdmin.initializeApp({
     credential: firebaseAdmin.credential.cert(serviceAccount)
 });
 
-module.exports = firebaseAdmin ;
+module.exports = firebaseAdmin;
