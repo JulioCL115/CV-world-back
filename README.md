@@ -31,6 +31,9 @@ PUT "http://localhost:3001/category/delete/:categoryId" --> to delete a category
 
 # Language
 GET "http://localhost:3001/language" --> to get all language
+GET "http://localhost:3001/language/:languageId" --> to get a language by id
+POST "http://localhost:3001/language" --> to create a language
+
 
 # Comment
 POST "http://localhost:3001/comment/:cvId/:userId" --> to create a comment
