@@ -1,23 +1,23 @@
-const { Subscription, User } = require("../../db");
+const { Subscription } = require("../../db");
 
-const createSubscriptionController = async (name, price, included, notIncluded, userId) => {
+const createSubscriptionController = async (name, price, included, notIncluded) => {
     try {
-   
+        const subscriptionFound = await Subscription.findOne(
+            { where: { name, deleted: false } }
+        );
+
+        if (subscriptionFound) {
+            const error = new Error('Subscription already exists');
+            error.statusCode = 409; 
+            throw error;
+        }
+
         const subscriptionCreated = await Subscription.create({
             name,
             price,
             included,
             notIncluded,
         });
-
-        const userFound = await User.findByPk(userId);
-
-        if(!userFound) {
-            return null;
-        }
-
-        // Asociar la suscripción con el usuario
-        await userFound.setSubscription(subscriptionCreated);
 
         return subscriptionCreated;
 

@@ -12,7 +12,8 @@ const postCvController = async (name, image, header, description, experience, ed
             where: {
                 name: {
                     [Op.like]: category,
-                }
+                },
+                deleted: false          
             }
         });
 
@@ -20,11 +21,12 @@ const postCvController = async (name, image, header, description, experience, ed
             where: {
                 name: {
                     [Op.like]: language,
-                }
+                },
+                deleted: false
             }
         });
 
-        const existingCv = await Cv.findOne({
+        const cvFound = await Cv.findOne({
             where: {
                 name,
                 header,
@@ -35,11 +37,12 @@ const postCvController = async (name, image, header, description, experience, ed
                 otherInterests,
                 UserId: userId,
                 CategoryId: categoryInDB.id,
-                LanguageId: languageInDB.id
+                LanguageId: languageInDB.id,
+                deleted: false
             }
         });
 
-        if (existingCv) {
+        if (cvFound) {
             const error = new Error('CV with similar characteristics already exists');
             error.statusCode = 409;
             throw error;
@@ -99,7 +102,8 @@ const postCvController = async (name, image, header, description, experience, ed
             deleteFile(completeFilePath);
         }
 
-        const newCvFound = {
+        const newCvFiltered = {
+            id: newCv.id,
             name,
             image: newCv.image,
             header,
@@ -118,11 +122,11 @@ const postCvController = async (name, image, header, description, experience, ed
                 subscription,
                 photo: newCv.User.photo
             },
-            category,
-            language,
+            category: categoryInDB.name,
+            language: languageInDB.name,
         }
 
-        return newCvFound;
+        return newCvFiltered;
 
     } catch (error) {
         console.error('Error creating CV:', error);

@@ -17,6 +17,10 @@ const createCv = async (req, res) => {
         
         const cvCreated = await postCvController(name, image, header, description, experience, education, contact, skills, speakingLanguages, otherInterests, views, category, language, userId);
 
+        if (!cvCreated) {
+            return res.status(404).json({ error: 'No Cv created.' });
+        }
+
         res.status(201).json(cvCreated);
 
     } catch (error) {

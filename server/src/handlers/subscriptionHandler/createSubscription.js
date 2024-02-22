@@ -4,15 +4,7 @@ const createSubscription = async (req, res) => {
     try {
         const { name, price, included, notIncluded } = req.body;
 
-        const { userId } = req.params;
-
-        console.log('ID' + userId);
-
-        if (!userId) {
-            return res.status(400).json({ error: 'Please provide a valid ID in the request parameters' })
-        }
-
-        const subscriptionCreated = await createSubscriptionController(name, price, included, notIncluded, userId);
+        const subscriptionCreated = await createSubscriptionController(name, price, included, notIncluded);
 
         if (!subscriptionCreated) {
             return res.status(404).json({ error: 'Subscription not found' });

@@ -15,6 +15,12 @@ const loginUser = async (email, password) => {
             throw error;
         }
 
+        if (userFound.deleted) {
+            const error = new Error("Cannot login a deleted User");
+            error.statusCode = 400;
+            throw error;
+        }
+
         // Comparar la contraseña proporcionada con la contraseña almacenada en la base de datos
         const passwordMatch = await bcrypt.compare(password, userFound.password);
 
