@@ -1,7 +1,7 @@
 const { MercadoPagoConfig, Preference, } = require("mercadopago");
 const { ACCESS_TOKEN } = process.env
 
-const { User } = require('../../db')
+const { User,Subscription } = require('../../db')
 const axios = require('axios');
 
 const createPayment = async (req, res) => {
@@ -12,7 +12,8 @@ const createPayment = async (req, res) => {
 
   const { userId } = req.params;
 
-  const { title, description, quantity, unit_price } = req.body;
+  const { title, description, quantity, unit_price, subscriptionId } = req.body;
+  console.log("esta es el id de la subscripcion back", subscriptionId);
   const preference = new Preference(client);
 
   try {
@@ -31,7 +32,7 @@ const createPayment = async (req, res) => {
         failure: "http://localhost:3001/failure",
         pending: "http://localhost:3001/pending",
       },
-      notification_url: `https://856a-2-57-171-45.ngrok-free.app/webhook/${userId}`,
+      notification_url: `https://6994-186-118-231-184.ngrok-free.app/webhook/${userId}/${subscriptionId}`,
     };
 
     const response = await preference.create({ body });
@@ -49,13 +50,14 @@ const createPayment = async (req, res) => {
 const processedWebhooks = new Set();
 
 const receiveWebhooks = async (req, res) => {
-  const { userId } = req.params;
+  const { userId ,subscriptionId } = req.params;
   const payment = req.query;
   const userIdString = userId.toString();
 
   try {
     console.log("este es el payment,", payment);
     console.log("esta es el id", userIdString);
+    console.log("esta es el id de la subscripcion", subscriptionId);
 
     if (payment.type === "payment" && payment['data.id']) {
       const paymentId = payment['data.id'];
@@ -65,16 +67,22 @@ const receiveWebhooks = async (req, res) => {
         return res.send("Webhook ya procesado");
       }
 
-      const response = await User.findByPk(userIdString);
       await axios.get(`https://api.mercadopago.com/v1/payments/${payment['data.id']}`, {
         headers: {
           Authorization: `Bearer TEST-1127404855878397-021315-d22d177cf405ab6d16972fd357795017-1680068297`
         }
       });
+      const response = await User.findByPk(userIdString);
+      console.log("Usuario encontrado:", response);
 
-      await User.update(
-        { suscription: true }, { where: { id: response.id } }
+      const subscription = await Subscription.findOne({ where: { id: subscriptionId } });
+      console.log("Subscripción encontrada:", subscription);
+
+      const updateResult = await User.update(
+        { SubscriptionId:subscription.id }, { where: { id: response.id } }
       );
+      console.log("Resultado de la actualización:", updateResult);
+
       processedWebhooks.add(paymentId);
       res.send("webhook")
     }

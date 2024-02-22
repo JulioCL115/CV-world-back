@@ -13,7 +13,7 @@ subscriptionRouter.get('/', getAllSubscriptions);
 
 subscriptionRouter.get('/:subscriptionId', getSubscriptionById);
 
-subscriptionRouter.put('/:userId', verifyToken, updateSubscription);
+subscriptionRouter.put('/:subscriptionId', verifyToken, updateSubscription);
 
 subscriptionRouter.put('/delete/:subscriptionId', verifyToken, deleteSubscription);
 

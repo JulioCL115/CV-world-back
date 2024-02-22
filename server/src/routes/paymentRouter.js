@@ -18,7 +18,7 @@ router.get('/pending', (req, res) => {
     res.redirect('http://localhost:3000/pending'); 
 });
 
-router.post('webhook/:userId', receiveWebhooks);
+router.post('/webhook/:userId/:subscriptionId', receiveWebhooks);
 
 module.exports = router;
 

@@ -4,13 +4,13 @@ const updateSubscription = async (req, res) => {
     try {
         const { name, price, included, notIncluded } = req.body;
 
-        const { userId } = req.params;
+        const { subscriptionId } = req.params;
 
-        if(!userId) {
+        if(!subscriptionId) {
             return res.status(400).json({ error: "ID is required" });
         }
 
-        const subscriptionUpdated = await updateSubscriptionController(userId, name, price, included, notIncluded);
+        const subscriptionUpdated = await updateSubscriptionController(name, price, included, notIncluded, subscriptionId);
 
         if(!subscriptionUpdated) {
             throw new Error('Failed to update Subscription');
