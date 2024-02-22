@@ -33,6 +33,7 @@ PUT "http://localhost:3001/category/delete/:categoryId" --> to delete a category
 GET "http://localhost:3001/language" --> to get all language
 GET "http://localhost:3001/language/:languageId" --> to get a language by id
 POST "http://localhost:3001/language" --> to create a language
+PUT "http://localhost:3001/language/:languageId" --> to update a language
 PUT "http://localhost:3001/language/delete/:languageId" --> to delete a language
 
 # Comment
