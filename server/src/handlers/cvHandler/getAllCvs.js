@@ -5,8 +5,6 @@ const getAllCvs = async (req, res) => {
     try {
         const { search, sort, categories, languages } = req.query;
 
-        console.log(categories, 'CATEGORIES')
-
         const offset = parseInt(req.query.offset ? req.query.offset : 0);
         const limit = parseInt(req.query.limit ? req.query.limit : 16);
 

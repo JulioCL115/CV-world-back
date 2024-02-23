@@ -2,8 +2,6 @@ const { Cv, Comment, User, Category, Language } = require('../../db');
 
 const getCvByIdController = async (cvId) => {
     try {
-        console.log("CV ID: ", cvId);
-
         const cvFound = await Cv.findOne({
             where: { id: cvId, deleted: false },
             include: [
@@ -25,8 +23,6 @@ const getCvByIdController = async (cvId) => {
                 }
             ]
         });
-
-        console.log(cvFound);
 
         function formatDate(inputDate) {
             const date = new Date(inputDate);

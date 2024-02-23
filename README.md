@@ -38,6 +38,8 @@ PUT "http://localhost:3001/language/:languageId" --> to update a language
 PUT "http://localhost:3001/language/delete/:languageId" --> to delete a language
 
 # Comment
+GET "http://localhost:3001/comment" --> to get all comments
+GET "http://localhost:3001/comment/:commentId" --> to get comment by Id
 POST "http://localhost:3001/comment/:cvId/:userId" --> to create a comment
 PUT "http://localhost:3001/comment/delete/:commentId" --> to delete a comment
 

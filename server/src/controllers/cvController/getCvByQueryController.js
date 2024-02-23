@@ -1,12 +1,9 @@
-const { Cv, Category, Language } = require('../../db');
+const { Cv, Category, Language, User, Subscription } = require('../../db');
 const { Op } = require('sequelize');
 const util = require('util');
 
 const getCvByQueryController = async (search, categories, languages, limit, offset) => {
     try {
-
-        console.log(search, categories, languages, limit, offset, 'PARAMS')
-
         const query = []
 
         const notDeleted = {
@@ -55,8 +52,6 @@ const getCvByQueryController = async (search, categories, languages, limit, offs
         }
 
         if (languages) {
-            console.log(languages, 'LANGUAGES')
-
             const languagesFound = await Language.findAll({
                 where: {
                     name: {
@@ -82,6 +77,15 @@ const getCvByQueryController = async (search, categories, languages, limit, offs
             },
             limit,
             offset,
+            include: [
+                {
+                    model: User,
+                    include: [
+                        { model: Subscription, attributes: ['name'] }
+                    ],
+                    attributes: ['name', 'photo']
+                }
+            ]
         }
 
         //print all statements in query for each
