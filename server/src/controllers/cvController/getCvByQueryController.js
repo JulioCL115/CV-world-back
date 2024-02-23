@@ -1,5 +1,5 @@
-const { Cv, Category, Language } = require('../../db');
-const { Op } = require('sequelize');
+const { Cv, Category, Language,User,Subscription } = require('../../db');
+const { Op,Sequelize } = require('sequelize');
 const util = require('util');
 
 const getCvByQueryController = async (search, categories, languages, limit, offset) => {
@@ -78,16 +78,37 @@ const getCvByQueryController = async (search, categories, languages, limit, offs
 
         const completeQuery = {
             where: {
-                [Op.and]: query
+                [Op.and]: query,
             },
             limit,
             offset,
-        }
+            order: [
+                [
+                    Sequelize.literal('"User->Subscription"."name" IS NOT NULL DESC, "User"."SubscriptionId" DESC'), // Ordenar por Subscription.name no nulo en orden descendente (premium primero)
+                ],
+                ['UserId', 'ASC'],
+            ],
+            include: [
+                {
+                    model: User,
+                    attributes: ['SubscriptionId','name','photo'],
+                    include: [
+                        { model: Subscription, attributes: ['name', "price"] }
+                    ]
+                }
+            ]
+        };
 
         //print all statements in query for each
         console.log(util.inspect(completeQuery, { depth: null, colors: true }));
 
         const cvsByQueryFound = await Cv.findAndCountAll(completeQuery);
+        if (cvsByQueryFound.count > 0) {
+            console.log('Suscripción de los usuarios en los CVs encontrados:');
+            cvsByQueryFound.rows.forEach(cv => {
+                console.log(`CVId: ${cv.id}, UserId: ${cv.UserId}, Subscription: ${cv.User?.Subscription?.name}`);
+            });
+        }
 
         return {
             totalCvs: cvsByQueryFound.count,

@@ -17,8 +17,7 @@ conn.sync({ force: false })
     // .then(() => populateUsers())
     .then(() => populateCategory())
     .then(() => populateLanguage())
-    .then(() => populateUsers())
     .then(() => populateSubscription())
+    .then(() => populateUsers())
     .then(() => populateCv())
-
     .catch((error) => console.error(error));

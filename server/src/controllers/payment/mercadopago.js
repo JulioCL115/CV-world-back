@@ -2,7 +2,6 @@ const { MercadoPagoConfig, Preference, } = require("mercadopago");
 const { ACCESS_TOKEN } = process.env
 
 const { User,Subscription } = require('../../db')
-const { User,Subscription } = require('../../db')
 const axios = require('axios');
 
 const createPayment = async (req, res) => {
@@ -13,8 +12,6 @@ const createPayment = async (req, res) => {
 
   const { userId } = req.params;
 
-  const { title, description, quantity, unit_price, subscriptionId } = req.body;
-  console.log("esta es el id de la subscripcion back", subscriptionId);
   const { title, description, quantity, unit_price, subscriptionId } = req.body;
   console.log("esta es el id de la subscripcion back", subscriptionId);
   const preference = new Preference(client);
@@ -54,14 +51,12 @@ const processedWebhooks = new Set();
 
 const receiveWebhooks = async (req, res) => {
   const { userId ,subscriptionId } = req.params;
-  const { userId ,subscriptionId } = req.params;
   const payment = req.query;
   const userIdString = userId.toString();
 
   try {
     console.log("este es el payment,", payment);
     console.log("esta es el id", userIdString);
-    console.log("esta es el id de la subscripcion", subscriptionId);
     console.log("esta es el id de la subscripcion", subscriptionId);
 
     if (payment.type === "payment" && payment['data.id']) {
@@ -82,19 +77,10 @@ const receiveWebhooks = async (req, res) => {
 
       const subscription = await Subscription.findOne({ where: { id: subscriptionId } });
       console.log("Subscripción encontrada:", subscription);
-      const response = await User.findByPk(userIdString);
-      console.log("Usuario encontrado:", response);
 
-      const subscription = await Subscription.findOne({ where: { id: subscriptionId } });
-      console.log("Subscripción encontrada:", subscription);
-
-      const updateResult = await User.update(
-        { SubscriptionId:subscription.id }, { where: { id: response.id } }
       const updateResult = await User.update(
         { SubscriptionId:subscription.id }, { where: { id: response.id } }
       );
-      console.log("Resultado de la actualización:", updateResult);
-
       console.log("Resultado de la actualización:", updateResult);
 
       processedWebhooks.add(paymentId);

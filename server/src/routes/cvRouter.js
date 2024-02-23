@@ -11,7 +11,7 @@ cvRouter.get('/', getAllCvs);
 
 cvRouter.get('/:cvId', getCvById);
 
-cvRouter.post('/:userId', verifyToken, createCv);
+cvRouter.post('/:userId', createCv);
 
 cvRouter.put('/:cvId', updateCv);
 
