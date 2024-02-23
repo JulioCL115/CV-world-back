@@ -1,8 +1,11 @@
-const { Cv, Category, Language, User, Subscription } = require('../../db');
-const { Op } = require('sequelize');
+const { Cv, Category, Language,User,Subscription } = require('../../db');
+const { Op, Sequelize } = require('sequelize');
 
 const getCvByQueryController = async (search, categories, languages, limit, offset) => {
     try {
+
+        console.log(search, categories, languages, limit, offset, 'PARAMS')
+
         const query = []
 
         const notDeleted = {
@@ -51,6 +54,8 @@ const getCvByQueryController = async (search, categories, languages, limit, offs
         }
 
         if (languages) {
+            console.log(languages, 'LANGUAGES')
+
             const languagesFound = await Language.findAll({
                 where: {
                     name: {
@@ -72,23 +77,29 @@ const getCvByQueryController = async (search, categories, languages, limit, offs
 
         const completeQuery = {
             where: {
-                [Op.and]: query
+                [Op.and]: query,
             },
             limit,
             offset,
+            order: [
+                [
+                    Sequelize.literal('"User->Subscription"."name" IS NOT NULL DESC, "User"."SubscriptionId" DESC'), // Ordenar por Subscription.name no nulo en orden descendente (premium primero)
+                ],
+                ['UserId', 'ASC'],
+            ],
             include: [
                 {
                     model: User,
+                    attributes: ['SubscriptionId','name','photo'],
                     include: [
-                        { model: Subscription, attributes: ['name'] }
-                    ],
-                    attributes: ['name', 'photo']
+                        { model: Subscription, attributes: ['name', "price"] }
+                    ]
                 }
             ]
-        }
+        };
 
         const cvsByQueryFound = await Cv.findAndCountAll(completeQuery);
-
+   
         return {
             totalCvs: cvsByQueryFound.count,
             cvs: cvsByQueryFound.rows
