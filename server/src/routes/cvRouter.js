@@ -18,6 +18,6 @@ cvRouter.put('/:cvId', updateCv);
 
 cvRouter.put('/delete/:cvId', verifyToken, deleteCv);
 
-cvRouter.put('updateView/:cvId', updateViewCv);
+cvRouter.put('/updateView/:cvId', updateViewCv);
 
 module.exports = cvRouter;
