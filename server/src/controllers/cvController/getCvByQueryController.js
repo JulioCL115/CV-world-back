@@ -1,6 +1,5 @@
 const { Cv, Category, Language, User, Subscription } = require('../../db');
 const { Op } = require('sequelize');
-const util = require('util');
 
 const getCvByQueryController = async (search, categories, languages, limit, offset) => {
     try {
@@ -87,9 +86,6 @@ const getCvByQueryController = async (search, categories, languages, limit, offs
                 }
             ]
         }
-
-        //print all statements in query for each
-        console.log(util.inspect(completeQuery, { depth: null, colors: true }));
 
         const cvsByQueryFound = await Cv.findAndCountAll(completeQuery);
 

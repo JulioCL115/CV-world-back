@@ -6,7 +6,7 @@ async function populateCv() {
         [
             {
                 "name": "Alice Johnson",
-                "image": "https://example.com/alice.jpg",
+                "image": "https://www.perfocal.com/blog/content/images/size/w960/2021/01/Perfocal_17-11-2019_TYWFAQ_100_standard-3.jpg",
                 "header": "Frontend Developer",
                 "description": "Dedicated frontend developer with a passion for creating elegant user interfaces.",
                 "experience": [
@@ -42,7 +42,7 @@ async function populateCv() {
             },
             {
                 "name": "Carlos García",
-                "image": "",
+                "image": "https://img.freepik.com/free-photo/portrait-optimistic-businessman-formalwear_1262-3600.jpg",
                 "header": "Data Scientist",
                 "description": "Experienced data scientist with a strong background in statistical analysis and machine learning algorithms.",
                 "experience": [
@@ -78,7 +78,7 @@ async function populateCv() {
             },
             {
                 "name": "Emily Smith",
-                "image": "https://example.com/emily.jpg",
+                "image": "https://media.istockphoto.com/id/1338134319/photo/portrait-of-young-indian-businesswoman-or-school-teacher-pose-indoors.jpg?s=612x612&w=0&k=20&c=Dw1nKFtnU_Bfm2I3OPQxBmSKe9NtSzux6bHqa9lVZ7A=",
                 "header": "UX/UI Designer",
                 "description": "Creative UX/UI designer with a focus on crafting intuitive and visually appealing user experiences.",
                 "experience": [
@@ -114,7 +114,7 @@ async function populateCv() {
             },
             {
                 "name": "Mohammed Ali",
-                "image": "https://example.com/mohammed.jpg",
+                "image": "https://t4.ftcdn.net/jpg/03/98/85/77/360_F_398857704_n44BPhqM68Xk9vT31BeFkLQwWsgeZS6C.jpg",
                 "header": "Software Engineer",
                 "description": "Innovative software engineer with a strong background in building robust and scalable applications.",
                 "experience": [
@@ -150,7 +150,7 @@ async function populateCv() {
             },
             {
                 "name": "Maria Fernández",
-                "image": "https://example.com/maria.jpg",
+                "image": "https://t3.ftcdn.net/jpg/03/67/46/48/360_F_367464887_f0w1JrL8PddfuH3P2jSPlIGjKU2BI0rn.jpg",
                 "header": "Mobile App Developer",
                 "description": "Enthusiastic mobile app developer with expertise in creating native and cross-platform applications.",
                 "experience": [
@@ -186,7 +186,7 @@ async function populateCv() {
             },
             {
                 "name": "Juan Pérez",
-                "image": "https://example.com/juan.jpg",
+                "image": "https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.webp?b=1&s=170667a&w=0&k=20&c=MRMqc79PuLmQfxJ99fTfGqHL07EDHqHLWg0Tb4rPXQc=",
                 "header": "Desarrollador Web",
                 "description": "Apasionado desarrollador web con experiencia en creación de sitios dinámicos y responsivos.",
                 "experience": [
@@ -222,7 +222,7 @@ async function populateCv() {
             },
             {
                 "name": "Emily Smith",
-                "image": "https://example.com/emily.jpg",
+                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYxsG3Ac8-CCLG3PzEvZXAfVoQxmjHleJqjg&usqp=CAU",
                 "header": "Mobile App Designer",
                 "description": "Creative mobile app designer specializing in intuitive user interfaces and engaging user experiences.",
                 "experience": [
@@ -258,7 +258,7 @@ async function populateCv() {
             },
             {
                 "name": "Ahmed Ali",
-                "image": "https://example.com/ahmed.jpg",
+                "image": "https://media.istockphoto.com/id/597272944/photo/looking-sharp-and-feeling-great.webp?b=1&s=170667a&w=0&k=20&c=nAj6kIO9npV5fOPjEOMQCvJaeR4DZVJFfHkniJrO95A=",
                 "header": "Data Scientist",
                 "description": "Experienced data scientist with a passion for deriving insights from complex datasets.",
                 "experience": [
@@ -294,7 +294,7 @@ async function populateCv() {
             },
             {
                 "name": "Sophie Martin",
-                "image": "https://example.com/sophie.jpg",
+                "image": "https://retratosbarcelona.com/wp-content/uploads/2022/09/Retratos-Barcelona-Linkedin-Photo-Sydney.jpg",
                 "header": "Enfermera Registrada",
                 "description": "Enfermera comprometida con brindar atención de calidad y apoyo a los pacientes en su proceso de recuperación.",
                 "experience": [
@@ -330,7 +330,7 @@ async function populateCv() {
             },
             {
                 "name": "John Smith",
-                "image": "https://example.com/john.jpg",
+                "image": "https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/social-media-profile-photos-3.jpg",
                 "header": "Financial Analyst",
                 "description": "Detail-oriented financial analyst with expertise in financial modeling and data analysis.",
                 "experience": [
@@ -366,7 +366,7 @@ async function populateCv() {
             },
             {
                 "name": "Marta López",
-                "image": "https://example.com/marta.jpg",
+                "image": "https://www.shutterstock.com/image-photo/smiling-brunette-businesswoman-sitting-against-600nw-2291067377.jpg",
                 "header": "Especialista en Recursos Humanos",
                 "description": "Especialista en recursos humanos con experiencia en reclutamiento, selección y desarrollo de talento.",
                 "experience": [
@@ -402,7 +402,7 @@ async function populateCv() {
             },
             {
                 "name": "Alice Wang",
-                "image": "https://example.com/alice.jpg",
+                "image": "https://www.shutterstock.com/image-photo/happy-millennial-business-woman-glasses-600nw-2103373409.jpg",
                 "header": "Ingeniera Civil",
                 "description": "Ingeniera civil con experiencia en diseño y gestión de proyectos de infraestructura.",
                 "experience": [
@@ -438,7 +438,7 @@ async function populateCv() {
             },
             {
                 "name": "Luisa García",
-                "image": "https://example.com/luisa.jpg",
+                "image": "https://static.photocdn.pt/images/articles/2019/08/07/images/articles/2019/07/31/good_linkedin_photo.webp",
                 "header": "Abogada Corporativa",
                 "description": "Abogada especializada en derecho corporativo con experiencia en asesoramiento legal para empresas.",
                 "experience": [
@@ -474,7 +474,7 @@ async function populateCv() {
             },
             {
                 "name": "Tom Johnson",
-                "image": "https://example.com/tom.jpg",
+                "image": "https://media.istockphoto.com/id/1307791650/photo/headshot-portrait-of-smiling-caucasian-businessman-pose-at-workplace.jpg?s=612x612&w=0&k=20&c=Guj8f7rGyX4tsSszs3qR_NCYDOOvypB6T3eSPEB9GOQ=",
                 "header": "Specialist in Social Services",
                 "description": "Compassionate social services specialist with experience in community outreach and support programs.",
                 "experience": [
@@ -510,7 +510,7 @@ async function populateCv() {
             },
             {
                 "name": "Sara Martínez",
-                "image": "https://example.com/sara.jpg",
+                "image": "https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg",
                 "header": "Especialista en Atención al Cliente",
                 "description": "Especialista en atención al cliente con habilidades para resolver problemas y garantizar la satisfacción del cliente.",
                 "experience": [
@@ -546,7 +546,7 @@ async function populateCv() {
             },
             {
                 "name": "Michael Brown",
-                "image": "https://example.com/michael.jpg",
+                "image": "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
                 "header": "Analista de Marketing",
                 "description": "Analista de marketing con experiencia en análisis de datos y estrategias de marketing digital.",
                 "experience": [
@@ -582,7 +582,7 @@ async function populateCv() {
             },
             {
                 "name": "Emma Chen",
-                "image": "https://example.com/emma.jpg",
+                "image": "https://nyheadshots.com/wp-content/uploads/2018/12/TSQ_6553web-800x533.jpg",
                 "header": "Ingeniera de Software",
                 "description": "Ingeniera de software con experiencia en desarrollo de aplicaciones web y sistemas distribuidos.",
                 "experience": [
@@ -618,7 +618,7 @@ async function populateCv() {
             },
             {
                 "name": "Ana Silva",
-                "image": "https://example.com/ana.jpg",
+                "image": "https://nyheadshots.com/wp-content/uploads/2018/07/headshots-800x536.jpg",
                 "header": "Educadora Infantil",
                 "description": "Educadora infantil comprometida con el desarrollo integral de los niños y el fomento de un ambiente educativo inclusivo.",
                 "experience": [
@@ -654,7 +654,7 @@ async function populateCv() {
              },
              {
                 "name": "David Lee",
-                "image": "https://example.com/david.jpg",
+                "image": "https://i.pinimg.com/736x/f8/66/8e/f8668e5328cfb4938903406948383cf6.jpg",
                 "header": "Técnico de Redes",
                 "description": "Técnico de redes con experiencia en configuración, mantenimiento y resolución de problemas de infraestructura de red.",
                 "experience": [
@@ -690,7 +690,7 @@ async function populateCv() {
             },
             {
                 "name": "Carla Rodríguez",
-                "image": "https://example.com/carla.jpg",
+                "image": "https://media.istockphoto.com/id/1438765014/video/headshot-person-attractive-young-brunette-woman-staring-at-camera.jpg?s=640x640&k=20&c=R-QEOOls5lBBqKJilbAtXdHBWbGK6HOM1RtK0cEm4qI=",
                 "header": "Especialista en Medio Ambiente",
                 "description": "Especialista en medio ambiente comprometida con la conservación de recursos naturales y la promoción de prácticas sostenibles.",
                 "experience": [
@@ -726,7 +726,7 @@ async function populateCv() {
              },
              {
                 "name": "Sarah Johnson",
-                "image": "https://example.com/sarah.jpg",
+                "image": "https://t4.ftcdn.net/jpg/03/94/33/83/360_F_394338310_XarWRxZ0Weu1kiUPvGnX1vmnFIT3j847.jpg",
                 "header": "Diseñadora Gráfica",
                 "description": "Diseñadora gráfica con pasión por crear identidades visuales impactantes y experiencias de usuario memorables.",
                 "experience": [
@@ -762,7 +762,7 @@ async function populateCv() {
             },
             {
                 "name": "Mohammed Ali",
-                "image": "https://example.com/mohammed.jpg",
+                "image": "https://media.istockphoto.com/id/1300512215/photo/headshot-portrait-of-smiling-ethnic-businessman-in-office.jpg?s=612x612&w=0&k=20&c=QjebAlXBgee05B3rcLDAtOaMtmdLjtZ5Yg9IJoiy-VY=",
                 "header": "Ingeniero de Producción",
                 "description": "Ingeniero de producción con experiencia en optimización de procesos y gestión de la cadena de suministro.",
                 "experience": [
@@ -798,7 +798,7 @@ async function populateCv() {
              },
              {
                 "name": "Alice Wang",
-                "image": "https://example.com/alice.jpg",
+                "image": "https://media.istockphoto.com/id/1407759041/photo/confident-happy-beautiful-hispanic-student-girl-indoor-head-shot-portrait.webp?b=1&s=170667a&w=0&k=20&c=--Ei0owZ8KqwVppB5o0bMRG4aNV8VA0HHnsH1YfuxAw=",
                 "header": "Especialista en Consultoría",
                 "description": "Especialista en consultoría con experiencia en asesoramiento estratégico y optimización de procesos empresariales.",
                 "experience": [
@@ -834,7 +834,7 @@ async function populateCv() {
             },
             {
                 "name": "Elena Martinez",
-                "image": "https://example.com/elena.jpg",
+                "image": "https://www.shutterstock.com/image-photo/attractive-middleaged-woman-casual-shirt-600nw-2381747649.jpg",
                 "header": "Abogada de Familia",
                 "description": "Abogada especializada en derecho de familia con experiencia en mediación y resolución de conflictos familiares.",
                 "experience": [
@@ -870,7 +870,7 @@ async function populateCv() {
              },
              {
                 "name": "Ryan Miller",
-                "image": "https://example.com/ryan.jpg",
+                "image": "https://media.istockphoto.com/id/1388253782/photo/positive-successful-millennial-business-professional-man-head-shot-portrait.jpg?s=612x612&w=0&k=20&c=uS4knmZ88zNA_OjNaE_JCRuq9qn3ycgtHKDKdJSnGdY=",
                 "header": "Gerente de Logística",
                 "description": "Gerente de logística con experiencia en gestión de inventarios, transporte y optimización de la cadena de suministro.",
                 "experience": [
