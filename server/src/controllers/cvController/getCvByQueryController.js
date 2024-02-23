@@ -4,9 +4,6 @@ const util = require('util');
 
 const getCvByQueryController = async (search, categories, languages, limit, offset) => {
     try {
-
-        console.log(search, categories, languages, limit, offset, 'PARAMS')
-
         const query = []
 
         const notDeleted = {
@@ -55,8 +52,6 @@ const getCvByQueryController = async (search, categories, languages, limit, offs
         }
 
         if (languages) {
-            console.log(languages, 'LANGUAGES')
-
             const languagesFound = await Language.findAll({
                 where: {
                     name: {
