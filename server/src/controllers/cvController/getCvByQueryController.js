@@ -1,8 +1,8 @@
-const { Cv, Category, Language } = require('../../db');
+const { Cv, Category, Language, User, Subscription } = require('../../db');
 const { Op } = require('sequelize');
 const util = require('util');
 
-const getCvByQueryController = async (search, categories, languages, limit, offset) => {
+const getCvByQueryController = async (search, categories, languages, limit, offset, sortByViews, sortByDate) => {
     try {
 
         console.log(search, categories, languages, limit, offset, 'PARAMS')
@@ -50,7 +50,6 @@ const getCvByQueryController = async (search, categories, languages, limit, offs
                     [Op.in]: categoriesIds
                 }
             }
-
             query.push(categoriesFilter);
         }
 
@@ -82,12 +81,34 @@ const getCvByQueryController = async (search, categories, languages, limit, offs
             },
             limit,
             offset,
+            include: [
+                {
+                    model: User,
+                    include: [
+                        { model: Subscription, attributes: ['price', 'name'] }
+                    ],
+                    attributes: ['name', 'photo']
+                }
+            ],
+            order: [
+                [User , Subscription, 'price', 'DESC'] // Sort by Subscription name in ascending order
+            ]
         }
 
+        if (sortByDate) {
+            completeQuery.order.push(['creationDate', 'DESC']);
+        }
+
+        if (sortByViews) {
+            completeQuery.order.push(['views', 'DESC']);
+        }
+        
         //print all statements in query for each
         console.log(util.inspect(completeQuery, { depth: null, colors: true }));
 
         const cvsByQueryFound = await Cv.findAndCountAll(completeQuery);
+
+
 
         return {
             totalCvs: cvsByQueryFound.count,
