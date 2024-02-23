@@ -2,7 +2,6 @@ const getAllLanguagesController = require('../../controllers/languageController/
 
 const getAllLanguages = async (req, res) => {
     try {
-
         const allLanguages = await getAllLanguagesController();
 
         if(!allLanguages || allLanguages.length === 0) {

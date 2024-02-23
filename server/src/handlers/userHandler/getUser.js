@@ -1,13 +1,12 @@
 const getUserController = require('../../controllers/userController/getUserController'); 
 
 const getUser = async (req, res) => {
-    const { email } = req.query;
-
-    if (!email) {
-        return res.status(400).json({ error: 'Please provide a valid email in the request body' });
-    }
-
     try {
+        const { email } = req.query;
+
+        if (!email) {
+            return res.status(400).json({ error: 'Please provide a valid email in the request body' });
+        }
 
         const user = await getUserController(email);
 

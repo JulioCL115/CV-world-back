@@ -1,25 +1,27 @@
 const deleteCommentController = require("../../controllers/commentController/deleteCommentController");
 
-const createComment = async (req, res) => {
+const deleteComment = async (req, res) => {
     try {
-        const { cvId } = req.params;
+        const { commentId } = req.params;
 
-        const { id } = req.body
-
-        if (!cvId) {
+        if (!commentId) {
             return res.status(400).json({ error: "Please provide a valid ID in the request parameters" });
         }
         
-        const commentDeleted = await deleteCommentController(cvId, id);
+        const commentDeleted = await deleteCommentController(commentId);
 
         if(!commentDeleted) {
-            throw new Error('Failed to delete CV');
+            throw new Error('Failed to delete Comment');
         }
-        res.status(200).json(commentDeleted);
-        
+
+        res.status(200).json({
+            message: 'Comment deleted successfully',
+            commentDeleted
+        }); 
+
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 };
 
-module.exports = createComment;
+module.exports = deleteComment;

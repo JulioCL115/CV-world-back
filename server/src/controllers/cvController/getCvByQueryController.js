@@ -51,8 +51,6 @@ const getCvByQueryController = async (search, categories, languages, limit, offs
                 }
             }
 
-            console.log(categoriesFilter, 'CATEGORIES FILTER')
-
             query.push(categoriesFilter);
         }
 
@@ -75,8 +73,6 @@ const getCvByQueryController = async (search, categories, languages, limit, offs
                 }
             }
 
-            console.log(languageFilter, 'LANGUAGE FILTER')
-
             query.push(languageFilter);
         }
 
@@ -91,10 +87,8 @@ const getCvByQueryController = async (search, categories, languages, limit, offs
         //print all statements in query for each
         console.log(util.inspect(completeQuery, { depth: null, colors: true }));
 
-
         const cvsByQueryFound = await Cv.findAndCountAll(completeQuery);
 
-        console.log(cvsByQueryFound.count, 'ROWS')
         return {
             totalCvs: cvsByQueryFound.count,
             cvs: cvsByQueryFound.rows

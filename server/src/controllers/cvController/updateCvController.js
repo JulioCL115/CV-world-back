@@ -1,12 +1,20 @@
-const { Cv } = require('../../db');
+const { Cv, Category, Language } = require('../../db');
 
 const updateCvController = async (cvId, propertiesToBeUpdated ) => {
     try {
-        const cvFound = await Cv.findByPk(cvId);
+        const cvFound = await Cv.findByPk(cvId, {
+            include: [Category, Language]
+        });
 
         if (!cvFound) {
-            const error = new Error("CV not found for updating");
+            const error = new Error("CV not found for updated");
             error.statusCode = 404; 
+            throw error;
+        }
+
+        if (cvFound.deleted) {
+            const error = new Error("Cannot update a deleted CV");
+            error.statusCode = 400;
             throw error;
         }
 

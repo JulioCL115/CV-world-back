@@ -2,10 +2,11 @@ const { Language } = require("../../db");
 
 const getAllLanguagesController = async () => {
     try {
-   
-        const allLanguagesFound = await Language.findAll({});
+        const AllLanguagesFound = await Language.findAll({
+            where: { deleted: false }
+        });
 
-        return allLanguagesFound;
+        return AllLanguagesFound;
 
     } catch (error) {
         console.error("Error searching for Languages: ", error);

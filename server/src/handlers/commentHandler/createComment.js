@@ -7,10 +7,6 @@ const createComment = async (req, res) => {
 
         const { cvId, userId } = req.params;
 
-        console.log(cvId, userId)
-
-        console.log(req);
-
         if (!cvId || !userId) {
             return res.status(400).json({ error: "Please provide a valid ID in the request parameters" });
         }

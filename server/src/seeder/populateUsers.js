@@ -1,9 +1,10 @@
 const bcrypt = require('bcrypt');
-const { User } = require("../db");
+const { Subscription, User } = require("../db");
+const subscription = require('../models/subscription');
 
 async function populateUsers() {
     try {
-        const usersData = [
+        const Users = [
             {
                 name: "Usuario 1",
                 email: "usuario1@example.com",
@@ -24,7 +25,19 @@ async function populateUsers() {
             }
         ];
 
-        const users = await User.bulkCreate(usersData);
+        // asignarle a cada Cv un category ID random
+        const subscriptions = await Subscription.findAll()
+        const subscriptionIds = subscriptions.map(subscription => subscription.id);
+        Users.forEach(user => {
+            user.SubscriptionId = subscriptionIds[Math.floor(Math.random() * subscriptionIds.length)];
+        });
+
+        for (const user of Users) {
+            const existingUser = await User.findOne({ where: { email: user.email } });
+            if (!existingUser) {
+                await User.create(user);
+            }
+        }
 
         console.log("Users table populated successfully");
     } catch (error) {
@@ -34,7 +47,7 @@ async function populateUsers() {
             return;
         }
         console.error("Error populating users database");
-    }; 
+    };
 };
 
 module.exports = populateUsers;

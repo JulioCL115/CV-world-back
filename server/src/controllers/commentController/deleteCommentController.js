@@ -1,35 +1,30 @@
-const { Comment, Cv } = require("../../db");
+const { Comment } = require("../../db");
 
-const deleteCommentController = async (cvId, id) => {
+const deleteCommentController = async (commentId) => {
     try {
 
-        const cvFound = await Cv.findByPk(cvId);
+        const commentFound = await Comment.findByPk(commentId);
 
-        if (!cvFound) {
-            const error = new Error("CV not found for comment deletion");
+        if (!commentFound) {
+            const error = new Error("Comment not found for deletion");
             error.statusCode = 404; 
             throw error;
         }
 
-        const commentToDelete = await Comment.findOne({
-            where: {
-                id,
-                CvId: cvId 
-            }
-        });
-
-        if (!commentToDelete) {
-            const error = new Error("Comment not found for deletion");
-            error.statusCode = 404;
+        if (cvFound.deleted) {
+            const error = new Error("Comment already deleted");
+            error.statusCode = 400;
             throw error;
         }
 
-        await commentToDelete.destroy();
- 
-        return commentToDelete;
-        
+        await commentFound.update(
+            { deleted: true }
+        );
+
+        return commentFound;
+         
     } catch (error) {
-        console.error("Error deteling comment: ", error);
+        console.error("Error deteling Comment: ", error);
         throw error;
     }
 };
