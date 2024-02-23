@@ -1,11 +1,8 @@
-const { Cv, Category, Language,User,Subscription } = require('../../db');
-const { Op, Sequelize } = require('sequelize');
+const { Cv, Category, Language, User, Subscription } = require('../../db');
+const { Op } = require('sequelize');
 
-const getCvByQueryController = async (search, categories, languages, limit, offset) => {
+const getCvByQueryController = async (search, categories, languages, limit, offset, sortByViews, sortByDate) => {
     try {
-
-        console.log(search, categories, languages, limit, offset, 'PARAMS')
-
         const query = []
 
         const notDeleted = {
@@ -49,12 +46,10 @@ const getCvByQueryController = async (search, categories, languages, limit, offs
                     [Op.in]: categoriesIds
                 }
             }
-
             query.push(categoriesFilter);
         }
 
         if (languages) {
-            console.log(languages, 'LANGUAGES')
 
             const languagesFound = await Language.findAll({
                 where: {
@@ -77,29 +72,34 @@ const getCvByQueryController = async (search, categories, languages, limit, offs
 
         const completeQuery = {
             where: {
-                [Op.and]: query,
+                [Op.and]: query
             },
             limit,
             offset,
-            order: [
-                [
-                    Sequelize.literal('"User->Subscription"."name" IS NOT NULL DESC, "User"."SubscriptionId" DESC'), // Ordenar por Subscription.name no nulo en orden descendente (premium primero)
-                ],
-                ['UserId', 'ASC'],
-            ],
             include: [
                 {
                     model: User,
-                    attributes: ['SubscriptionId','name','photo'],
                     include: [
-                        { model: Subscription, attributes: ['name', "price"] }
-                    ]
+                        { model: Subscription, attributes: ['price', 'name'] }
+                    ],
+                    attributes: ['name', 'photo']
                 }
+            ],
+            order: [
+                [User , Subscription, 'price', 'DESC'] // Sort by Subscription name in ascending order
             ]
-        };
+        }
 
+        if (sortByDate) {
+            completeQuery.order.push(['creationDate', 'DESC']);
+        }
+
+        if (sortByViews) {
+            completeQuery.order.push(['views', 'DESC']);
+        }
+        
         const cvsByQueryFound = await Cv.findAndCountAll(completeQuery);
-   
+
         return {
             totalCvs: cvsByQueryFound.count,
             cvs: cvsByQueryFound.rows
