@@ -7,29 +7,24 @@ const getUser = async (email) => {
             where: {
                 email: {
                     [Op.like]: email,
-                }
+                },
+                deleted: false
             },
             include: [
-                // Assuming 'Subscription' is the associated model for the 'subscription' field
                 {
                     model: Subscription,
-                    // attributes: ['price'], // Specify the attributes you want to include
                 },
-                // Assuming 'Cv' is the associated model for the 'Cv' field
                 {
                     model: Cv,
                 },
             ],
         });
 
-
         const result = JSON.parse(JSON.stringify(userFound));
 
         if (result && result.Cvs) {
             result.Cvs = result.Cvs.filter(cv => cv.deleted === false);
         }
-
-        console.log(result)
 
         return result
 

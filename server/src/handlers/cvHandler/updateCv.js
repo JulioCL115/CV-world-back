@@ -12,7 +12,7 @@ const updateCv = async (req, res) => {
             return res.status(400).json({ error: "ID is required" });
         }
 
-        if(Object.keys(propertiesToBeUpdated ).length === 0) {
+        if(Object.keys(propertiesToBeUpdated).length === 0) {
             return res.status(400).json({ error: "The properties to be updated cannot be empty" });
         }
 

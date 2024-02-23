@@ -16,6 +16,14 @@ module.exports = (sequelize) => {
         createdAt: { // New field for creation date
             type: DataTypes.DATE,
             defaultValue: DataTypes.NOW
+        },
+        deleted: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
+        deleted: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         }
     },
     {

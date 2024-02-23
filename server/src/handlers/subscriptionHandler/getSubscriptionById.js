@@ -1,4 +1,3 @@
-
 const getSubscriptionByIdController = require('../../controllers/subscriptionController/getSubscriptionByIdController');
 
 const getSubscriptionById = async (req, res) => {

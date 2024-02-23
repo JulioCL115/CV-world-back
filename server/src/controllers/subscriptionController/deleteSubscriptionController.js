@@ -1,28 +1,24 @@
 const { Subscription } = require('../../db');
 
-const updateSubscriptionController = async (name, price, included, notIncluded, subscriptionId) => {
+const deleteSubscriptionController = async (subscriptionId) => {
     try {
-
         const subscriptionFound = await Subscription.findByPk(subscriptionId);
 
         if (!subscriptionFound) {
-            const error = new Error("Subscription not found for updated");
+            const error = new Error("Subscription not found for deleting");
             error.statusCode = 404; 
             throw error;
         }
 
-        if(subscriptionFound.delete) {
-            const error = new Error("Cannot update a deleted Subscription");
+        if (subscriptionFound.deleted) {
+            const error = new Error("Subscription already deleted");
             error.statusCode = 400; 
             throw error;
         }
 
-        await subscriptionFound.update({
-            name,
-            price,
-            included,
-            notIncluded
-        });
+        await subscriptionFound.update(
+            { deleted: true }
+        );
 
         return subscriptionFound;
 
@@ -32,4 +28,5 @@ const updateSubscriptionController = async (name, price, included, notIncluded, 
     }
 }
 
-module.exports = updateSubscriptionController;
+module.exports = deleteSubscriptionController;
+
