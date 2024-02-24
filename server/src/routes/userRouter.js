@@ -9,9 +9,9 @@ const getUser = require('../handlers/userHandler/getUser');
 const getAllUsers = require('../handlers/userHandler/getAllUsers');
 const verifyToken = require('../middlewares/verifyToken');
 
-userRouter.get('/', getUser);
-
 userRouter.get('/', getAllUsers);
+
+userRouter.get('/:userId', getUser);
 
 userRouter.put('/:userId', verifyToken, updateUser);
 
