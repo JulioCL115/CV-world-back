@@ -17,9 +17,9 @@ userRouter.put('/:userId', verifyToken, updateUser);
 
 userRouter.post('/register', createUser);
 
-userRouter.post('/login', loginUser);
-
 userRouter.post('/firebase', loginFirebase);
+
+userRouter.post('/login', loginUser);
 
 userRouter.put('/delete', verifyToken, deleteUser);
 
