@@ -9,10 +9,9 @@ const getAllCommentsController = async () => {
         return allCommentsFound;
 
     } catch (error) {
-        console.error("Error searching for Languages: ", error);
+        console.error("Error searching for Comments: ", error);
         throw error;
     }
 };
-
 
 module.exports = getAllCommentsController;

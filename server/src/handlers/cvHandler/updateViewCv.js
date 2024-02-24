@@ -4,8 +4,6 @@ const updateViewCv = async (req, res) => {
     try {
         const { cvId } = req.params;
 
-        console.log("ID DEL CV EN UPDATE VIEWS: " + cvId);
-
         if(!cvId) {
             return res.status(400).json({ error: "ID is required" });
         }

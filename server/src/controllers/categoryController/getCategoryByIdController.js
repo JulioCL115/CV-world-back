@@ -7,7 +7,6 @@ const getCategoryByIdController = async (categoryId) => {
         })
 
         return categoryFound;
-
     } catch (error) {
         console.error("Error searching Category: ", error);
         throw error;

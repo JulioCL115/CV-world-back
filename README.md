@@ -1,8 +1,8 @@
 # CV-world
 
 # User
-GET  "http://localhost:3001/user?email=emailUsuario" --> to get user by email
 GET  "http://localhost:3001/user" --> to get all users
+GET  "http://localhost:3001/user/:userId" --> to get user by id
 POST "http://localhost:3001/user/register" --> to sign up
 POST "http://localhost:3001/user/firebase" --> to sign up and log in with firebase
 PUT "http://localhost:3001/user/:userId" --> to update user
@@ -45,4 +45,7 @@ PUT "http://localhost:3001/comment/delete/:commentId" --> to delete a comment
 
 # Payment
 POST "http://localhost:3001/create-order/:userId" --> to create a payment
-POST "http://localhost:3001/webhook/:userId/:subscriptionId"
+POST "http://localhost:3001/webhook/:userId/:subscriptionId" 
+
+
+

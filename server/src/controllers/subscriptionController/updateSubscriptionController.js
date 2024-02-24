@@ -2,7 +2,6 @@ const { Subscription } = require('../../db');
 
 const updateSubscriptionController = async (name, price, included, notIncluded, subscriptionId) => {
     try {
-
         const subscriptionFound = await Subscription.findByPk(subscriptionId);
 
         if (!subscriptionFound) {

@@ -7,7 +7,6 @@ const getAllCategoriesController = async () => {
         });
 
         return allCategoriesFound;
-
     } catch (error) {
         console.error("Error searching for categories: ", error);
         throw error;

@@ -5,13 +5,13 @@ const loginUser = require('../handlers/userHandler/loginUser');
 const loginFirebase = require('../handlers/userHandler/loginFirebase');
 const deleteUser = require('../handlers/userHandler/deleteUser');
 const updateUser = require('../handlers/userHandler/updateUser');
-const getUser = require('../handlers/userHandler/getUser');
+const getUserById = require('../handlers/userHandler/getUserById');
 const getAllUsers = require('../handlers/userHandler/getAllUsers');
 const verifyToken = require('../middlewares/verifyToken');
 
 userRouter.get('/', getAllUsers);
 
-userRouter.get('/:userId', getUser);
+userRouter.get('/:userId', getUserById);
 
 userRouter.put('/:userId', verifyToken, updateUser);
 

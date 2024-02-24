@@ -1,4 +1,4 @@
-const getAllCommentsController = require('../../controllers/commentController/getAllCommentsController'); 
+const getAllCommentsController = require('../../controllers/commentController/getAllCommentsController');
 
 const getAllComments = async (req, res) => {
     try {
@@ -10,7 +10,6 @@ const getAllComments = async (req, res) => {
 
         res.status(200).json(allComments);
     } catch (error) {
-
         res.status(500).json({ error: error.message });
     }
 };

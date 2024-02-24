@@ -19,5 +19,4 @@ conn.sync({ force: true })
     .then(() => populateSubscription())
     .then(() => populateUsers())
     .then(() => populateCv())
-
     .catch((error) => console.error(error));

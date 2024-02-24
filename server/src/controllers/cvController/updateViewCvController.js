@@ -16,16 +16,11 @@ const updateViewCvController = async (cvId) => {
             throw error;
         }
 
-        // const cvViewsUpdated = await cvFound.update(
-        //     { where: { views: cvFound.views + 1 } }
-        // );
-
-        // return cvViewsUpdated;
-
         cvFound.views += 1;
+        
         await cvFound.save();
 
-        return cvFound
+        return cvFound;
         
     } catch (error) {
         console.error('Error updating CV:', error);
