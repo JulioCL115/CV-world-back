@@ -7,7 +7,7 @@ const getCvByIdController = async (cvId) => {
             include: [
                 {
                     model: Comment,
-                    include: [{ model: User, attributes: ['name', 'photo'] }] // Include user data with comments
+                    include: [{ model: User, attributes: ['name', 'photo', 'id'] }] // Include user data with comments
                 },
                 {
                     model: User,
@@ -61,7 +61,8 @@ const getCvByIdController = async (cvId) => {
                 comment: comment.comment,
                 createdAt: formatDate(comment.createdAt),
                 userImage: comment.User.photo ? comment.User.photo : null, // Access the user's photo
-                userName: comment.User.name // Access the user's username
+                userName: comment.User.name, // Access the user's username
+                userId: comment.User.id, // Access the user's username
             }))
         };
 
