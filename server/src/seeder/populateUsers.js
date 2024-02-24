@@ -163,14 +163,13 @@ async function populateUsers() {
         Users.forEach(user => {
             user.SubscriptionId = subscriptionIds[Math.floor(Math.random() * subscriptionIds.length)];
         });
-
+ 
         for (const user of Users) {
             const existingUser = await User.findOne({ where: { email: user.email } });
             if (!existingUser) {
                 await User.create(user);
             }
         }
-
         console.log("Users table populated successfully");
     } catch (error) {
         // check if error is a SequelizeUniqueConstraintError

@@ -1,4 +1,4 @@
-const { Cv, Category, Language, User } = require("../db");
+const { Cv, Category, Language, User, Subscription } = require("../db");
 
 async function populateCv() {
   try {
@@ -906,51 +906,58 @@ async function populateCv() {
             }
         ];
 
-    // asignarle a cada Cv un category ID random
-    const categories = await Category.findAll()
-    const categoriesIds = categories.map(category => category.id);
-    Cvs.forEach(cv => {
-        cv.CategoryId = categoriesIds[Math.floor(Math.random() * categoriesIds.length)];
-    });
-
-    // asginarle a cada Cv un languageId
-    const languages = await Language.findAll()
-    const languagesIds = languages.map(language => language.id);
-    Cvs.forEach(cv => {
-        cv.LanguageId = languagesIds[Math.floor(Math.random() * languagesIds.length)];
-    });
-
-    const users = await User.findAll()
-    const usersIds = users.map(user => user.id);
-    Cvs.forEach(cv => {
-        cv.UserId = usersIds[Math.floor(Math.random() * usersIds.length)];
-    });
-
-    for (const cv of Cvs) {
-        cv.CategoryId = categoriesIds[Math.floor(Math.random() * categoriesIds.length)];
-        cv.LanguageId = languagesIds[Math.floor(Math.random() * languagesIds.length)];
-        cv.UserId = usersIds[Math.floor(Math.random() * usersIds.length)];
-
-        const user = users.find(user => user.id === cv.UserId);
-        if (user.subscription !== 'Plan Premium') {
-            const userCvsCount = await Cv.count({
-                where: {
-                    UserId: user.id,
-                    deleted: false
+        const categories = await Category.findAll();
+        const categoriesIds = categories.map(category => category.id);
+        
+        const languages = await Language.findAll();
+        const languagesIds = languages.map(language => language.id);
+        
+        const users = await User.findAll({ include: [Subscription] });
+        const usersIds = users.map(user => user.id);
+        
+        for (const cv of Cvs) {
+            // Asignar IDs de usuario, categoría y lenguaje de forma aleatoria
+            cv.UserId = usersIds[Math.floor(Math.random() * usersIds.length)];
+            cv.CategoryId = categoriesIds[Math.floor(Math.random() * categoriesIds.length)];
+            cv.LanguageId = languagesIds[Math.floor(Math.random() * languagesIds.length)];
+        
+            // Obtener el usuario actual
+            const user = users.find(user => user.id === cv.UserId);
+        
+            if (!user) {
+                console.error(`User with ID ${cv.UserId} not found`);
+                continue;
+            }
+        
+            // Verificar la suscripción del usuario
+            if (user.Subscription.name === 'Plan Premium') {
+                // Si el usuario tiene suscripción premium, no hay límite en la cantidad de CVs
+                const existingCv = await Cv.findOne({ where: { name: cv.name, description: cv.description } });
+                if (!existingCv) {
+                    await Cv.create(cv);
                 }
-            });
-
-            if (userCvsCount >= 1) {
-                console.log(`User with ID ${user.id} cannot create more than 1 CV without paying the subscription`);
-                continue; // Salta a la siguiente iteración del bucle for
+            } else {
+                // Contar la cantidad de CVs creados por el usuario
+                const userCvsCount = await Cv.count({
+                    where: {
+                        UserId: user.id,
+                        deleted: false
+                    }
+                });
+        
+                // Si el usuario ya tiene un CV y no es premium, evitar la creación
+                if (userCvsCount >= 1) {
+                    console.log(`User with ID ${user.id} cannot create more than 1 CV without paying the subscription`);
+                    continue; // Saltar a la siguiente iteración del bucle
+                }
+        
+                // Verificar si ya existe un CV con el mismo nombre y descripción
+                const existingCv = await Cv.findOne({ where: { name: cv.name, description: cv.description } });
+                if (!existingCv) {
+                    await Cv.create(cv);
+                }
             }
         }
-
-        const existingCv = await Cv.findOne({ where: { name: cv.name, description: cv.description } });
-        if (!existingCv) {
-            await Cv.create(cv);
-        }
-    }
 
     console.log("Cv table populated successfully");
   } catch (error) {
@@ -964,3 +971,50 @@ async function populateCv() {
 };
 
 module.exports = populateCv;
+
+/*
+        const categories = await Category.findAll();
+        const categoriesIds = categories.map(category => category.id);
+        
+        const languages = await Language.findAll();
+        const languagesIds = languages.map(language => language.id);
+        
+        const users = await User.findAll({ include: [Subscription] });
+        const usersIds = users.map(user => user.id);
+        
+        for (const cv of Cvs) {
+            // Asignar IDs de usuario, categoría y lenguaje de forma aleatoria
+            cv.UserId = usersIds[Math.floor(Math.random() * usersIds.length)];
+            cv.CategoryId = categoriesIds[Math.floor(Math.random() * categoriesIds.length)];
+            cv.LanguageId = languagesIds[Math.floor(Math.random() * languagesIds.length)];
+        
+            // Obtener el usuario actual
+            const user = users.find(user => user.id === cv.UserId);
+            
+            // Verificar la suscripción del usuario
+            if (user.Subscription.name !== 'Plan Premium') {
+                // Contar la cantidad de CVs creados por el usuario
+                const userCvsCount = await Cv.count({
+                    where: {
+                        UserId: user.id,
+                        deleted: false
+                    }
+                });
+        
+                // Si el usuario ya tiene un CV y no es premium, evitar la creación
+                if (userCvsCount >= 1) {
+                    console.log(`User with ID ${user.id} cannot create more than 1 CV without paying the subscription`);
+                    continue; // Saltar a la siguiente iteración del bucle
+                }
+            }
+        
+            // Verificar si ya existe un CV con el mismo nombre y descripción
+            const existingCv = await Cv.findOne({ where: { name: cv.name, description: cv.description } });
+            if (!existingCv) {
+                // Si no existe, crear el CV
+                await Cv.create(cv);
+            }
+        }
+
+
+*/
