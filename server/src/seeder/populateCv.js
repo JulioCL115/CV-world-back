@@ -926,8 +926,26 @@ async function populateCv() {
         cv.UserId = usersIds[Math.floor(Math.random() * usersIds.length)];
     });
 
-    // iterar los Cvs y fijarse si existe uno con ese nombre, si no existe, lo crea
     for (const cv of Cvs) {
+        cv.CategoryId = categoriesIds[Math.floor(Math.random() * categoriesIds.length)];
+        cv.LanguageId = languagesIds[Math.floor(Math.random() * languagesIds.length)];
+        cv.UserId = usersIds[Math.floor(Math.random() * usersIds.length)];
+
+        const user = users.find(user => user.id === cv.UserId);
+        if (user.subscription !== 'Plan Premium') {
+            const userCvsCount = await Cv.count({
+                where: {
+                    UserId: user.id,
+                    deleted: false
+                }
+            });
+
+            if (userCvsCount >= 1) {
+                console.log(`User with ID ${user.id} cannot create more than 1 CV without paying the subscription`);
+                continue; // Salta a la siguiente iteración del bucle for
+            }
+        }
+
         const existingCv = await Cv.findOne({ where: { name: cv.name, description: cv.description } });
         if (!existingCv) {
             await Cv.create(cv);
