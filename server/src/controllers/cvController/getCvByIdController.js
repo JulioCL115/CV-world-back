@@ -49,6 +49,7 @@ const getCvByIdController = async (cvId) => {
         const cvFormat = {
             image: cvFound.image,
             id: cvFound.id,
+            name: cvFound.name,
             header: cvFound.header,
             description: cvFound.description,
             contact: cvFound.contact,
