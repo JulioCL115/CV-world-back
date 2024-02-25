@@ -9,10 +9,6 @@ const getCvByIdController = async (cvId) => {
             where: { id: cvId, deleted: false },
             include: [
                 {
-                    model: Comment,
-                    attributes: ['name'] 
-                },
-                {
                     model: User,
                     attributes: ['name', 'photo'] 
                 },
