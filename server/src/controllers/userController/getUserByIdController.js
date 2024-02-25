@@ -8,17 +8,20 @@ const getUserByIdController = async (userId) => {
                     model: Subscription,
                 },
                 {
-                    model: Cv
+                    model: Cv,
+                    where: {
+                        deleted: false,
+                    },
+                    required: false,
                 },
             ],
         });
 
-        if (userFound) {
-            userFound.Cvs = userFound.Cvs.filter(cv => !cv.deleted);
+        if (!userFound.Cvs) {
+            userFound.Cvs = [];
         }
 
         return userFound;
-
     } catch (error) {
         console.error("Error searching for User: ", error);
         throw error;
