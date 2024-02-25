@@ -947,7 +947,6 @@ async function populateCv() {
         
                 // Si el usuario ya tiene un CV y no es premium, evitar la creación
                 if (userCvsCount >= 1) {
-                    console.log(`User with ID ${user.id} cannot create more than 1 CV without paying the subscription`);
                     continue; // Saltar a la siguiente iteración del bucle
                 }
         
