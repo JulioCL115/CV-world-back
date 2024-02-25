@@ -9,14 +9,9 @@ const getCvByIdController = async (cvId) => {
         const cvFound = await Cv.findOne({
             where: { id: cvId, deleted: false },
             include: [
-                // {
-                //     model: Comment,
-                //     where: { deleted: false },
-                //     include: [{ model: User, attributes: ['name', 'photo', 'id'] }] // Include user data with comments
-                // },
                 {
                     model: User,
-                    attributes: ['name', 'photo'] // Include user's name and image
+                    attributes: ['name', 'photo'] 
                 },
                 {
                     model: Category,
@@ -29,7 +24,6 @@ const getCvByIdController = async (cvId) => {
             ]
         });
 
-        console.log(cvFound)
 
         if (!cvFound) {
             const error = new Error('CV not found');
@@ -39,7 +33,7 @@ const getCvByIdController = async (cvId) => {
 
         const comments = await Comment.findAll({
             where: { CvId: cvId, deleted: false },
-            include: [{ model: User, attributes: ['name', 'photo', 'id'] }] // Include user data with comments
+            include: [{ model: User, attributes: ['name', 'photo', 'id'] }] 
         })
 
         if (!comments) {
@@ -63,15 +57,15 @@ const getCvByIdController = async (cvId) => {
             otherInterests: cvFound.otherInterests,
             category: cvFound.Category,
             language: cvFound.Language,
-            userName: cvFound.User.name, // Access the user's username
-            userImage: cvFound.User.photo ? cvFound.User.photo : null, // Access the user's photo
+            userName: cvFound.User.name, 
+            userImage: cvFound.User.photo ? cvFound.User.photo : null, 
             Comments: cvFound.Comments.map((comment) => ({
                 id: comment.id,
                 comment: comment.comment,
                 createdAt: formatDate(comment.createdAt),
-                userImage: comment.User.photo ? comment.User.photo : null, // Access the user's photo
-                userName: comment.User.name, // Access the user's username
-                userId: comment.User.id, // Access the user's username
+                userImage: comment.User.photo ? comment.User.photo : null, 
+                userName: comment.User.name, 
+                userId: comment.User.id, 
             }))
         };
 
