@@ -48,9 +48,35 @@ const postCvController = async (name, image, header, description, experience, ed
             throw error;
         }
 
+        const userFound = await User.findByPk(userId, {
+            include: [
+                {
+                    model: Subscription,
+                    attributes: ['name'], 
+                }
+            ]
+        });
+
+        const subscriptionName = userFound.Subscription ? userFound.Subscription.name : null;
+
+        if(subscriptionName && subscriptionName !== 'Plan Premium') {
+
+            const userCvsCount = await Cv.count({
+                where: {
+                    UserId: userId,
+                    deleted: false 
+                }
+            });
+
+            if (userCvsCount > 0) {
+                const error = new Error('You cannot create more than one CV without paying the subscription');
+                error.statusCode = 403; 
+                throw error;
+            }
+        }
+
         const currentDate = new Date();
         const formattedDate = currentDate.toISOString().slice(0, 10);
-
 
         const newCv = await Cv.create({
             name,

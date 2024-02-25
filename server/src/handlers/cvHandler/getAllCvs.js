@@ -8,20 +8,28 @@ const getAllCvs = async (req, res) => {
         const offset = parseInt(req.query.offset ? req.query.offset : 0);
         const limit = parseInt(req.query.limit ? req.query.limit : 16);
 
-        const { totalCvs, cvs } = await getCvByQueryController(search, categories, languages, limit, offset);
+        const sortByDate =  sort === "date" ? true : false;
+        const sortByViews = sort === "views" ? true : false;
 
-        if (!cvs || cvs.length === 0) {
+        const { totalCvs, cvs: cvss } = await getCvByQueryController(
+            search,
+            categories,
+            languages,
+            limit,
+            offset,
+            sortByViews,
+            sortByDate
+        );
+
+        if (!cvss || cvss.length === 0) {
             return res.status(404).json({ error: "CVs not found." });
         }
 
-        if (sort) {
-            if (sort === "views") {
-                cvs.sort((a, b) => b.views - a.views);
-            }
+        const cvs = cvss.map(cv => cv.get({ plain: true }))
 
-            if (sort === "date") {
-                cvs.sort((a, b) => new Date(b.creationDate) - new Date(a.creationDate));
-            }
+        for (let i = 0; i < cvs.length; i++) {
+            // log cvId userId and subscriptionId
+            console.log(cvs[i].id, cvs[i].User.name, cvs[i].User.Subscription.name)
         }
 
         const totalPages = Math.ceil(totalCvs / limit);

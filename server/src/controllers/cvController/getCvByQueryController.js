@@ -1,8 +1,7 @@
 const { Cv, Category, Language, User, Subscription } = require('../../db');
 const { Op } = require('sequelize');
-const util = require('util');
 
-const getCvByQueryController = async (search, categories, languages, limit, offset) => {
+const getCvByQueryController = async (search, categories, languages, limit, offset, sortByViews, sortByDate) => {
     try {
         const query = []
 
@@ -47,11 +46,11 @@ const getCvByQueryController = async (search, categories, languages, limit, offs
                     [Op.in]: categoriesIds
                 }
             }
-
             query.push(categoriesFilter);
         }
 
         if (languages) {
+
             const languagesFound = await Language.findAll({
                 where: {
                     name: {
@@ -81,16 +80,24 @@ const getCvByQueryController = async (search, categories, languages, limit, offs
                 {
                     model: User,
                     include: [
-                        { model: Subscription, attributes: ['name'] }
+                        { model: Subscription, attributes: ['price', 'name'] }
                     ],
                     attributes: ['name', 'photo']
                 }
+            ],
+            order: [
+                [User , Subscription, 'price', 'DESC'] // Sort by Subscription name in ascending order
             ]
         }
 
-        //print all statements in query for each
-        console.log(util.inspect(completeQuery, { depth: null, colors: true }));
+        if (sortByDate) {
+            completeQuery.order.push(['creationDate', 'DESC']);
+        }
 
+        if (sortByViews) {
+            completeQuery.order.push(['views', 'DESC']);
+        }
+        
         const cvsByQueryFound = await Cv.findAndCountAll(completeQuery);
 
         return {

@@ -4,6 +4,8 @@ const deleteComment = async (req, res) => {
     try {
         const { commentId } = req.params;
 
+        console.log('ID DE COMENTARIO' + commentId);
+
         if (!commentId) {
             return res.status(400).json({ error: "Please provide a valid ID in the request parameters" });
         }
