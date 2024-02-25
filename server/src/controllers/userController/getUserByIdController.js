@@ -10,11 +10,14 @@ const getUserByIdController = async (userId) => {
                 },
                 {
                     model: Cv,
+                    where: { deleted: false }
                 },
             ],
-        })
+        });
 
-        return userFound
+        console.log('AAAAAAAAAAAAAAAAA' + userFound )
+
+        return userFound;
 
     } catch (error) {
         console.error("Error searching for User: ", error);
