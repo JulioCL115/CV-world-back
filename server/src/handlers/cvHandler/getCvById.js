@@ -8,6 +8,8 @@ const getCvById = async (req, res) => {
             return res.status(400).json({ error: "ID is required" });
         }
 
+        console.log('cvId:', cvId)
+
         const cvFound = await getCvByIdController(cvId);
 
         if(!cvFound) {
