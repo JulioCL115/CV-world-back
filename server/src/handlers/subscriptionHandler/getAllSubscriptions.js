@@ -10,7 +10,6 @@ const getAllSubscriptions = async (req, res) => {
 
         res.status(200).json(allSubscriptions);
     } catch (error) {
-
         res.status(500).json({ error: error.message });
     }
 };

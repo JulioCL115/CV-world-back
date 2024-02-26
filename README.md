@@ -28,6 +28,7 @@ GET "http://localhost:3001/subscription/dashboard/:subscriptionId" --> to get a 
 POST "http://localhost:3001/subscription" --> to create a subscription (requires verify Token)
 PUT "http://localhost:3001/subscription/:subscriptionId" --> to update a subscription (requires verify Token)
 PUT "http://localhost:3001/subscription/delete/:subscriptionId" --> to delete a subscription (requires verify Token)
+PUT "http://localhost:3001/subscription/restore/:subscriptionId" --> to restore a subscription (requires verify Token)
 
 # Category
 GET "http://localhost:3001/category" --> to get all category
@@ -37,6 +38,7 @@ GET "http://localhost:3001/category/dashboard/:categoryId" --> to get a category
 POST "http://localhost:3001/category" --> to create a category (requires verify Token)
 PUT "http://localhost:3001/category/:categoryId" --> to update a category (requires verify Token)
 PUT "http://localhost:3001/category/delete/:categoryId" --> to delete a category (requires verify Token)
+PUT "http://localhost:3001/category/restore/:categoryId" --> to restore a category (requires verify Token)
 
 # Language
 GET "http://localhost:3001/language" --> to get all language 
@@ -46,6 +48,7 @@ GET "http://localhost:3001/language/dashboard/:languageId" --> to get a language
 POST "http://localhost:3001/language" --> to create a language (requires verify Token)
 PUT "http://localhost:3001/language/:languageId" --> to update a language (requires verify Token)
 PUT "http://localhost:3001/language/delete/:languageId" --> to delete a language (requires verify Token)
+PUT "http://localhost:3001/language/restore/:languageId" --> to restore a language (requires verify Token)
 
 # Comment
 GET "http://localhost:3001/comment" --> to get all comments
@@ -54,6 +57,7 @@ GET "http://localhost:3001/comment/dashboard" --> to get all comments dashboard 
 GET "http://localhost:3001/comment/dashboard/:commentId" --> to get comment by Id dashboard (requires verify Token)
 POST "http://localhost:3001/comment/:cvId/:userId" --> to create a comment (requires verify Token)
 PUT "http://localhost:3001/comment/delete/:commentId" --> to delete a comment (requires verify Token)
+PUT "http://localhost:3001/comment/restore/:commentId" --> to restore a comment (requires verify Token)
 
 # Payment
 POST "http://localhost:3001/create-order/:userId" --> to create a payment (requires verify Token)
