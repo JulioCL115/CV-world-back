@@ -1,7 +1,7 @@
 const { MercadoPagoConfig, Preference, } = require("mercadopago");
 const { ACCESS_TOKEN } = process.env
 
-const { User,Subscription } = require('../../db')
+const { User, Subscription } = require('../../db')
 const axios = require('axios');
 
 const createPayment = async (req, res) => {
@@ -32,7 +32,7 @@ const createPayment = async (req, res) => {
         failure: "http://localhost:3001/failure",
         pending: "http://localhost:3001/pending",
       },
-      notification_url: `https://c19d-45-70-222-62.ngrok-free.app/webhook/${userId}/${subscriptionId}`,
+      notification_url: `https://8603-45-70-222-62.ngrok-free.app/webhook/${userId}/${subscriptionId}`,
     };
 
     const response = await preference.create({ body });
@@ -50,7 +50,7 @@ const createPayment = async (req, res) => {
 const processedWebhooks = new Set();
 
 const receiveWebhooks = async (req, res) => {
-  const { userId ,subscriptionId } = req.params;
+  const { userId, subscriptionId } = req.params;
   const payment = req.query;
   const userIdString = userId.toString();
 
@@ -72,14 +72,15 @@ const receiveWebhooks = async (req, res) => {
           Authorization: `Bearer TEST-1127404855878397-021315-d22d177cf405ab6d16972fd357795017-1680068297`
         }
       });
-      const response = await User.findByPk(userIdString);
-      console.log("Usuario encontrado:", response);
+      const userFound = await User.findByPk(userIdString);
+      console.log("Usuario encontrado:", userFound);
 
-      const subscription = await Subscription.findOne({ where: { id: subscriptionId } });
-      console.log("Subscripción encontrada:", subscription);
+      const subscriptionFound = await Subscription.findByPk(subscriptionId);
+      console.log("Subscripción encontrada:", subscriptionFound);
 
       const updateResult = await User.update(
-        { SubscriptionId:subscription.id }, { where: { id: response.id } }
+        { SubscriptionId: subscriptionFound.id },
+        { where: { id: userFound.id } }
       );
       console.log("Resultado de la actualización:", updateResult);
 
@@ -91,7 +92,6 @@ const receiveWebhooks = async (req, res) => {
     res.status(500).json({ error: error.message })
   }
 }
-
 
 module.exports = {
   createPayment,

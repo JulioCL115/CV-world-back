@@ -5,16 +5,22 @@ const getLanguageById = require('../handlers/languageHandler/getLanguageById');
 const createLanguage = require('../handlers/languageHandler/createLanguage');
 const deleteLanguage = require('../handlers/languageHandler/deleteLanguage');
 const updateLanguage = require('../handlers/languageHandler/updateLanguage');
+const getAllLanguagesDashboard = require('../handlers/languageHandler/getAllLanguagesDashboard');
+const getLanguageByIdDashboard = require('../handlers/languageHandler/getLanguageByIdDashboard');
 const verifyToken = require('../middlewares/verifyToken');
 
-languageRouter.post('/', createLanguage);
+languageRouter.get('/dashboard/:languageId', verifyToken, getLanguageByIdDashboard);
 
-languageRouter.get('/', getAllLanguages);
+languageRouter.get('/dashboard', verifyToken, getAllLanguagesDashboard);
+
+languageRouter.put('/delete/:languageId', verifyToken, deleteLanguage);
+
+languageRouter.post('/', verifyToken, createLanguage);
 
 languageRouter.get('/:languageId', getLanguageById);
 
-languageRouter.put('/:languageId', updateLanguage);
+languageRouter.get('/', getAllLanguages);
 
-languageRouter.put('/delete/:languageId', verifyToken, deleteLanguage);
+languageRouter.put('/:languageId', verifyToken, updateLanguage);
 
 module.exports = languageRouter;
