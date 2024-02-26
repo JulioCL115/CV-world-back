@@ -1,7 +1,7 @@
 const { User, Cv, Subscription } = require("../../db");
 
 const getUserByIdController = async (userId) => {
-    try {   
+    try {
         const userFound = await User.findByPk(userId, {
             include: [
                 {
@@ -9,17 +9,19 @@ const getUserByIdController = async (userId) => {
                 },
                 {
                     model: Cv,
+                    where: {
+                        deleted: false,
+                    },
+                    required: false,
                 },
             ],
         });
 
-        if (userFound) {
-            // Manually filter out deleted CVs
-            userFound.Cvs = userFound.Cvs.filter(cv => !cv.deleted);
+        if (!userFound.Cvs) {
+            userFound.Cvs = [];
         }
 
         return userFound;
-
     } catch (error) {
         console.error("Error searching for User: ", error);
         throw error;
