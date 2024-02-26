@@ -2,7 +2,6 @@ const getAllSubscriptionsController = require('../../controllers/subscriptionCon
 
 const getAllSubscriptions = async (req, res) => {
     try {
-
         const allSubscriptions = await getAllSubscriptionsController();
 
         if(!allSubscriptions || allSubscriptions.length === 0) {

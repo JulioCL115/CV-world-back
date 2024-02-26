@@ -1,8 +1,8 @@
 # CV-world
 
 # User
-GET  "http://localhost:3001/user?email=emailUsuario" --> to get user by email
 GET  "http://localhost:3001/user" --> to get all users
+GET  "http://localhost:3001/user/:userId" --> to get user by id
 POST "http://localhost:3001/user/register" --> to sign up
 POST "http://localhost:3001/user/firebase" --> to sign up and log in with firebase
 PUT "http://localhost:3001/user/:userId" --> to update user
@@ -13,6 +13,7 @@ GET "http://localhost:3001/cv?search=searchValue&sort=sortValue&page=pageValue&l
 GET "http://localhost:3001/cv/:cvId" --> to get a cv by id
 POST "http://localhost:3001/cv/:userId" --> to create a cv
 PUT "http://localhost:3001/cv/:cvId" --> to update a cv by id
+PUT "http://localhost:3001/cv/updateView/:cvId" --> to update views
 PUT "http://localhost:3001/cv/delete/:cvId" --> to delete a cv by id
 
 # Subscription
@@ -37,6 +38,8 @@ PUT "http://localhost:3001/language/:languageId" --> to update a language
 PUT "http://localhost:3001/language/delete/:languageId" --> to delete a language
 
 # Comment
+GET "http://localhost:3001/comment" --> to get all comments
+GET "http://localhost:3001/comment/:commentId" --> to get comment by Id
 POST "http://localhost:3001/comment/:cvId/:userId" --> to create a comment
 PUT "http://localhost:3001/comment/delete/:commentId" --> to delete a comment
 
