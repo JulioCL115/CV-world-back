@@ -1,10 +1,8 @@
 const { User } = require('../../db');
 
-const deleteUserController = async (email) => {
+const deleteUserController = async (userId) => {
     try {
-        const userFound = await User.findOne({
-            where: { email }
-        });
+        const userFound = await User.findByPk(userId);
 
         if (!userFound) {
             const error = new Error("User not found for deleting");

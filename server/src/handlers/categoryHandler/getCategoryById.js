@@ -16,7 +16,6 @@ const getCategoryById = async (req, res) => {
 
         res.status(200).json(categoryFound);
     } catch (error) {
-
         res.status(500).json({ error: error.message });
     }
 };
