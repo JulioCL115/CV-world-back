@@ -8,7 +8,8 @@ GET  "http://localhost:3001/user/dashboard/:userId" --> to get user by id dashbo
 POST "http://localhost:3001/user/register" --> to sign up
 POST "http://localhost:3001/user/firebase" --> to sign up and log in with firebase
 PUT "http://localhost:3001/user/:userId" --> to update user (requires verify Token)
-PUT "http://localhost:3001/user/delete" --> to delete user (requires verify Token)
+PUT "http://localhost:3001/user/delete/:userId" --> to delete user (requires verify Token)
+PUT "http://localhost:3001/user/restore/:userId" --> to restore user (requires verify Token)
 
 # Cv
 GET "http://localhost:3001/cv?search=searchValue&sort=sortValue&page=pageValue&limit=limitValue&categories=categoriesValue&languages=languageValue" --> to get all cvs filtered and paginated
@@ -19,6 +20,7 @@ POST "http://localhost:3001/cv/:userId" --> to create a cv (requires verify Toke
 PUT "http://localhost:3001/cv/:cvId" --> to update a cv by id
 PUT "http://localhost:3001/cv/updateView/:cvId" --> to update views 
 PUT "http://localhost:3001/cv/delete/:cvId" --> to delete a cv by id (requires verify Token)
+PUT "http://localhost:3001/cv/restore/:cvId" --> to restore a cv by id (requires verify Token)
 
 # Subscription
 GET "http://localhost:3001/subscription" --> to get all subscription
