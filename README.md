@@ -29,7 +29,6 @@ POST "http://localhost:3001/subscription" --> to create a subscription (requires
 PUT "http://localhost:3001/subscription/:subscriptionId" --> to update a subscription (requires verify Token)
 PUT "http://localhost:3001/subscription/delete/:subscriptionId" --> to delete a subscription (requires verify Token)
 
-
 # Category
 GET "http://localhost:3001/category" --> to get all category
 GET "http://localhost:3001/category/:categoryId" --> to get a category by id
