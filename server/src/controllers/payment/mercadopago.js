@@ -32,7 +32,7 @@ const createPayment = async (req, res) => {
         failure: "http://localhost:3001/failure",
         pending: "http://localhost:3001/pending",
       },
-      notification_url: `https://c19d-45-70-222-62.ngrok-free.app/webhook/${userId}/${subscriptionId}`,
+      notification_url: `https://7ecb-190-195-216-17.ngrok-free.app/webhook/${userId}/${subscriptionId}`,
     };
 
     const response = await preference.create({ body });
@@ -69,7 +69,7 @@ const receiveWebhooks = async (req, res) => {
 
       await axios.get(`https://api.mercadopago.com/v1/payments/${payment['data.id']}`, {
         headers: {
-          Authorization: `Bearer TEST-1127404855878397-021315-d22d177cf405ab6d16972fd357795017-1680068297`
+          Authorization: `Bearer ${ACCESS_TOKEN}`
         }
       });
       const response = await User.findByPk(userIdString);
