@@ -3,8 +3,9 @@ const createSubscriptionController = require('../../controllers/subscriptionCont
 const createSubscription = async (req, res) => {
     try {
         const { name, price, included, notIncluded } = req.body;
+        console.log(req.body)
 
-        const subscriptionCreated = await createSubscriptionController(name, price, included, notIncluded);
+        const subscriptionCreated = await createSubscriptionController({name, price, included, notIncluded});
 
         if (!subscriptionCreated) {
             return res.status(404).json({ error: 'Subscription not found' });

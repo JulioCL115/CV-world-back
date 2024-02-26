@@ -3,6 +3,7 @@ const createCategoryController = require('../../controllers/categoryController/c
 const createCategory = async (req, res) => {
     try {
         const { name } = req.body;
+        console.log(name)
 
         const categoryCreated = await createCategoryController(name);
 
