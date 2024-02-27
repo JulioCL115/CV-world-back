@@ -15,7 +15,7 @@ server.use(cookieParser());
 server.use(cors());
 server.use(fileUpload({ 
     useTempFiles: true, 
-    tempFileDir: "./uploads", 
+    tempFileDir: "./uploads",
 }));
 server.use(express.static(path.resolve('src/public')));
 
