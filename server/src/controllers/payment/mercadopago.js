@@ -35,7 +35,7 @@ const createPayment = async (req, res) => {
         failure: "http://localhost:3001/failure",
         pending: "http://localhost:3001/pending",
       },
-      notification_url: `https://f69f-45-70-222-54.ngrok-free.app/webhook/${userId}/${subscriptionId}`,
+      notification_url: `https://7ecb-190-195-216-17.ngrok-free.app/webhook/${userId}/${subscriptionId}`,
     };
 
     const response = await preference.create({ body });
@@ -95,9 +95,9 @@ const receiveWebhooks = async (req, res) => {
       });
 
       await transporter.sendMail({
-        from: "Subcription Cv-world <cvwordweb@gmail.com>",
+        from: "Subscription Cv-World <cvwordweb@gmail.com>",
         to: userFound.email,
-        subject: "Subcription Cv-world",
+        subject: "Subcription Cv-World",
         html: renderedHtml
     });
 
