@@ -1,5 +1,8 @@
 const createUserController = require("../../controllers/userController/createUserController");
 const { registerUserSchema } = require('../../schemas/userSchema');
+const transporter = require('../../nodemailer/mailer');
+const fs = require('fs');
+const path = require('path');
 
 const createUser = async (req, res) => {
     try {
@@ -18,6 +21,16 @@ const createUser = async (req, res) => {
             photo,
             role
         );
+
+        const emailTemplatePath = path.join(__dirname, '../../public/register.html');
+        const emailTemplate = fs.readFileSync(emailTemplatePath, 'utf-8');
+
+        await transporter.sendMail({
+            from: "Register Cv-world <cvwordweb@gmail.com>",
+            to: newUser.email,
+            subject: "Register Cv-world",
+            html: emailTemplate
+        });
 
         res.status(201).json(newUser);
     } catch (error) {
