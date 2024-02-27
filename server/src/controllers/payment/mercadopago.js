@@ -1,6 +1,9 @@
 const { MercadoPagoConfig, Preference, } = require("mercadopago");
 const { ACCESS_TOKEN } = process.env
-
+const fs = require('fs');
+const path = require('path');
+const transporter = require('../../nodemailer/mailer');
+const ejs = require('ejs');
 const { User, Subscription } = require('../../db')
 const axios = require('axios');
 
@@ -32,7 +35,7 @@ const createPayment = async (req, res) => {
         failure: "http://localhost:3001/failure",
         pending: "http://localhost:3001/pending",
       },
-      notification_url: `https://8603-45-70-222-62.ngrok-free.app/webhook/${userId}/${subscriptionId}`,
+      notification_url: `https://f69f-45-70-222-54.ngrok-free.app/webhook/${userId}/${subscriptionId}`,
     };
 
     const response = await preference.create({ body });
@@ -53,6 +56,8 @@ const receiveWebhooks = async (req, res) => {
   const { userId, subscriptionId } = req.params;
   const payment = req.query;
   const userIdString = userId.toString();
+  const emailTemplatePath = path.join(__dirname, '../../public/subscription.html');
+ const emailTemplate = fs.readFileSync(emailTemplatePath, 'utf-8');
 
   try {
     console.log("este es el payment,", payment);
@@ -69,7 +74,7 @@ const receiveWebhooks = async (req, res) => {
 
       await axios.get(`https://api.mercadopago.com/v1/payments/${payment['data.id']}`, {
         headers: {
-          Authorization: `Bearer TEST-1127404855878397-021315-d22d177cf405ab6d16972fd357795017-1680068297`
+          Authorization: `Bearer ${ACCESS_TOKEN}`
         }
       });
       const userFound = await User.findByPk(userIdString);
@@ -83,6 +88,18 @@ const receiveWebhooks = async (req, res) => {
         { where: { id: userFound.id } }
       );
       console.log("Resultado de la actualización:", updateResult);
+
+      const renderedHtml = ejs.render(emailTemplate, {
+        paymentId: paymentId,
+        total: subscriptionFound.price 
+      });
+
+      await transporter.sendMail({
+        from: "Subcription Cv-world <cvwordweb@gmail.com>",
+        to: userFound.email,
+        subject: "Subcription Cv-world",
+        html: renderedHtml
+    });
 
       processedWebhooks.add(paymentId);
       res.send("webhook")
