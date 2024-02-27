@@ -7,21 +7,23 @@ const getSubscriptionById = require('../handlers/subscriptionHandler/getSubscrip
 const deleteSubscription = require('../handlers/subscriptionHandler/deleteSubscription');
 const getAllSubscriptionsDashboard = require('../handlers/subscriptionHandler/getAllSubscriptionsDashboard');
 const getSubscriptionByIdDashboard = require('../handlers/subscriptionHandler/getSubscriptionByIdDashboard');
+const restoreSubscription = require('../handlers/subscriptionHandler/restoreSubscription');
 const verifyToken = require('../middlewares/verifyToken');
-
-subscriptionRouter.get('/dashboard/:subscriptionId', verifyToken, getSubscriptionByIdDashboard);
 
 subscriptionRouter.get('/dashboard', verifyToken, getAllSubscriptionsDashboard);
 
+subscriptionRouter.get('/dashboard/:subscriptionId', verifyToken, getSubscriptionByIdDashboard);
+
 subscriptionRouter.put('/delete/:subscriptionId', verifyToken, deleteSubscription);
 
+subscriptionRouter.put('/restore/:subscriptionId', verifyToken, restoreSubscription);
+
 subscriptionRouter.post('/', verifyToken, createSubscription);
+
+subscriptionRouter.put('/:subscriptionId', verifyToken, updateSubscription);
 
 subscriptionRouter.get('/:subscriptionId', getSubscriptionById);
 
 subscriptionRouter.get('/', getAllSubscriptions);
-
-subscriptionRouter.put('/:subscriptionId', verifyToken, updateSubscription);
-
 
 module.exports = subscriptionRouter;

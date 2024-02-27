@@ -14,21 +14,6 @@ const createUserController = async (name, email, password, photo, role) => {
             throw error;
         }
 
-        if (userFound && userFound.deleted) {
-
-            const salt = await bcrypt.genSalt(10);
-            const hashPassword = await bcrypt.hash(password, salt);
-
-            userFound.name = name;
-            userFound.email = email.toLowerCase();
-            userFound.password = hashPassword;
-            userFound.photo = photo
-            userFound.role = role;
-            userFound.deleted = false;
-            await userFound.save();
-            return userFound;
-        }
-
         const salt = await bcrypt.genSalt(10);
         const hashPassword = await bcrypt.hash(password, salt);
 

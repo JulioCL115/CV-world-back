@@ -2,9 +2,9 @@ const deleteUserController = require('../../controllers/userController/deleteUse
 
 const deleteUser = async (req, res) => {
     try {
-        const { email } = req.body;
+        const { userId } = req.params;
 
-        const userDeleted = await deleteUserController(email);
+        const userDeleted = await deleteUserController(userId);
 
         if(!userDeleted) {
             throw new Error('Failed to delete User');

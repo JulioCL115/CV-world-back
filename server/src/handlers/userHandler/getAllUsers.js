@@ -10,7 +10,6 @@ const getAllUsers = async (req, res) => {
 
         res.status(200).json(usersFound);
     } catch (error) {
-
         res.status(500).json({ error: error.message });
     }
 };

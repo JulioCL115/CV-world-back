@@ -1,6 +1,9 @@
 const { MercadoPagoConfig, Preference, } = require("mercadopago");
 const { ACCESS_TOKEN } = process.env
-
+const fs = require('fs');
+const path = require('path');
+const transporter = require('../../nodemailer/mailer');
+const ejs = require('ejs');
 const { User, Subscription } = require('../../db')
 const axios = require('axios');
 
@@ -53,6 +56,8 @@ const receiveWebhooks = async (req, res) => {
   const { userId, subscriptionId } = req.params;
   const payment = req.query;
   const userIdString = userId.toString();
+  const emailTemplatePath = path.join(__dirname, '../../public/subscription.html');
+ const emailTemplate = fs.readFileSync(emailTemplatePath, 'utf-8');
 
   try {
     console.log("este es el payment,", payment);
@@ -83,6 +88,18 @@ const receiveWebhooks = async (req, res) => {
         { where: { id: userFound.id } }
       );
       console.log("Resultado de la actualización:", updateResult);
+
+      const renderedHtml = ejs.render(emailTemplate, {
+        paymentId: paymentId,
+        total: subscriptionFound.price 
+      });
+
+      await transporter.sendMail({
+        from: "Subcription Cv-world <cvwordweb@gmail.com>",
+        to: userFound.email,
+        subject: "Subcription Cv-world",
+        html: renderedHtml
+    });
 
       processedWebhooks.add(paymentId);
       res.send("webhook")

@@ -7,13 +7,15 @@ const fileUpload = require("express-fileupload");
 const path = require('path');
 const server = express();
 
+console.log('Prueba');
+
 server.use(morgan('dev'));
 server.use(express.json());
 server.use(cookieParser());
 server.use(cors());
 server.use(fileUpload({ 
     useTempFiles: true, 
-    tempFileDir: "./uploads", 
+    tempFileDir: "./uploads",
 }));
 server.use(express.static(path.resolve('src/public')));
 
