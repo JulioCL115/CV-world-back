@@ -95,9 +95,9 @@ const receiveWebhooks = async (req, res) => {
       });
 
       await transporter.sendMail({
-        from: "Subscription Cv-World <cvwordweb@gmail.com>",
+        from: "Subscription CV-World <cvwordweb@gmail.com>",
         to: userFound.email,
-        subject: "Subcription Cv-World",
+        subject: "Subcription CV-World",
         html: renderedHtml
     });
 

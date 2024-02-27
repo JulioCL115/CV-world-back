@@ -26,9 +26,9 @@ const createUser = async (req, res) => {
         const emailTemplate = fs.readFileSync(emailTemplatePath, 'utf-8');
 
         await transporter.sendMail({
-            from: "Register Cv-world <cvwordweb@gmail.com>",
+            from: "Register CV-World <cvwordweb@gmail.com>",
             to: newUser.email,
-            subject: "Register Cv-world",
+            subject: "Register CV-World",
             html: emailTemplate
         });
 
