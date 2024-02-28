@@ -33,9 +33,13 @@ const updateUserController = async (userId, propertiesToBeUpdated) => {
             await userFound.setSubscription(subscription);
         }
 
-        const UserUpdated = await userFound.update(propertiesToBeUpdated);
+        await userFound.update(propertiesToBeUpdated);
 
-        return UserUpdated;
+        const userUpdated = await User.findByPk(userId, {
+            include: [Subscription]
+        });
+
+        return userUpdated;
 
     } catch (error) {
         console.error('Error updating User:', error);
