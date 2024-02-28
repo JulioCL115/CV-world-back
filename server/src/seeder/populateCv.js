@@ -903,7 +903,298 @@ async function populateCv() {
                 "views": 2100,
                 "category": "Logística y Cadena de Suministro",
                 "language": "Inglés"
-            }
+            },
+            {
+                "name": "Maria Rodriguez",
+                "image": "https://img.freepik.com/foto-gratis/retrato-hermoso-mujer-joven-posicion-pared-gris_231208-10760.jpg",
+                "header": "Ingeniera de Software",
+                "description": "Ingeniera de software con experiencia en desarrollo web y móvil. Especializada en tecnologías de frontend y backend.",
+                "experience": [
+                    {
+                        "dateRange": "Jul 2017 - Presente",
+                        "company": "Tech Solutions Inc.",
+                        "role": "Ingeniera de Software",
+                        "responsibilities": "Desarrollo de aplicaciones web y móviles, implementación de soluciones escalables y mantenimiento de sistemas existentes."
+                    }
+                ],
+                "education": [
+                    {
+                        "dateRange": "Sep 2013 - Jun 2017",
+                        "institution": "Universidad Tecnológica",
+                        "career": "Ingeniería en Informática"
+                    }
+                ],
+                "contact": [
+                    {
+                        "phone": "+1122334455",
+                        "email": "maria.rodriguez@example.com",
+                        "location": "Ciudad, País",
+                        "website": "www.mariarodriguez.com"
+                    }
+                ],
+                "skills": ["Desarrollo Web", "Desarrollo Móvil", "JavaScript", "Python", "SQL"],
+                "speakingLanguages": ["Español", "Inglés"],
+                "otherInterests": ["Senderismo", "Arte", "Cocina"],
+                "creationDate": "2024-02-27",
+                "views": 1500,
+                "category": "IT y Desarrollo de Software",
+                "language": "Español"
+            },
+            {
+                "name": "John Goodman",
+                "image": "https://img.freepik.com/foto-gratis/joven-confiado_1098-20868.jpg",
+                "header": "Financial Analyst",
+                "description": "Experienced financial analyst with expertise in financial modeling, risk analysis, and investment management.",
+                "experience": [
+                    {
+                        "dateRange": "Jan 2015 - Present",
+                        "company": "Global Investments LLC",
+                        "role": "Financial Analyst",
+                        "responsibilities": "Conducting financial research, analyzing market trends, and providing investment recommendations to clients."
+                    }
+                ],
+                "education": [
+                    {
+                        "dateRange": "Sep 2011 - Jun 2015",
+                        "institution": "University of Finance",
+                        "career": "Bachelor's in Finance"
+                    }
+                ],
+                "contact": [
+                    {
+                        "phone": "+1122334455",
+                        "email": "john.smith@example.com",
+                        "location": "City, Country",
+                        "website": "www.johnsmithfinance.com"
+                    }
+                ],
+                "skills": ["Financial Modeling", "Risk Analysis", "Investment Management", "Market Research", "Portfolio Management"],
+                "speakingLanguages": ["English", "Spanish"],
+                "otherInterests": ["Tennis", "Reading", "Photography"],
+                "creationDate": "2024-02-27",
+                "views": 1800,
+                "category": "Finanzas y Contabilidad",
+                "language": "English"
+            },
+            {
+                "name": "Sophie Leclerc",
+                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvzsqEoIb6qDBuL2F9SkHcCCI7_oRFQN45v99jLZ56KwomMRIBbi5WuyjRnWAViH_N6SY&usqp=CAU",
+                "header": "Chef de Cuisine",
+                "description": "Passionate chef with extensive experience in French cuisine. Skilled in creating innovative dishes and managing kitchen operations.",
+                "experience": [
+                    {
+                        "dateRange": "Mar 2012 - Present",
+                        "company": "Le Petit Bistro",
+                        "role": "Chef de Cuisine",
+                        "responsibilities": "Menu planning, recipe development, staff training, and ensuring high-quality culinary standards."
+                    }
+                ],
+                "education": [
+                    {
+                        "dateRange": "Sep 2008 - Jun 2012",
+                        "institution": "Le Cordon Bleu",
+                        "career": "Culinary Arts"
+                    }
+                ],
+                "contact": [
+                    {
+                        "phone": "+1122334455",
+                        "email": "sophie.leclerc@example.com",
+                        "location": "City, Country",
+                        "website": "www.sophieleclerccuisine.com"
+                    }
+                ],
+                "skills": ["French Cuisine", "Menu Planning", "Recipe Development", "Kitchen Management", "Food Presentation"],
+                "speakingLanguages": ["French", "English"],
+                "otherInterests": ["Painting", "Traveling", "Wine Tasting"],
+                "creationDate": "2024-02-27",
+                "views": 2200,
+                "category": "Diseño y Creatividad",
+                "language": "English"
+            },
+            
+                {
+                    "name": "Laura García",
+                    "image": "https://static.cegos.es/content/uploads/2023/03/01165224/GettyImages-1300321639.jpg",
+                    "header": "Enfermera Registrada",
+                    "description": "Enfermera registrada con experiencia en cuidados intensivos y atención hospitalaria. Comprometida con brindar atención de alta calidad a los pacientes.",
+                    "experience": [
+                        {
+                            "dateRange": "Ene 2018 - Presente",
+                            "company": "Hospital General",
+                            "role": "Enfermera de Cuidados Intensivos",
+                            "responsibilities": "Monitoreo y atención directa a pacientes críticos, administración de medicamentos y colaboración en procedimientos médicos."
+                        }
+                    ],
+                    "education": [
+                        {
+                            "dateRange": "Sep 2014 - Jun 2018",
+                            "institution": "Escuela de Enfermería",
+                            "career": "Licenciatura en Enfermería"
+                        }
+                    ],
+                    "contact": [
+                        {
+                            "phone": "+1122334455",
+                            "email": "laura.garcia@example.com",
+                            "location": "Ciudad, País",
+                            "website": "www.lauragarciaenfermera.com"
+                        }
+                    ],
+                    "skills": ["Cuidados Intensivos", "Administración de Medicamentos", "Atención Hospitalaria", "Trabajo en Equipo", "Comunicación Efectiva"],
+                    "speakingLanguages": ["Español", "Inglés"],
+                    "otherInterests": ["Yoga", "Cocina Saludable", "Viajes"],
+                    "creationDate": "2024-02-27",
+                    "views": 1600,
+                    "category": "Salud y Cuidado de la Salud",
+                    "language": "Español"
+                },
+                {
+                    "name": "David Johnson",
+                    "image": "https://covalto-production-website.s3.amazonaws.com/Hero_Mobile_Cuenta_Personas_V1_1_8046e424ea.webp",
+                    "header": "Sales Manager",
+                    "description": "Experienced sales manager with a proven track record of driving revenue growth and building strong client relationships.",
+                    "experience": [
+                        {
+                            "dateRange": "Mar 2016 - Present",
+                            "company": "ABC Corporation",
+                            "role": "Sales Manager",
+                            "responsibilities": "Developing sales strategies, leading a sales team, and nurturing client accounts to achieve revenue targets."
+                        }
+                    ],
+                    "education": [
+                        {
+                            "dateRange": "Sep 2012 - Jun 2016",
+                            "institution": "University of Business",
+                            "career": "Bachelor's in Business Administration"
+                        }
+                    ],
+                    "contact": [
+                        {
+                            "phone": "+1122334455",
+                            "email": "david.johnson@example.com",
+                            "location": "City, Country",
+                            "website": "www.davidjohnsonsales.com"
+                        }
+                    ],
+                    "skills": ["Sales Strategy", "Team Leadership", "Client Relationship Management", "Negotiation", "Market Analysis"],
+                    "speakingLanguages": ["English", "Spanish"],
+                    "otherInterests": ["Golf", "Music", "Cooking"],
+                    "creationDate": "2024-02-27",
+                    "views": 1900,
+                    "category": "Ventas y Marketing",
+                    "language": "English"
+                },
+                {
+                    "name": "Sophia Chen",
+                    "image": "https://media.istockphoto.com/id/1360028830/es/foto/mujer-joven-sonriendo-y-haciendo-gestos-para-copiar-el-espacio.jpg?s=612x612&w=0&k=20&c=6dOb0XPJ7pOnhki5XzV6D_m0PXOrDK0hfp0XSvXVfgo=",
+                    "header": "Recruiter",
+                    "description": "Experienced recruiter with expertise in talent acquisition, interviewing, and candidate assessment. Committed to finding the best talent for organizations.",
+                    "experience": [
+                        {
+                            "dateRange": "Aug 2015 - Present",
+                            "company": "Talent Solutions LLC",
+                            "role": "Recruiter",
+                            "responsibilities": "Identifying talent needs, sourcing candidates, conducting interviews, and managing the recruitment process."
+                        }
+                    ],
+                    "education": [
+                        {
+                            "dateRange": "Sep 2011 - Jun 2015",
+                            "institution": "University of Human Resources",
+                            "career": "Bachelor's in Human Resources Management"
+                        }
+                    ],
+                    "contact": [
+                        {
+                            "phone": "+1122334455",
+                            "email": "sophia.chen@example.com",
+                            "location": "City, Country",
+                            "website": "www.sophiachenrecruiter.com"
+                        }
+                    ],
+                    "skills": ["Talent Acquisition", "Interviewing", "Candidate Assessment", "Recruitment Process Management", "HR Policies"],
+                    "speakingLanguages": ["English", "Mandarin"],
+                    "otherInterests": ["Hiking", "Photography", "Cultural Exchange"],
+                    "creationDate": "2024-02-27",
+                    "views": 1700,
+                    "category": "Recursos humanos",
+                    "language": "English"
+                },
+                {
+                    "name": "Carlos Ruiz",
+                    "image": "https://img.freepik.com/foto-gratis/chico-guapo-seguro-posando-contra-pared-blanca_176420-32936.jpg",
+                    "header": "Profesor de Matemáticas",
+                    "description": "Profesor de matemáticas con experiencia en enseñanza secundaria y preparación de estudiantes para exámenes estandarizados. Apasionado por hacer que las matemáticas sean accesibles y comprensibles para todos los estudiantes.",
+                    "experience": [
+                        {
+                            "dateRange": "Sep 2010 - Presente",
+                            "company": "High School XYZ",
+                            "role": "Profesor de Matemáticas",
+                            "responsibilities": "Impartir clases de matemáticas, desarrollar materiales didácticos, y proporcionar apoyo académico individualizado a los estudiantes."
+                        }
+                    ],
+                    "education": [
+                        {
+                            "dateRange": "Sep 2006 - Jun 2010",
+                            "institution": "Universidad Educativa",
+                            "career": "Licenciatura en Educación Matemática"
+                        }
+                    ],
+                    "contact": [
+                        {
+                            "phone": "+1122334455",
+                            "email": "carlos.ruiz@example.com",
+                            "location": "Ciudad, País",
+                            "website": "www.carlosruizprofesor.com"
+                        }
+                    ],
+                    "skills": ["Enseñanza de Matemáticas", "Desarrollo de Materiales Didácticos", "Apoyo Académico Individualizado", "Tecnología Educativa", "Evaluación del Aprendizaje"],
+                    "speakingLanguages": ["Español", "Inglés"],
+                    "otherInterests": ["Música", "Deportes", "Viajes"],
+                    "creationDate": "2024-02-27",
+                    "views": 2000,
+                    "category": "Educación y Formación",
+                    "language": "Español"
+                },
+                {
+                    "name": "Alexandra Müller",
+                    "image": "https://static.cegos.es/content/uploads/2023/03/01165224/GettyImages-1300321639.jpg",
+                    "header": "Arquitecta",
+                    "description": "Arquitecta con experiencia en diseño arquitectónico, planificación urbana y sostenibilidad. Comprometida con crear espacios innovadores y funcionales que mejoren la calidad de vida.",
+                    "experience": [
+                        {
+                            "dateRange": "Jun 2013 - Presente",
+                            "company": "Estudio de Arquitectura ABC",
+                            "role": "Arquitecta",
+                            "responsibilities": "Diseño conceptual, desarrollo de proyectos, coordinación con equipos multidisciplinarios, y supervisión de obras."
+                        }
+                    ],
+                    "education": [
+                        {
+                            "dateRange": "Sep 2007 - Jun 2013",
+                            "institution": "Universidad de Arquitectura",
+                            "career": "Licenciatura en Arquitectura"
+                        }
+                    ],
+                    "contact": [
+                        {
+                            "phone": "+1122334455",
+                            "email": "alexandra.muller@example.com",
+                            "location": "Ciudad, País",
+                            "website": "www.alexandramullerarquitecta.com"
+                        }
+                    ],
+                    "skills": ["Diseño Arquitectónico", "Planificación Urbana", "Sostenibilidad", "Dibujo Técnico", "Modelado 3D"],
+                    "speakingLanguages": ["Alemán", "Inglés"],
+                    "otherInterests": ["Arte", "Naturaleza", "Arquitectura Sostenible"],
+                    "creationDate": "2024-02-27",
+                    "views": 2100,
+                    "category": "Ingeniería y Arquitectura",
+                    "language": "Alemán"
+                }
+            
+            
         ];
 
         const categories = await Category.findAll();

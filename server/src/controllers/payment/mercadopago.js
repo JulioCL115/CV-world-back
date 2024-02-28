@@ -101,6 +101,7 @@ const receiveWebhooks = async (req, res) => {
         html: renderedHtml
     });
 
+
       processedWebhooks.add(paymentId);
       res.send("webhook")
     }
