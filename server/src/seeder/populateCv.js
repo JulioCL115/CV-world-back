@@ -904,9 +904,12 @@ async function populateCv() {
                 "category": "Logística y Cadena de Suministro",
                 "language": "Inglés"
             },
+
+
+
             {
-                "name": "Maria Rodriguez",
-                "image": "https://img.freepik.com/foto-gratis/retrato-hermoso-mujer-joven-posicion-pared-gris_231208-10760.jpg",
+                "name": "Alice Johnson",
+                "image": "https://www.perfocal.com/blog/content/images/size/w960/2021/01/Perfocal_17-11-2019_TYWFAQ_100_standard-3.jpg",
                 "header": "Ingeniera de Software",
                 "description": "Ingeniera de software con experiencia en desarrollo web y móvil. Especializada en tecnologías de frontend y backend.",
                 "experience": [
@@ -927,7 +930,7 @@ async function populateCv() {
                 "contact": [
                     {
                         "phone": "+1122334455",
-                        "email": "maria.rodriguez@example.com",
+                        "email": "alice.johnson@example.com",
                         "location": "Ciudad, País",
                         "website": "www.mariarodriguez.com"
                     }
@@ -941,8 +944,8 @@ async function populateCv() {
                 "language": "Español"
             },
             {
-                "name": "John Goodman",
-                "image": "https://img.freepik.com/foto-gratis/joven-confiado_1098-20868.jpg",
+                "name": "Carlos García",
+                "image": "https://img.freepik.com/free-photo/portrait-optimistic-businessman-formalwear_1262-3600.jpg",
                 "header": "Financial Analyst",
                 "description": "Experienced financial analyst with expertise in financial modeling, risk analysis, and investment management.",
                 "experience": [
@@ -963,7 +966,7 @@ async function populateCv() {
                 "contact": [
                     {
                         "phone": "+1122334455",
-                        "email": "john.smith@example.com",
+                        "email": "carlos.garcia@example.com",
                         "location": "City, Country",
                         "website": "www.johnsmithfinance.com"
                     }
@@ -977,8 +980,8 @@ async function populateCv() {
                 "language": "English"
             },
             {
-                "name": "Sophie Leclerc",
-                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvzsqEoIb6qDBuL2F9SkHcCCI7_oRFQN45v99jLZ56KwomMRIBbi5WuyjRnWAViH_N6SY&usqp=CAU",
+                "name": "Alice Johnson",
+                "image": "https://www.perfocal.com/blog/content/images/size/w960/2021/01/Perfocal_17-11-2019_TYWFAQ_100_standard-3.jpg",
                 "header": "Chef de Cuisine",
                 "description": "Passionate chef with extensive experience in French cuisine. Skilled in creating innovative dishes and managing kitchen operations.",
                 "experience": [
@@ -999,7 +1002,7 @@ async function populateCv() {
                 "contact": [
                     {
                         "phone": "+1122334455",
-                        "email": "sophie.leclerc@example.com",
+                        "email": "alice.johnson@example.com",
                         "location": "City, Country",
                         "website": "www.sophieleclerccuisine.com"
                     }
@@ -1014,8 +1017,8 @@ async function populateCv() {
             },
             
                 {
-                    "name": "Laura García",
-                    "image": "https://static.cegos.es/content/uploads/2023/03/01165224/GettyImages-1300321639.jpg",
+                    "name": "Maria Fernández",
+                    "image": "https://t3.ftcdn.net/jpg/03/67/46/48/360_F_367464887_f0w1JrL8PddfuH3P2jSPlIGjKU2BI0rn.jpg",
                     "header": "Enfermera Registrada",
                     "description": "Enfermera registrada con experiencia en cuidados intensivos y atención hospitalaria. Comprometida con brindar atención de alta calidad a los pacientes.",
                     "experience": [
@@ -1036,7 +1039,7 @@ async function populateCv() {
                     "contact": [
                         {
                             "phone": "+1122334455",
-                            "email": "laura.garcia@example.com",
+                            "email": "maria.fernandez@example.com",
                             "location": "Ciudad, País",
                             "website": "www.lauragarciaenfermera.com"
                         }
@@ -1050,8 +1053,8 @@ async function populateCv() {
                     "language": "Español"
                 },
                 {
-                    "name": "David Johnson",
-                    "image": "https://covalto-production-website.s3.amazonaws.com/Hero_Mobile_Cuenta_Personas_V1_1_8046e424ea.webp",
+                    "name": "John Smith",
+                    "image": "https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/social-media-profile-photos-3.jpg",
                     "header": "Sales Manager",
                     "description": "Experienced sales manager with a proven track record of driving revenue growth and building strong client relationships.",
                     "experience": [
@@ -1072,7 +1075,7 @@ async function populateCv() {
                     "contact": [
                         {
                             "phone": "+1122334455",
-                            "email": "david.johnson@example.com",
+                            "email": "john.smith@example.com",
                             "location": "City, Country",
                             "website": "www.davidjohnsonsales.com"
                         }
@@ -1086,8 +1089,8 @@ async function populateCv() {
                     "language": "English"
                 },
                 {
-                    "name": "Sophia Chen",
-                    "image": "https://media.istockphoto.com/id/1360028830/es/foto/mujer-joven-sonriendo-y-haciendo-gestos-para-copiar-el-espacio.jpg?s=612x612&w=0&k=20&c=6dOb0XPJ7pOnhki5XzV6D_m0PXOrDK0hfp0XSvXVfgo=",
+                    "name": "Alice Wang",
+                    "image": "https://media.istockphoto.com/id/1407759041/photo/confident-happy-beautiful-hispanic-student-girl-indoor-head-shot-portrait.webp?b=1&s=170667a&w=0&k=20&c=--Ei0owZ8KqwVppB5o0bMRG4aNV8VA0HHnsH1YfuxAw=",
                     "header": "Recruiter",
                     "description": "Experienced recruiter with expertise in talent acquisition, interviewing, and candidate assessment. Committed to finding the best talent for organizations.",
                     "experience": [
@@ -1108,7 +1111,7 @@ async function populateCv() {
                     "contact": [
                         {
                             "phone": "+1122334455",
-                            "email": "sophia.chen@example.com",
+                            "email": "alice.wang@example.com",
                             "location": "City, Country",
                             "website": "www.sophiachenrecruiter.com"
                         }
@@ -1122,8 +1125,8 @@ async function populateCv() {
                     "language": "English"
                 },
                 {
-                    "name": "Carlos Ruiz",
-                    "image": "https://img.freepik.com/foto-gratis/chico-guapo-seguro-posando-contra-pared-blanca_176420-32936.jpg",
+                    "name": "Juan Pérez",
+                    "image": "https://media.istockphoto.com/id/1309328823/photo/headshot-portrait-of-smiling-male-employee-in-office.webp?b=1&s=170667a&w=0&k=20&c=MRMqc79PuLmQfxJ99fTfGqHL07EDHqHLWg0Tb4rPXQc=",
                     "header": "Profesor de Matemáticas",
                     "description": "Profesor de matemáticas con experiencia en enseñanza secundaria y preparación de estudiantes para exámenes estandarizados. Apasionado por hacer que las matemáticas sean accesibles y comprensibles para todos los estudiantes.",
                     "experience": [
@@ -1144,7 +1147,7 @@ async function populateCv() {
                     "contact": [
                         {
                             "phone": "+1122334455",
-                            "email": "carlos.ruiz@example.com",
+                            "email": "juan.perez@example.com",
                             "location": "Ciudad, País",
                             "website": "www.carlosruizprofesor.com"
                         }
@@ -1158,8 +1161,8 @@ async function populateCv() {
                     "language": "Español"
                 },
                 {
-                    "name": "Alexandra Müller",
-                    "image": "https://static.cegos.es/content/uploads/2023/03/01165224/GettyImages-1300321639.jpg",
+                    "name": "Sara Martínez",
+                    "image": "https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg",
                     "header": "Arquitecta",
                     "description": "Arquitecta con experiencia en diseño arquitectónico, planificación urbana y sostenibilidad. Comprometida con crear espacios innovadores y funcionales que mejoren la calidad de vida.",
                     "experience": [
@@ -1180,7 +1183,7 @@ async function populateCv() {
                     "contact": [
                         {
                             "phone": "+1122334455",
-                            "email": "alexandra.muller@example.com",
+                            "email": "sara.martinez@example.com",
                             "location": "Ciudad, País",
                             "website": "www.alexandramullerarquitecta.com"
                         }
@@ -1193,8 +1196,6 @@ async function populateCv() {
                     "category": "Ingeniería y Arquitectura",
                     "language": "Alemán"
                 }
-            
-            
         ];
 
         const categories = await Category.findAll();
@@ -1207,6 +1208,72 @@ async function populateCv() {
         const usersIds = users.map(user => user.id);
         
         for (const cv of Cvs) {
+            // Filtrar usuarios con el mismo nombre que el CV actual
+            const usersWithSameName = users.filter(user => user.name === cv.name);
+        
+            if (usersWithSameName.length === 0) {
+                console.error(`No user found with the name ${cv.name} for CV ${cv.id}`);
+                continue;
+            }
+        
+            // Seleccionar un usuario aleatorio con el mismo nombre
+            const selectedUser = usersWithSameName[Math.floor(Math.random() * usersWithSameName.length)];
+        
+            // Asignar IDs de usuario, categoría y lenguaje de forma aleatoria
+            cv.UserId = selectedUser.id;
+            cv.CategoryId = categoriesIds[Math.floor(Math.random() * categoriesIds.length)];
+            cv.LanguageId = languagesIds[Math.floor(Math.random() * languagesIds.length)];
+        
+            // Obtener el usuario actual
+            const user = users.find(user => user.id === cv.UserId);
+        
+            if (!user) {
+                console.error(`User with ID ${cv.UserId} not found`);
+                continue;
+            }
+        
+            // Verificar la suscripción del usuario
+            if (user.Subscription.name === 'Plan Premium') {
+                // Si el usuario tiene suscripción premium, no hay límite en la cantidad de CVs
+                const existingCv = await Cv.findOne({ where: { name: cv.name, description: cv.description } });
+                if (!existingCv) {
+                    await Cv.create(cv);
+                }
+            } else {
+                // Contar la cantidad de CVs creados por el usuario
+                const userCvsCount = await Cv.count({
+                    where: {
+                        UserId: user.id,
+                        deleted: false
+                    }
+                });
+        
+                // Si el usuario ya tiene un CV y no es premium, evitar la creación
+                if (userCvsCount >= 1) {
+                    continue; // Saltar a la siguiente iteración del bucle
+                }
+        
+                // Verificar si ya existe un CV con el mismo nombre y descripción
+                const existingCv = await Cv.findOne({ where: { name: cv.name, description: cv.description } });
+                if (!existingCv) {
+                    await Cv.create(cv);
+                }
+            }
+        }
+    console.log("Cv table populated successfully");
+  } catch (error) {
+    if (error.name === "SequelizeUniqueConstraintError") {
+        console.log("Users table already populated");
+        return;
+    }
+    console.log(error)
+    console.error("Error populating CV database");
+  };
+};
+
+module.exports = populateCv;
+/*
+for (const cv of Cvs) {
             // Asignar IDs de usuario, categoría y lenguaje de forma aleatoria
             cv.UserId = usersIds[Math.floor(Math.random() * usersIds.length)];
             cv.CategoryId = categoriesIds[Math.floor(Math.random() * categoriesIds.length)];
@@ -1249,15 +1316,4 @@ async function populateCv() {
             }
         }
 
-    console.log("Cv table populated successfully");
-  } catch (error) {
-    if (error.name === "SequelizeUniqueConstraintError") {
-        console.log("Users table already populated");
-        return;
-    }
-    console.log(error)
-    console.error("Error populating CV database");
-  };
-};
-
-module.exports = populateCv;
+*/

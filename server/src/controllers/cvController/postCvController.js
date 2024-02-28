@@ -107,7 +107,7 @@ const postCvController = async (name, image, header, description, experience, ed
         const dataUrl = image ? image : null;
 
         if (dataUrl) {
-            const base64Data = dataUrl.replace(/^data:image\/png;base64,/, '');
+            const base64Data = dataUrl.replace(/^data:image\/(png|jpeg|jpg);base64,/, '');
 
             // make random string for filename
             const randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);

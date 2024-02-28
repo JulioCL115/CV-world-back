@@ -7,8 +7,6 @@ const fileUpload = require("express-fileupload");
 const path = require('path');
 const server = express();
 
-console.log('Prueba');
-
 server.use(morgan('dev'));
 server.use(express.json());
 server.use(cookieParser());
