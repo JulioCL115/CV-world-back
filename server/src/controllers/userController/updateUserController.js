@@ -11,7 +11,7 @@ const updateUserController = async (userId, propertiesToBeUpdated) => {
 
         if (!userFound) {
             const error = new Error("User not found for updating");
-            error.statusCode = 404; 
+            error.statusCode = 404;
             throw error;
         }
 
@@ -39,24 +39,24 @@ const updateUserController = async (userId, propertiesToBeUpdated) => {
 
         const dataUrl = propertiesToBeUpdated.photo ? propertiesToBeUpdated.photo : null;
 
-        if (dataUrl) {
-            const base64Data = dataUrl.replace(/^data:image\/(png|jpeg|jpg);base64,/, '');
+        if (dataUrl && !dataUrl.startsWith('http://') && !dataUrl.startsWith('https://')) {
 
-            // make random string for filename
+            const base64Data = dataUrl.replace(/^data:image\/(png|jpeg|jpg);base64,/, '');
+               // make random string for filename
             const randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
             const fileName = `${randomString}.png`;
             const completeFilePath = `./${tempFileFolder}/${fileName}`;
-
+   
             // write the file to the temp folder
             saveFile(base64Data, completeFilePath);
-
+   
             const result = await uploadImage(completeFilePath);
             console.log(`Result of uploading to Cloudinary: ${result}`);
-        
+           
             propertiesToBeUpdated.photo = result.secure_url;
             console.log(propertiesToBeUpdated.photo) 
             deleteFile(completeFilePath);
-        }
+        }            
 
         await userFound.update(propertiesToBeUpdated);
 
