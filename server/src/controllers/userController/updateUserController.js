@@ -39,7 +39,7 @@ const updateUserController = async (userId, propertiesToBeUpdated) => {
 
         const dataUrl = propertiesToBeUpdated.photo ? propertiesToBeUpdated.photo : null;
 
-        if (dataUrl) {
+        if (dataUrl && !dataUrl.startsWith('http://') && !dataUrl.startsWith('https://')) {
             const base64Data = dataUrl.replace(/^data:image\/(png|jpeg|jpg);base64,/, '');
 
             // make random string for filename
