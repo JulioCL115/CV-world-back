@@ -31,11 +31,11 @@ const createPayment = async (req, res) => {
         },
       ],
       back_urls: {
-        success: "http://localhost:3001/success",
-        failure: "http://localhost:3001/failure",
-        pending: "http://localhost:3001/pending",
+        success: "https://cv-world-back-production.up.railway.app/success",
+        failure: "https://cv-world-back-production.up.railway.app/failure",
+        pending: "https://cv-world-back-production.up.railway.app/pending",
       },
-      notification_url: `https://f38c-45-70-222-55.ngrok-free.app/webhook/${userId}/${subscriptionId}`,
+      notification_url: `https://cv-world-back-production.up.railway.app/webhook/${userId}/${subscriptionId}`,
     };
 
     const response = await preference.create({ body });
