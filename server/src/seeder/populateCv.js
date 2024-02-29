@@ -762,7 +762,7 @@ async function populateCv() {
             },
             {
                 "name": "Mohammed Ali",
-                "image": "https://media.istockphoto.com/id/1300512215/photo/headshot-portrait-of-smiling-ethnic-businessman-in-office.jpg?s=612x612&w=0&k=20&c=QjebAlXBgee05B3rcLDAtOaMtmdLjtZ5Yg9IJoiy-VY=",
+                "image": "https://t4.ftcdn.net/jpg/03/98/85/77/360_F_398857704_n44BPhqM68Xk9vT31BeFkLQwWsgeZS6C.jpg",
                 "header": "Ingeniero de Producción",
                 "description": "Ingeniero de producción con experiencia en optimización de procesos y gestión de la cadena de suministro.",
                 "experience": [
@@ -798,7 +798,7 @@ async function populateCv() {
              },
              {
                 "name": "Alice Wang",
-                "image": "https://media.istockphoto.com/id/1407759041/photo/confident-happy-beautiful-hispanic-student-girl-indoor-head-shot-portrait.webp?b=1&s=170667a&w=0&k=20&c=--Ei0owZ8KqwVppB5o0bMRG4aNV8VA0HHnsH1YfuxAw=",
+                "image": "https://www.shutterstock.com/image-photo/happy-millennial-business-woman-glasses-600nw-2103373409.jpg",
                 "header": "Especialista en Consultoría",
                 "description": "Especialista en consultoría con experiencia en asesoramiento estratégico y optimización de procesos empresariales.",
                 "experience": [
@@ -1090,7 +1090,7 @@ async function populateCv() {
                 },
                 {
                     "name": "Alice Wang",
-                    "image": "https://media.istockphoto.com/id/1407759041/photo/confident-happy-beautiful-hispanic-student-girl-indoor-head-shot-portrait.webp?b=1&s=170667a&w=0&k=20&c=--Ei0owZ8KqwVppB5o0bMRG4aNV8VA0HHnsH1YfuxAw=",
+                    "image": "https://www.shutterstock.com/image-photo/happy-millennial-business-woman-glasses-600nw-2103373409.jpg",
                     "header": "Recruiter",
                     "description": "Experienced recruiter with expertise in talent acquisition, interviewing, and candidate assessment. Committed to finding the best talent for organizations.",
                     "experience": [
@@ -1272,48 +1272,3 @@ async function populateCv() {
 };
 
 module.exports = populateCv;
-/*
-for (const cv of Cvs) {
-            // Asignar IDs de usuario, categoría y lenguaje de forma aleatoria
-            cv.UserId = usersIds[Math.floor(Math.random() * usersIds.length)];
-            cv.CategoryId = categoriesIds[Math.floor(Math.random() * categoriesIds.length)];
-            cv.LanguageId = languagesIds[Math.floor(Math.random() * languagesIds.length)];
-        
-            // Obtener el usuario actual
-            const user = users.find(user => user.id === cv.UserId);
-        
-            if (!user) {
-                console.error(`User with ID ${cv.UserId} not found`);
-                continue;
-            }
-        
-            // Verificar la suscripción del usuario
-            if (user.Subscription.name === 'Plan Premium') {
-                // Si el usuario tiene suscripción premium, no hay límite en la cantidad de CVs
-                const existingCv = await Cv.findOne({ where: { name: cv.name, description: cv.description } });
-                if (!existingCv) {
-                    await Cv.create(cv);
-                }
-            } else {
-                // Contar la cantidad de CVs creados por el usuario
-                const userCvsCount = await Cv.count({
-                    where: {
-                        UserId: user.id,
-                        deleted: false
-                    }
-                });
-        
-                // Si el usuario ya tiene un CV y no es premium, evitar la creación
-                if (userCvsCount >= 1) {
-                    continue; // Saltar a la siguiente iteración del bucle
-                }
-        
-                // Verificar si ya existe un CV con el mismo nombre y descripción
-                const existingCv = await Cv.findOne({ where: { name: cv.name, description: cv.description } });
-                if (!existingCv) {
-                    await Cv.create(cv);
-                }
-            }
-        }
-
-*/

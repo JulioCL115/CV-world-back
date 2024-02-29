@@ -1,6 +1,5 @@
 const bcrypt = require('bcrypt');
 const { Subscription, User } = require("../db");
-const subscription = require('../models/subscription');
 
 async function populateUsers() {
     try {
@@ -157,7 +156,6 @@ async function populateUsers() {
             }
         ];
 
-        // asignarle a cada Cv un category ID random
         const subscriptions = await Subscription.findAll()
         const subscriptionIds = subscriptions.map(subscription => subscription.id);
         Users.forEach(user => {
