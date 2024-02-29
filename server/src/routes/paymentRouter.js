@@ -7,15 +7,15 @@ const verifyToken = require('../middlewares/verifyToken');
 router.post('/create-order/:userId', verifyToken, createPayment);
 
 router.get('/success', (req, res) => {
-    res.redirect('http://localhost:3000/success');
+    res.redirect('https://cv-world-front-gamma.vercel.app/success');
 });
 
 router.get('/failure', (req, res) => {
-    res.redirect('http://localhost:3000/failure');
+    res.redirect('https://cv-world-front-gamma.vercel.app/failure');
 });
 
 router.get('/pending', (req, res) => {
-    res.redirect('http://localhost:3000/pending'); 
+    res.redirect('https://cv-world-front-gamma.vercel.app/pending'); 
 });
 
 router.post('/webhook/:userId/:subscriptionId', receiveWebhooks);
